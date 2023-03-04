@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
 });
 
 
+
 userSchema.pre('save', async function() {
     this.email =this.email.toLocaleLowerCase()    
     console.log(this.password ,this.email )

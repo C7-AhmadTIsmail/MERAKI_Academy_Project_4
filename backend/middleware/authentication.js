@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const Authentication=(req, res , next)=>{
+const authentication=(req, res , next)=>{
     
     try{
     if(!req.headers.authorization){
@@ -27,4 +27,4 @@ catch(err){
 }
 
 
-module.exports = {Authentication};
+module.exports = {authentication};
