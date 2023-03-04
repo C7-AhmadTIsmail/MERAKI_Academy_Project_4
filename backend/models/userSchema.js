@@ -4,10 +4,15 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
-    name: { type: String },
-    age: { type: Number },
     password: { type: String, required: true },
+    name: { type: String , required: true },
+    age: { type: Number , required: true  },
     phoneNumber: { type: Number },
+    zipcode:{ type: Number },
+    city:{ type: String },
+    campaign :[{type :mongoose.Schema.Types.ObjectId ,ref:"user"}],
+    campaign :[{type :mongoose.Schema.Types.ObjectId ,ref:"user"}],
+    role:{type :mongoose.Schema.Types.ObjectId ,ref:"role"},
 });
 
 

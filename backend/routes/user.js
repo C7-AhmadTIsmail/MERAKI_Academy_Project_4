@@ -10,14 +10,16 @@ const { authorization } = require('../middleware/authorization');
 
 //end point
 
-userRouter.post("/", signUp );
+userRouter.post("/signUp", signUp );
 
-userRouter.get("/", registration );
+userRouter.get("/registration", registration );
 
-userRouter.delete("/",authentication,authorization("delete"),deleteUser );
+userRouter.delete("/deleteUser",authentication,authorization("delete"),deleteUser );
 
-// About page route.
-// userRouter.get("*", function (req, res) {
+
+// Undefiend end point
+
+// userRouter("*", function (req, res) {
 // res.send("About this wiki");
 // });
 
