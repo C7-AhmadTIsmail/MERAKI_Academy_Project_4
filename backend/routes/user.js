@@ -3,10 +3,12 @@ const express = require("express");
 const userRouter = express.Router();
 
 
-const {siginin} = require('../controllers/user');
+const { signUp , registration} = require('../controllers/user');
 
 // Home page route.
-userRouter.get("/", siginin );
+userRouter.post("/", signUp );
+
+userRouter.get("/", registration );
 
 // About page route.
 userRouter.get("/about", function (req, res) {
