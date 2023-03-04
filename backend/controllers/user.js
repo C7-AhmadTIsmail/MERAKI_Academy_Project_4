@@ -62,4 +62,18 @@ const registration=(req, res)=>{
     });
 }
 
-module.exports = {signUp,registration};
+deleteUser=(req, res)=>{
+    const {email,password}=req.body
+        console.log("end level")
+        res.send("result");
+
+    // userSchema.findOneAndDelete({email}).exec()
+    // .then( (result) => {
+    // res.send(result);
+    // })
+    // .catch((err) => {
+    // res.send(err);
+    // });
+}
+
+module.exports = {signUp,registration,deleteUser};
