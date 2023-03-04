@@ -1,17 +1,23 @@
 require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
-const db=require("./models/db")
-const userRouter = require("./routes/user")
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-
 app.use(cors());
 app.use(express.json());
 
+// db build
+const db=require("./models/db")
+
+// router build
+const userRouter = require("./routes/user")
+const roleRouter = require("./routes/user")
+
+// port # run on it
+const PORT = process.env.PORT || 5000;
+
 // Handles any other endpoints [endpoints]
 app.use("/user",userRouter);
+app.use("/role",roleRouter)
 
 // Undefiend end point
 

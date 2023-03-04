@@ -6,4 +6,4 @@ const roleSchema = new  mongoose.Schema({
     permissions:[{type :String },]
 })
 
-module.exports=mongoose.model("role",roleSchema)
+module.exports=mongoose.model( "role" , roleSchema )
