@@ -3,7 +3,7 @@ const express = require("express");
 const userRouter = express.Router();
 
 
-const { signUp , registration , deleteUser } = require('../controllers/user');
+const { signUp , getAll , logIn , deleteUser } = require('../controllers/user');
 
 const { authentication } = require('../middleware/authentication');
 const { authorization } = require('../middleware/authorization');
@@ -12,9 +12,16 @@ const { authorization } = require('../middleware/authorization');
 
 userRouter.post("/signUp", signUp );
 
-userRouter.get("/registration", registration );
 
-userRouter.delete("/deleteUser",authentication,authorization("delete"),deleteUser );
+userRouter.get("/getAll", getAll );
+
+
+
+userRouter.get("/logIn", logIn );
+
+
+
+userRouter.delete("/deleteUser",deleteUser );
 
 
 

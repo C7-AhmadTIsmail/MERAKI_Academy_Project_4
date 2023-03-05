@@ -4,29 +4,27 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
-const signUp=(req, res)=>{
-    console.log(req.body,"yu")
-    const {email,name,age,password,phoneNumber}=req.body
-    const newUser = new userSchema({email,name,age,password,phoneNumber})
-
+const signUp =(req, res)=>{
+    const { email , password , name , age , phoneNumber, zipcode , city , role }=req.body
+    const newUser = new userSchema({ email , password , name , age , phoneNumber, zipcode , city , role })
     newUser.save().then((result) => {
-        console.log("her3")
-        res.json("true")
-    }).catch((err) => {
-        console.log("her4")
-        console.log(err)
-        res.json("false")
+        res.status(201).json(
+            {success: true,
+            message: "Success role created",
+            role: result })
+    })
+    .catch((err) => {
+        res.status(400).json(
+            {success: false,
+            message:  err })
     });
-
-
-
 }
 
-const registration=(req, res)=>{
+const logIn=(req, res)=>{
     const {email,password}=req.body
     userSchema.findOne({email}).exec()
+    
     .then( (result) => {
-    console.log(password, result.password)
     bcrypt.compare(password, result.password ,(errPassword, resultCompare) => {
     console.log(errPassword, resultCompare)
     if(errPassword){
@@ -62,6 +60,24 @@ const registration=(req, res)=>{
     });
 }
 
+const getAll =(req, res)=>{
+    userSchema.find().populate("role").exec().then((result) => {
+        res.status(201).json(
+            {success: true,
+            message: "Success role created",
+            role: result })
+    })
+    .catch((err) => {
+        res.status(400).json(
+            {success: false,
+            message:  err })
+    });
+}
+
+
+
+
+
 deleteUser=(req, res)=>{
     const {email,password}=req.body
         console.log("end level")
@@ -76,4 +92,4 @@ deleteUser=(req, res)=>{
     // });
 }
 
-module.exports = {signUp,registration,deleteUser};
+module.exports = { signUp , logIn , getAll , deleteUser };

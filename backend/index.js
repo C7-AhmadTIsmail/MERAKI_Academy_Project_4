@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 5000;
 
 // Handles any other endpoints [endpoints]
 app.use("/user",userRouter);
+
 app.use("/role",roleRouter)
 
 // Undefiend end point
