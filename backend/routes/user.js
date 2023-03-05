@@ -3,7 +3,7 @@ const express = require("express");
 const userRouter = express.Router();
 
 
-const { signUp , logIn , getAll , deleteUser } = require('../controllers/user');
+const { signUp , logIn , getAll , deleteUser , updateUserById , updateUserByEmail } = require('../controllers/user');
 
 const { authentication } = require('../middleware/authentication');
 const { authorization } = require('../middleware/authorization');
@@ -16,9 +16,10 @@ userRouter.get("/logIn", logIn );
 
 userRouter.get("/getAll", getAll );
 
-userRouter.delete("/deleteUser",deleteUser );
+userRouter.delete("/delete/:id",deleteUser );
 
+userRouter.put("/update/:id",updateUserById );
 
-
+userRouter.put("/update/:email",updateUserByEmail );
 
 module.exports = userRouter;
