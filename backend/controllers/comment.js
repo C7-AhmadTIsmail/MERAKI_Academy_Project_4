@@ -3,19 +3,19 @@ const commentSchema =require("../models/commentSchema");
 
 
 
-const addcomment=(req, res)=>{
+const addComment=(req, res)=>{
     
-    const  campaign =req.params.idcampaign;
-    const  commenter =req.params.idcommenter;
+    const  capagin =req.params.idCapagin;
+    const  commenter =req.params.idCommenter;
     const {  comment }=req.body
     
-        const newCapagin = new commentSchema({ comment , commenter , campaign })
+        const newCapagin = new commentSchema({ comment , commenter , capagin })
 
         newCapagin.save().then((result) => {
         res.status(201).json(
             {success: true,
             message: "Success comment created",
-            role: result })
+            Comment: result })
     })
     .catch((err) => {
         res.status(400).json(
@@ -25,13 +25,13 @@ const addcomment=(req, res)=>{
 }
 
 
-const getAllcomment =(req, res)=>{
-    commentSchema.find({}).populate(["commenter", "campaign" ])
+const getAllComment =(req, res)=>{
+    commentSchema.find({}).populate(["commenter", "capagin" ])
     .then((result) => {
         res.status(200).json(
             {success: true,
             message: "Success All comment update",
-            capagin: result })
+            Comment: result })
     }).catch((err) => {
         res.status(500).json(
             {success: false,
@@ -40,20 +40,16 @@ const getAllcomment =(req, res)=>{
 }
 
 
-const updatecomment =(req, res)=>{
+const updateComment =(req, res)=>{
     id_=req.params.id
-    const {  bankAccount , capaginTitle , capaginCardimage , 
-        pargraphesAboutCapagin , loaction , catgory , capagindurationdays , 
-        UrlVideoOrimage , campaignPerks , campaignamounts,darftcampaignlink  }=req.body
+    const {  comment }=req.body
 
-    commentSchema.findByIdAndUpdate(id_,{ bankAccount , capaginTitle , capaginCardimage , 
-        pargraphesAboutCapagin , loaction , catgory , capagindurationdays , 
-        UrlVideoOrimage , campaignPerks , campaignamounts,darftcampaignlink})
+    commentSchema.findByIdAndUpdate(id_,{ comment })
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success Capagin update",
-            capagin: result })
+            message: "Success comment update",
+            Comment: result })
     }).catch((err) => {
         res.status(500).json(
             {success: false,
@@ -62,15 +58,15 @@ const updatecomment =(req, res)=>{
 }
 
 
-const removecomment =(req, res)=>{
+const removeComment =(req, res)=>{
     id_=req.params.id
 
     commentSchema.findByIdAndDelete(id_)
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success Capagin remove",
-            capagin: result })
+            message: "Success comment remove",
+            Comment: result })
     }).catch((err) => {
         res.status(500).json(
             {success: false,
@@ -79,15 +75,29 @@ const removecomment =(req, res)=>{
 }
 
 
-const getcommentbyOriginter =(req, res)=>{
-    id_=req.params.id
-
-    commentSchema.find({campaigner:id_})
+const getCommentByUser =(req, res)=>{
+    id_=req.params.idUser
+    commentSchema.find({commenter:id_})
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success all Capagin for this user",
-            capagin: result })
+            message: "Success all Comment for this user",
+            Comment: result })
+    }).catch((err) => {
+        res.status(500).json(
+            {success: false,
+            message:  err })
+    });
+}
+
+const getCommentByCapagin =(req, res)=>{
+    id_=req.params.idCapagin
+    commentSchema.find({capagin:id_})
+    .then((result) => {
+        res.status(200).json(
+            {success: true,
+            message: "Success all Comment for this Capagin",
+            Comment: result })
     }).catch((err) => {
         res.status(500).json(
             {success: false,
@@ -96,4 +106,6 @@ const getcommentbyOriginter =(req, res)=>{
 }
 
 
-module.exports = { addcomment , getAllcomment , updatecomment , removecomment , getcommentbyOriginter };
+
+
+module.exports = { addComment , getAllComment , updateComment , removeComment , getCommentByUser , getCommentByCapagin};

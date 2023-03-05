@@ -3,21 +3,23 @@ const express = require("express");
 const commentRouter = express.Router();
 
 
-const { addcomment , getAllcomment , updatecomment , removecomment , getcommentbyOriginter  } = require('../controllers/comment')
+const { addComment , getAllComment , updateComment , removeComment , getCommentByUser , getCommentByCapagin } = require('../controllers/comment')
 
 const { authentication } = require('../middleware/authentication');
 const { authorization } = require('../middleware/authorization');
 
 //end point
 
-commentRouter.post("/add/:idcampaign/:idcommenter", addcomment );
+commentRouter.post("/add/:idCapagin/:idCommenter", addComment );
 
-commentRouter.get("/get", getAllcomment );
+commentRouter.get("/get", getAllComment );
 
-// commentRouter.put("/update/:id", updatecomment);
+commentRouter.put("/update/:id", updateComment);
 
-// commentRouter.delete("/delete/:id", removecomment );
+commentRouter.delete("/delete/:id", removeComment );
 
-// commentRouter.get("/getCapagin/:id", getcommentbyOriginter );
+commentRouter.get("/getCommentUser/:idUser", getCommentByUser );
+
+commentRouter.get("/getCommentCapagin/:idCapagin", getCommentByCapagin );
 
 module.exports = commentRouter;
