@@ -91,6 +91,7 @@ deleteUser=(req, res)=>{
 
 
 const updateUserById =(req, res)=>{
+    console.log("update id")
     const id_=req.params.id
     const {email , password , name , age , phoneNumber, zipcode , city , role }=req.body
     userSchema.findByIdAndUpdate(id_ ,{ email , password , name , age , phoneNumber, zipcode , city , role }).populate("role").exec()
@@ -109,7 +110,20 @@ const updateUserById =(req, res)=>{
 
 
 const updateUserByEmail =(req, res)=>{
-
+    console.log("upadte email")
+    const {email , newEmail , password , name , age , phoneNumber, zipcode , city , role }=req.body
+    userSchema.findOneAndUpdate({email} ,{ email : newEmail, name , age  }).exec()
+    .then((result) => {
+        res.status(201).json(
+            {success: true,
+            message: "Success update  done",
+            userOldData : result })
+    })
+    .catch((err) => {
+        res.status(400).json(
+            {success: false,
+            message:  err })
+    });
 }
 
 module.exports = { signUp , logIn , getAll , deleteUser , updateUserById , updateUserByEmail };

@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 
 const bcrypt = require('bcrypt');
 
-const campaignSchema = new mongoose.Schema({
-    bankAcount: { type: String, required: true, unique: true },
-    capaginTagLine: { type: String, required: true },
+const capaginSchema = new mongoose.Schema({
+    bankAcount: [{ type: String, required: true, unique: true }],
+    capaginTitle: { type: String, required: true },
     capaginCardimage: { type: String },
-    pargraphes: { type: String },
-    loaction: [{ type: Number , required: true  }],
-    catgory: { type: Number },
+    pargraphesAboutCampaign: { type: String },
+    loaction: [{ type: Number }],
+    catgory: { type: String },
     capagindurationdays:{ type: Number },
     UrlVideoOrimage:{ type: String },
     campaignPerks:{ type: String },
@@ -20,4 +20,4 @@ const campaignSchema = new mongoose.Schema({
 
 
 
-module.exports=mongoose.model("campaign",campaignSchema)
+module.exports=mongoose.model("campaign",capaginSchema)

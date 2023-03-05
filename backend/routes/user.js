@@ -18,8 +18,9 @@ userRouter.get("/getAll", getAll );
 
 userRouter.delete("/delete/:id",deleteUser );
 
+userRouter.put("/update",updateUserByEmail );
+
 userRouter.put("/update/:id",updateUserById );
 
-userRouter.put("/update/:email",updateUserByEmail );
 
 module.exports = userRouter;
