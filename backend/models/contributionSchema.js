@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 
-
 const contributionSchema = new mongoose.Schema({
     dateOfContribution: { type: String, required: true, unique: true },
     lastDateOfContributionCanRefund: { type: String, required: true },

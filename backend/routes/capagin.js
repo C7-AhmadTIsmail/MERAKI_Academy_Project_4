@@ -3,7 +3,9 @@ const express = require("express");
 const capaginRouter = express.Router();
 
 
-const { addCapagin , getAllCapagin , updateCapagin , removeCapagin , getCapaginbyOriginter} = require('../controllers/Capagin')
+const { addCapagin , getAllCapagin , 
+    updateCapagin , removeCapagin , getCapaginbyOriginter} = require('../controllers/capagin')
+
 
 const { authentication } = require('../middleware/authentication');
 const { authorization } = require('../middleware/authorization');

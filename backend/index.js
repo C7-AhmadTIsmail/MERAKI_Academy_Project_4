@@ -12,6 +12,7 @@ const db=require("./models/db")
 const userRouter = require("./routes/user")
 const roleRouter = require("./routes/role")
 const capaginRouter = require("./routes/capagin")
+const commentRouter= require("./routes/comment")
 // port # run on it
 const PORT = process.env.PORT || 5000;
 
@@ -22,6 +23,7 @@ app.use("/role",roleRouter)
 
 app.use("/capagin",capaginRouter)
 
+app.use("/comment",commentRouter)
 
 // Undefiend end point
 
