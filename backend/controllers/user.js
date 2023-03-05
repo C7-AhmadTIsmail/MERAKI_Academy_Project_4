@@ -11,7 +11,7 @@ const signUp =(req, res)=>{
         res.status(201).json(
             {success: true,
             message: "Success role created",
-            role: result })
+            user: result })
     })
     .catch((err) => {
         res.status(400).json(
@@ -22,37 +22,33 @@ const signUp =(req, res)=>{
 
 const logIn=(req, res)=>{
     const {email,password}=req.body
-    userSchema.findOne({email}).exec()
-    
+    userSchema.findOne({email}).populate("role").exec()
     .then( (result) => {
     bcrypt.compare(password, result.password ,(errPassword, resultCompare) => {
-    console.log(errPassword, resultCompare)
-    if(errPassword){
-    res.status(404).json(errPassword)
-    }else if(!resultCompare){
-        console.log(2)
-        res.status(404).json("the password false")
-        return
-    }else{
-        console.log(3)
-        const SECRET = process.env.SECRET;
-        const TOKEN_EXP_Time = process.env.TOKEN_EXP_Time;
-        const payload = {
-        id: 1,
-        permissions: ["read", "write"],
-        type: "user",
-        };
+            console.log("*****************result:",typeof(result.role))
+        if(errPassword){
+            res.status(404).json(
+            {success: false,
+            message:  errPassword })
+        }else if(!resultCompare){
+            res.status(404).json(
+            {success: false,
+            message:  "the Password is erorr" })
+        }else{
+            const SECRET = process.env.SECRET;
+            const TOKEN_EXP_Time = process.env.TOKEN_EXP_Time || "60m" ;
+            const payload =result.toObject();
         
-        const options = {
-            expiresIn: TOKEN_EXP_Time,
-        };
-        console.log("token:",options,payload,SECRET,TOKEN_EXP_Time)
-
+                const options = {
+                        expiresIn: TOKEN_EXP_Time ,
+                    };
         token =jwt.sign(payload, SECRET, options);
-        res.status(202).json(token);
-    
+        res.status(201).json(
+            {success: true,
+            message: "Success to LogIn",
+            usrer: result ,
+            token: token })
     }
-
     });
     })
     .catch((err) => {

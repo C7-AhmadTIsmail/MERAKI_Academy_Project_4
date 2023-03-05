@@ -18,10 +18,8 @@ const userSchema = new mongoose.Schema({
 
 
 userSchema.pre('save', async function() {   
-
     const SALT=process.env.SALT || 7
     this.password = await bcrypt.hash(this.password , parseInt(SALT));
-    
 });
 
 
