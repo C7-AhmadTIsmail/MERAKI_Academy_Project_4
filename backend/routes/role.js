@@ -3,23 +3,22 @@ const express = require("express");
 const roleRouter = express.Router();
 
 
-const {addrole,remoiverole} = require('../controllers/role');
+const { addRole , getAllRole  , updateRole  , removeRole } = require('../controllers/role');
 
 const { authentication } = require('../middleware/authentication');
 const { authorization } = require('../middleware/authorization');
 
 //end point
 
-roleRouter.post("/role", addrole );
+roleRouter.post("/add", addRole );
 
-roleRouter.get("/delete", remoiverole );
+roleRouter.get("/get", getAllRole );
+
+roleRouter.put("/update/:id", updateRole );
 
 
+roleRouter.delete("/delete/:id", removeRole );
 
-// Undefiend end point
 
-// userRouter("*", function (req, res) {
-// res.send("About this wiki");
-// });
 
 module.exports = roleRouter;

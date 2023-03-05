@@ -17,10 +17,6 @@ userRouter.get("/registration", registration );
 userRouter.delete("/deleteUser",authentication,authorization("delete"),deleteUser );
 
 
-// Undefiend end point
 
-// userRouter("*", function (req, res) {
-// res.send("About this wiki");
-// });
 
 module.exports = userRouter;

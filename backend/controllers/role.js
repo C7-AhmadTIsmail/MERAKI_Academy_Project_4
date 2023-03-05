@@ -7,33 +7,73 @@ const jwt = require("jsonwebtoken");
 const addRole=(req, res)=>{
     console.log(req.body,"yu")
     const { role , permissions }=req.body
-    const newRole = new roleSchema({email,name,age,password,phoneNumber})
+    const newRole = new roleSchema({ role , permissions})
 
     newRole.save().then((result) => {
-        console.log("her3")
-        res.json("true")
-    }).catch((err) => {
-        console.log("her4")
-        console.log(err)
-        res.json("false")
+        res.status(201).json(
+            {success: true,
+            message: "Success role created",
+            role: result })
+    })
+    .catch((err) => {
+        res.status(400).json(
+            {success: false,
+            message:  err })
     });
 }
 
 
+const getAllRole=(req, res)=>{
+    roleSchema.find()
+    .then((result) => {
+        res.status(200).json(
+            {success: true,
+            message: "Success role get All",
+            role: result })
+    }).catch((err) => {
+        res.status(500).json(
+            {success: false,
+            message:  err })
+    });
+}
 
-const removeRole=(req, res)=>{
-    console.log(req.body,"yu")
+
+const updateRole =(req, res)=>{
+    const id_=req.params.id
+    console.log(id_)
     const { role , permissions }=req.body
-    const newRole = new roleSchema({email,name,age,password,phoneNumber})
-
-    newRole.save().then((result) => {
-        console.log("her3")
-        res.json("true")
+    
+    roleSchema.findByIdAndUpdate(id_,{role , permissions})
+    .then((result) => {
+        res.status(200).json(
+            {success: true,
+            message: "Success role update",
+            role: result })
     }).catch((err) => {
-        console.log("her4")
-        console.log(err)
-        res.json("false")
+        res.status(500).json(
+            {success: false,
+            message:  err })
     });
 }
 
-module.exports = {addRole , removeRole , editeRole ,gitRole };
+
+
+const removeRole =(req, res)=>{
+    const id_=req.params.id
+    roleSchema.findByIdAndDelete(id_)
+    .then((result) => {
+        res.status(200).json(
+            {success: true,
+            message: "Success role remove",
+            role: result })
+    }).catch((err) => {
+            res.status(404).json(
+            {success: false,
+            message:  err })
+    });
+}
+
+
+
+
+module.exports = {addRole , getAllRole  , updateRole , removeRole };

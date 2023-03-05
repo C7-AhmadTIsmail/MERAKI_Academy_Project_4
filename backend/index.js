@@ -10,7 +10,7 @@ const db=require("./models/db")
 
 // router build
 const userRouter = require("./routes/user")
-const roleRouter = require("./routes/user")
+const roleRouter = require("./routes/role")
 
 // port # run on it
 const PORT = process.env.PORT || 5000;
