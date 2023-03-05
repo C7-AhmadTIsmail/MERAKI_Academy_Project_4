@@ -8,7 +8,7 @@ const authentication=(req, res , next)=>{
         return  res.json("no token are there")
     }
     const token = req.headers.authorization.split(" ").pop()
-    const SECRET = process.env.SECRET;
+    const SECRET = process.env.SECRET || "ahmad" ;
     console.log("token:",token)
     jwt.verify(token,SECRET,function(err, resultVerify) {
         console.log(resultVerify,err) // bar

@@ -1,11 +1,7 @@
-
 const roleSchema=require("../models/roleSchema");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 
 const addRole=(req, res)=>{
-    console.log(req.body,"yu")
     const { role , permissions }=req.body
     const newRole = new roleSchema({ role , permissions})
 
@@ -40,7 +36,6 @@ const getAllRole=(req, res)=>{
 
 const updateRole =(req, res)=>{
     const id_=req.params.id
-    console.log(id_)
     const { role , permissions }=req.body
     
     roleSchema.findByIdAndUpdate(id_,{role , permissions})

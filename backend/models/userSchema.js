@@ -10,9 +10,9 @@ const userSchema = new mongoose.Schema({
     phoneNumber: { type: Number },
     zipcode:{ type: Number },
     city:{ type: String },
+    role:{type :mongoose.Schema.Types.ObjectId ,ref:"role"},
     // campaign :[{type :mongoose.Schema.Types.ObjectId ,ref:"campaign"}],
     // contribution :[{type :mongoose.Schema.Types.ObjectId ,ref:"contribution"}],
-    role:{type :mongoose.Schema.Types.ObjectId ,ref:"role"},
 });
 
 

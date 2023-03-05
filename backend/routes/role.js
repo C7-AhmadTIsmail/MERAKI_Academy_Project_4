@@ -16,7 +16,6 @@ roleRouter.get("/get", getAllRole );
 
 roleRouter.put("/update/:id", updateRole );
 
-
 roleRouter.delete("/delete/:id", removeRole );
 
 

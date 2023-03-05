@@ -25,7 +25,6 @@ const logIn=(req, res)=>{
     userSchema.findOne({email}).populate("role").exec()
     .then( (result) => {
     bcrypt.compare(password, result.password ,(errPassword, resultCompare) => {
-            console.log("*****************result:",typeof(result.role))
         if(errPassword){
             res.status(404).json(
             {success: false,
@@ -35,15 +34,15 @@ const logIn=(req, res)=>{
             {success: false,
             message:  "the Password is erorr" })
         }else{
-            const SECRET = process.env.SECRET;
+            const SECRET = process.env.SECRET ||"ahmad" ;
             const TOKEN_EXP_Time = process.env.TOKEN_EXP_Time || "60m" ;
             const payload =result.toObject();
         
                 const options = {
                         expiresIn: TOKEN_EXP_Time ,
                     };
-        token =jwt.sign(payload, SECRET, options);
-        res.status(201).json(
+        const token =jwt.sign(payload, SECRET, options);
+            res.status(201).json(
             {success: true,
             message: "Success to LogIn",
             usrer: result ,
