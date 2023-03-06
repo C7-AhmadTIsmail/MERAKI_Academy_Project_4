@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 
 const contributionSchema = new mongoose.Schema({
-    dateOfContribution: { type: String, required: true, unique: true },
-    lastDateOfContributionCanRefund: { type: String, required: true },
     name: { type: String , required: true },
+    dateOfContribution: { type: Number, required: true },
+    lastDateOfContributionCanRefund: { type: Number, required: true },
     ammount: { type: Number , required: true  },
     park: { type: Number },
-    visibility:{ type: Number },
-    campaigner:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
-    
+    visibility:{ type: Boolean },
+    contributor:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
+    capagin:{type :mongoose.Schema.Types.ObjectId ,ref:"capagin"},
 });
 
 

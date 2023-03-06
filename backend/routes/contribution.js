@@ -10,7 +10,7 @@ const { authorization } = require('../middleware/authorization');
 
 //end point
 
-contributionRouter.post("/add/:idCapagin/:idcontributioner", addcontribution );
+contributionRouter.post("/add/:idCapagin/:idcontributor", addcontribution );
 
 contributionRouter.get("/get", getAllcontribution );
 

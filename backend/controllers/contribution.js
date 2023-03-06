@@ -5,11 +5,14 @@ const contributionSchema =require("../models/contributionSchema");
 const addcontribution=(req, res)=>{
 
     const  capagin =req.params.idCapagin;
-    const  contributioner =req.params.idcontributioner;
+    const  contributor =req.params.idcontributor;
     
-    const {  contribution }=req.body
+    const {  dateOfContribution ,lastDateOfContributionCanRefund , name ,
+        ammount , park , visibility }=req.body
     
-        const newcontribution = new contributionSchema({  })
+        const newcontribution = new contributionSchema({ 
+            dateOfContribution,lastDateOfContributionCanRefund,name,ammount,
+            park,visibility,capagin , contributor})
 
         newcontribution.save().then((result) => {
         res.status(201).json(
@@ -26,11 +29,11 @@ const addcontribution=(req, res)=>{
 
 
 const getAllcontribution =(req, res)=>{
-    contributionSchema.find({}).populate(["contributioner", "capagin" ])
+    contributionSchema.find({})
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success All contribution update",
+            message: "Success get All contribution ",
             contribution: result })
     }).catch((err) => {
         res.status(500).json(
@@ -42,9 +45,11 @@ const getAllcontribution =(req, res)=>{
 
 const updatecontribution =(req, res)=>{
     id_=req.params.id
-    const {  contribution }=req.body
+    const {  dateOfContribution,lastDateOfContributionCanRefund,
+        name ,ammount,park,visibility,capagin  }=req.body
 
-    contributionSchema.findByIdAndUpdate(id_,{ contribution })
+    contributionSchema.findByIdAndUpdate(id_,{
+        dateOfContribution,lastDateOfContributionCanRefund, name ,ammount,park,visibility,capagin  })
     .then((result) => {
         res.status(200).json(
             {success: true,
@@ -76,12 +81,12 @@ const removecontribution =(req, res)=>{
 
 
 const getcontributionByUser =(req, res)=>{
-    id_=req.params.id
-    contributionSchema.find({contributioner:id_})
+    id_=req.params.idUser
+    contributionSchema.find({contributor:id_})
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success all Capagin for this user",
+            message: "Success get all contribution for this user",
             contribution: result })
     }).catch((err) => {
         res.status(500).json(
@@ -91,12 +96,12 @@ const getcontributionByUser =(req, res)=>{
 }
 
 const getcontributionByCapagin =(req, res)=>{
-    id_=req.params.id
-    contributionSchema.find({contributioner:id_})
+    id_=req.params.idCapagin
+    contributionSchema.find({capagin:id_})
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success all Capagin for this user",
+            message: "Success get all contribution for this Capagin",
             contribution: result })
     }).catch((err) => {
         res.status(500).json(
@@ -108,4 +113,5 @@ const getcontributionByCapagin =(req, res)=>{
 
 
 
-module.exports = { addcontribution , getAllcontribution , updatecontribution , removecontribution , getcontributionByUser , getcontributionByCapagin};
+module.exports = { addcontribution , getAllcontribution , updatecontribution 
+    , removecontribution , getcontributionByUser , getcontributionByCapagin};
