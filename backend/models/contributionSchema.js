@@ -9,7 +9,7 @@ const contributionSchema = new mongoose.Schema({
     park: { type: Number },
     visibility:{ type: Boolean },
     contributor:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
-    capagin:{type :mongoose.Schema.Types.ObjectId ,ref:"capagin"},
+    campaign:{type :mongoose.Schema.Types.ObjectId ,ref:"campaign"},
 });
 
 

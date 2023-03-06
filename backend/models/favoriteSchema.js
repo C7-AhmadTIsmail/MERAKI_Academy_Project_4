@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const favoriteSchema = new  mongoose.Schema({
     user:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
-    favoriteCapagin:[{type :mongoose.Schema.Types.ObjectId ,ref:"capagin"}],
+    favoriteCampaign:[{type :mongoose.Schema.Types.ObjectId ,ref:"campaign"}],
 })
 
 

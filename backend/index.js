@@ -11,7 +11,7 @@ const db=require("./models/db")
 // router build
 const userRouter = require("./routes/user")
 const roleRouter = require("./routes/role")
-const capaginRouter = require("./routes/capagin")
+const campaignRouter = require("./routes/campaign")
 const commentRouter= require("./routes/comment")
 const contributionRouter= require("./routes/contribution")
 const favoriteRouter=require("./routes/favorite")
@@ -19,12 +19,12 @@ const favoriteRouter=require("./routes/favorite")
 const PORT = process.env.PORT || 5000;
 
 // Handles any other endpoints [endpoints]
+app.use("/role",roleRouter);
 app.use("/user",userRouter);
-app.use("/role",roleRouter)
-app.use("/capagin",capaginRouter)
-app.use("/comment",commentRouter)
-app.use("/contribution",contributionRouter)
-app.use("/favorite",favoriteRouter)
+app.use("/campaign",campaignRouter);
+app.use("/comment",commentRouter);
+app.use("/contribution",contributionRouter);
+app.use("/favorite",favoriteRouter);
 
 // Undefiend end point
 

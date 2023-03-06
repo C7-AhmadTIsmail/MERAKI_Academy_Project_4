@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 
 
 const teamsSchema = new mongoose.Schema({
-    firtsname: { type: String, required: true, unique: true },
-    lastname: { type: String, required: true },
-    dateofbirth: { type: String , required: true },
-    phonenumber: { type: Number , required: true  },
+    firtsName: { type: String, required: true, unique: true },
+    lastName: { type: String, required: true },
+    dateOfBirth: { type: String , required: true },
+    phoneNumber: { type: Number , required: true  },
     country:{ type: Number },
-    streetaddress:{type: Number},
-    campaigner:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
+    streetAddress:{type: Number},
+    campaigner:{type :mongoose.Schema.Types.ObjectId ,ref:"campaign"},
     teamsOfAcount:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
 });
 

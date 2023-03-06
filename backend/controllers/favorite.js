@@ -2,16 +2,15 @@
 const favoriteSchema =require("../models/favoriteSchema");
 
 
-
 const addfavorite=(req, res)=>{
     
-    const  capagin =req.params.idCapagin;
+    const  campaign =req.params.idCampaign;
     const  commenter =req.params.idCommenter;
     const {  comment }=req.body
     
-        const newCapagin = new favoriteSchema({ comment , commenter , capagin })
+        const newCampaign = new favoriteSchema({ comment , commenter , campaign })
 
-        newCapagin.save().then((result) => {
+        newCampaign.save().then((result) => {
         res.status(201).json(
             {success: true,
             message: "Success comment created",

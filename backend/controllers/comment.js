@@ -5,13 +5,13 @@ const commentSchema =require("../models/commentSchema");
 
 const addComment=(req, res)=>{
     
-    const  capagin =req.params.idCapagin;
+    const  campaign =req.params.idCampaign;
     const  commenter =req.params.idCommenter;
     const {  comment }=req.body
     
-        const newCapagin = new commentSchema({ comment , commenter , capagin })
+        const newCampaign = new commentSchema({ comment , commenter , campaign })
 
-        newCapagin.save().then((result) => {
+        newCampaign.save().then((result) => {
         res.status(201).json(
             {success: true,
             message: "Success comment created",
@@ -26,7 +26,7 @@ const addComment=(req, res)=>{
 
 
 const getAllComment =(req, res)=>{
-    commentSchema.find({}).populate(["commenter", "capagin" ])
+    commentSchema.find({}).populate(["commenter", "campaign" ])
     .then((result) => {
         res.status(200).json(
             {success: true,
@@ -90,13 +90,13 @@ const getCommentByUser =(req, res)=>{
     });
 }
 
-const getCommentByCapagin =(req, res)=>{
-    id_=req.params.idCapagin
-    commentSchema.find({capagin:id_})
+const getCommentByCampaign =(req, res)=>{
+    id_=req.params.idCampaign
+    commentSchema.find({campaign:id_})
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success all Comment for this Capagin",
+            message: "Success all Comment for this campaign",
             Comment: result })
     }).catch((err) => {
         res.status(500).json(
@@ -108,4 +108,4 @@ const getCommentByCapagin =(req, res)=>{
 
 
 
-module.exports = { addComment , getAllComment , updateComment , removeComment , getCommentByUser , getCommentByCapagin};
+module.exports = { addComment , getAllComment , updateComment , removeComment , getCommentByUser , getCommentByCampaign};

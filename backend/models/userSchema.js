@@ -8,11 +8,10 @@ const userSchema = new mongoose.Schema({
     name: { type: String , required: true },
     age: { type: Number , required: true  },
     phoneNumber: { type: Number },
-    zipcode:{ type: Number },
+    zipCode:{ type: Number },
     city:{ type: String },
     role:{type :mongoose.Schema.Types.ObjectId ,ref:"role"},
-    // campaign :[{type :mongoose.Schema.Types.ObjectId ,ref:"campaign"}],
-    // contribution :[{type :mongoose.Schema.Types.ObjectId ,ref:"contribution"}],
+
 });
 
 

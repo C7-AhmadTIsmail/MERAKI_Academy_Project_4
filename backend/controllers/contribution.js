@@ -4,7 +4,7 @@ const contributionSchema =require("../models/contributionSchema");
 
 const addcontribution=(req, res)=>{
 
-    const  capagin =req.params.idCapagin;
+    const  campaign =req.params.idCampaign;
     const  contributor =req.params.idcontributor;
     
     const {  dateOfContribution ,lastDateOfContributionCanRefund , name ,
@@ -12,7 +12,7 @@ const addcontribution=(req, res)=>{
     
         const newcontribution = new contributionSchema({ 
             dateOfContribution,lastDateOfContributionCanRefund,name,ammount,
-            park,visibility,capagin , contributor})
+            park,visibility,campaign , contributor})
 
         newcontribution.save().then((result) => {
         res.status(201).json(
@@ -46,10 +46,10 @@ const getAllcontribution =(req, res)=>{
 const updatecontribution =(req, res)=>{
     id_=req.params.id
     const {  dateOfContribution,lastDateOfContributionCanRefund,
-        name ,ammount,park,visibility,capagin  }=req.body
+        name ,ammount,park,visibility,campaign  }=req.body
 
     contributionSchema.findByIdAndUpdate(id_,{
-        dateOfContribution,lastDateOfContributionCanRefund, name ,ammount,park,visibility,capagin  })
+        dateOfContribution,lastDateOfContributionCanRefund, name ,ammount,park,visibility,campaign  })
     .then((result) => {
         res.status(200).json(
             {success: true,
@@ -95,13 +95,13 @@ const getcontributionByUser =(req, res)=>{
     });
 }
 
-const getcontributionByCapagin =(req, res)=>{
-    id_=req.params.idCapagin
-    contributionSchema.find({capagin:id_})
+const getcontributionByCampaign =(req, res)=>{
+    id_=req.params.idCampaign
+    contributionSchema.find({campaign:id_})
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success get all contribution for this Capagin",
+            message: "Success get all contribution for this campaign",
             contribution: result })
     }).catch((err) => {
         res.status(500).json(
@@ -114,4 +114,4 @@ const getcontributionByCapagin =(req, res)=>{
 
 
 module.exports = { addcontribution , getAllcontribution , updatecontribution 
-    , removecontribution , getcontributionByUser , getcontributionByCapagin};
+    , removecontribution , getcontributionByUser , getcontributionByCampaign};
