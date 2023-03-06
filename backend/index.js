@@ -15,6 +15,7 @@ const campaignRouter = require("./routes/campaign")
 const commentRouter= require("./routes/comment")
 const contributionRouter= require("./routes/contribution")
 const favoriteRouter=require("./routes/favorite")
+// const campaignTeamsRouter=require("./routes/teamsCampaign")
 // port # run on it
 const PORT = process.env.PORT || 5000;
 
@@ -25,7 +26,7 @@ app.use("/campaign",campaignRouter);
 app.use("/comment",commentRouter);
 app.use("/contribution",contributionRouter);
 app.use("/favorite",favoriteRouter);
-
+// app.use("/campaignTeams",campaignTeamsRouter);
 // Undefiend end point
 
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
