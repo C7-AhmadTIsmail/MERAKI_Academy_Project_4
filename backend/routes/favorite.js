@@ -10,9 +10,9 @@ const { authorization } = require('../middleware/authorization');
 
 //end point
 
-favoriteRouter.post("/add/:idCampaign/:idcontributor", addfavorite );
+favoriteRouter.post("/add/:idCampaign/:idUser", addfavorite );
 
-favoriteRouter.delete("/delete/:id", removefavorite );
+favoriteRouter.delete("/delete/:idUser", removefavorite );
 
 favoriteRouter.get("/:idUser", getfavoriteByUser );
 

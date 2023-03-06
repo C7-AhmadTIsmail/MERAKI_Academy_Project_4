@@ -4,34 +4,53 @@ const favoriteSchema =require("../models/favoriteSchema");
 
 const addfavorite=(req, res)=>{
     
-    const  campaign =req.params.idCampaign;
-    const  commenter =req.params.idCommenter;
-    const {  comment }=req.body
+    const  favoriteCampaign  =req.params.idCampaign;
+    const  user =req.params.idUser;
     
-        const newCampaign = new favoriteSchema({ comment , commenter , campaign })
+    const newCampaign = new favoriteSchema({ user , favoriteCampaign })
 
-        newCampaign.save().then((result) => {
+
+    favoriteSchema.findOneAndUpdate(user,{ $addToSet: { favoriteCampaign: favoriteCampaign } })
+    .then((result) => {
+        console.log(result)
+        if(!result){
+        newCampaign.save().then((resultSave) => {
+            console.log("1")
         res.status(201).json(
             {success: true,
-            message: "Success comment created",
-            Comment: result })
+            message: "Success add to favorite created",
+            result: resultSave })
     })
     .catch((err) => {
         res.status(400).json(
             {success: false,
             message:  err })
     });
+        }else{
+            console.log("2")
+            res.status(201).json(
+                {success: true,
+                message: "Success add to favorite created",
+                result: result })
+        }
+    }).catch((err) => {
+        res.status(500).json(
+            {success: false,
+            message:  err })
+    });
 }
 
 
-const removefavorite =(req, res)=>{
-    id_=req.params.id
 
-    favoriteSchema.findByIdAndDelete(id_)
+const removefavorite =(req, res)=>{
+    const user=req.params.idUser
+    const favoriteCampaign=req.body.favoriteCampaign
+    console.log(favoriteCampaign)
+    favoriteSchema.findOneAndUpdate(user,{ $pull: { favoriteCampaign: favoriteCampaign } })
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success comment remove",
+            message: "Success remove favorite",
             Comment: result })
     }).catch((err) => {
         res.status(500).json(
@@ -42,12 +61,12 @@ const removefavorite =(req, res)=>{
 
 
 const getfavoriteByUser =(req, res)=>{
-    id_=req.params.idUser
-    favoriteSchema.find({commenter:id_})
+    const user=req.params.idUser
+    favoriteSchema.find({user})
     .then((result) => {
         res.status(200).json(
             {success: true,
-            message: "Success all Comment for this user",
+            message: "Success all favorite for this user",
             Comment: result })
     }).catch((err) => {
         res.status(500).json(
