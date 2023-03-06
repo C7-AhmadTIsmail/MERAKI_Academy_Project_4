@@ -14,13 +14,12 @@ userRouter.post("/signUp", signUp );
 
 userRouter.get("/logIn", logIn );
 
-userRouter.get("/getAll", getAll );
+userRouter.get("/getAll",authentication, getAll );
 
-userRouter.delete("/delete/:id",deleteUser );
+userRouter.delete("/delete/:id",authentication, deleteUser );
 
-userRouter.put("/update",updateUserByEmail );
+userRouter.put("/update",authentication ,updateUserByEmail );
 
-userRouter.put("/update/:id",updateUserById );
-
+userRouter.put("/update/:id",authentication , updateUserById );
 
 module.exports = userRouter;

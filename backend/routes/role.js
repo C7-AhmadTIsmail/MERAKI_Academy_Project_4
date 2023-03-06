@@ -10,13 +10,13 @@ const { authorization } = require('../middleware/authorization');
 
 //end point
 
-roleRouter.post("/add", addRole );
+roleRouter.post("/add",authentication , addRole );
 
-roleRouter.get("/get", getAllRole );
+roleRouter.get("/get",authentication , getAllRole );
 
-roleRouter.put("/update/:id", updateRole );
+roleRouter.put("/update/:id",authentication , updateRole );
 
-roleRouter.delete("/delete/:id", removeRole );
+roleRouter.delete("/delete/:id",authentication , removeRole );
 
 
 

@@ -10,9 +10,9 @@ const { authorization } = require('../middleware/authorization');
 
 //end point
 
-campaignTeamsRouter.post("/add/:idCampaign", addteamsMamber );
+campaignTeamsRouter.post("/add/:idCampaign",authentication , addteamsMamber );
 
-campaignTeamsRouter.delete("/delete/:idCampaign", removeteamsMamber );
+campaignTeamsRouter.delete("/delete/:idCampaign",authentication , removeteamsMamber );
 
 campaignTeamsRouter.get("/:idCampaign", getAllteamsMamberForThisCampaign );
 

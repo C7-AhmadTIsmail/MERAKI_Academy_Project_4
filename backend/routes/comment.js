@@ -10,16 +10,16 @@ const { authorization } = require('../middleware/authorization');
 
 //end point
 
-commentRouter.post("/add/:idCampaign/:idCommenter", addComment );
+commentRouter.post("/add/:idCampaign/:idCommenter", authentication , addComment );
 
-commentRouter.get("/get", getAllComment );
+commentRouter.get("/get", authentication , getAllComment );
 
-commentRouter.put("/update/:id", updateComment);
+commentRouter.put("/update/:id", authentication , updateComment);
 
-commentRouter.delete("/delete/:id", removeComment );
+commentRouter.delete("/delete/:id", authentication , removeComment );
 
-commentRouter.get("/getCommentUser/:idUser", getCommentByUser );
+commentRouter.get("/getCommentUser/:idUser" , getCommentByUser );
 
-commentRouter.get("/getCommentCampaign/:idCampaign", getCommentByCampaign );
+commentRouter.get("/getCommentCampaign/:idCampaign" , getCommentByCampaign );
 
 module.exports = commentRouter;

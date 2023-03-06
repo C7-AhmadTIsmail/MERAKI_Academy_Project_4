@@ -11,17 +11,17 @@ const { authorization } = require('../middleware/authorization');
 
 //end point
 
-contributionRouter.post("/add/:idCampaign/:idcontributor", addcontribution );
+contributionRouter.post("/add/:idCampaign/:idcontributor",authentication, addcontribution );
 
-contributionRouter.get("/get", getAllcontribution );
+contributionRouter.get("/get",authentication, getAllcontribution );
 
-contributionRouter.put("/update/:id", updatecontribution);
+contributionRouter.put("/update/:id",authentication, updatecontribution);
 
-contributionRouter.delete("/delete/:id", removecontribution );
+contributionRouter.delete("/delete/:id",authentication, removecontribution );
 
-contributionRouter.get("/getcontributionUser/:idUser", getcontributionByUser );
+contributionRouter.get("/getcontributionUser/:idUser",authentication, getcontributionByUser );
 
-contributionRouter.get("/getcontributionCampaign/:idCampaign", getcontributionByCampaign );
+contributionRouter.get("/getcontributionCampaign/:idCampaign",authentication, getcontributionByCampaign );
 
 module.exports = contributionRouter;
 
