@@ -14,6 +14,7 @@ const roleRouter = require("./routes/role")
 const capaginRouter = require("./routes/capagin")
 const commentRouter= require("./routes/comment")
 const contributionRouter= require("./routes/contribution")
+const favoriteRouter=require("./routes/favorite")
 // port # run on it
 const PORT = process.env.PORT || 5000;
 
@@ -23,7 +24,7 @@ app.use("/role",roleRouter)
 app.use("/capagin",capaginRouter)
 app.use("/comment",commentRouter)
 app.use("/contribution",contributionRouter)
-
+app.use("/favorite",favoriteRouter)
 
 // Undefiend end point
 
