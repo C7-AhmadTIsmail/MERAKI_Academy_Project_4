@@ -12,7 +12,7 @@ const { authorization } = require('../middleware/authorization');
 
 userRouter.post("/signUp", signUp );
 
-userRouter.get("/logIn", logIn );
+userRouter.post("/logIn", logIn );
 
 userRouter.get("/getAll",authentication, getAll );
 

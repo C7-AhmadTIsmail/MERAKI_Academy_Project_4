@@ -45,7 +45,7 @@ const logIn=(req, res)=>{
             res.status(201).json(
             {success: true,
             message: "Success to LogIn",
-            usrer: result ,
+            user: result ,
             token: token })
     }
     });

@@ -1,24 +1,64 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
+import {useContext ,useEffect , useState } from "react";
+import {useRef} from 'react';
 
 const Register = () => {
+  const usertest={
+    email: null,
+    password: null,
+    name: null,
+    age: null,
+    phoneNumber: null,
+    zipcode: null,
+    city: null,
+    role: "64047450f9276133c0753cfc"
+}
+  const [userData, setUserData] = useState(usertest)
+  const {email , password , name , age , city , phoneNumber , zipcode}=userData
+  const [error, setError] = useState({})
+
+  // const validateData=()=>{
+  //  
+  // }
+
+  const handleChamge=(e)=>{
+    const {name,value}=e.target
+    setUserData((preData)=>({...preData,[name]:value}))
+  }
+
+  const submet=()=>{
+    
+    axios.post('http://localhost:5000/user/signUp',userData)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
+
   return (
-    <>
+    <> 
     <div style={{ marginTop: "8px" }}>Register</div>
     <div style={{ marginTop: "40px" }}>
-    <label>Email</label><br/>
-    <input></input><br/>
-    <label>Password</label><br/>
-    <input></input><br/>
-    <label>name</label><br/>
-    <input></input><br/>
-    <label>age</label><br/>
-    <input></input><br/>
-    <label>city</label><br/>
-    <input></input><br/>
-    <label>phone namber</label><br/>
-    <input></input><br/>
-    <label>zib code</label><br/>
-    <input></input><br/>
+    <label  htmlFor="email" >Email: </label><br/>
+    <input name="email" onChange={handleChamge}></input><br/>
+    <label htmlFor="password" >Password: </label><br/>
+    <input  name="password" onChange={handleChamge}></input><br/>
+    <label htmlFor="name" >name: </label><br/>
+    <input   name="name" onChange={handleChamge}></input><br/>
+    <label htmlFor="age" >age:</label><br/>
+    <input  name="age" onChange={handleChamge}></input><br/>
+    <label htmlFor="city" >city:</label><br/>
+    <input   name="city" onChange={handleChamge}></input><br/>
+    <label htmlFor="phoneNumber" >phone namber:</label><br/>
+    <input  name="phoneNumber" onChange={handleChamge}></input><br/>
+    <label htmlFor="zipcode" >zibcode:</label><br/>
+    <input  name="zipcode" onChange={handleChamge}></input><br/>
+    <button onClick={submet}>submet</button>
     </div>
     </>
   )
