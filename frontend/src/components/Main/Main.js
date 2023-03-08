@@ -9,9 +9,10 @@ import "./Main.css"
 const Main = () => {
 
   const [first, setFirst] = useState(null)
-  const [campaignPageShow, setCampaignPageShow] = useState(false)
   const [campaignPageData, setcampaignPageData] = useState(null)
+  const {campaignPageShow, setCampaignPageShow} = useContext(UserContext);
   
+
   useEffect(() => {
     axios.get(`http://localhost:5000/campaign/get`).then((res) => {
       setFirst(res.data.campaign);

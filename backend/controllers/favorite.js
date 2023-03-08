@@ -44,7 +44,7 @@ const addfavorite=(req, res)=>{
 
 const removefavorite =(req, res)=>{
     const user=req.params.idUser
-    const favoriteCampaign=req.body.favoriteCampaign
+    const favoriteCampaign=req.params.idCampaign
     console.log(favoriteCampaign)
     favoriteSchema.findOneAndUpdate(user,{ $pull: { favoriteCampaign: favoriteCampaign } })
     .then((result) => {

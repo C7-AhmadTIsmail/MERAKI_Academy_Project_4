@@ -23,10 +23,10 @@ const Favorite = () => {
         const token =JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
         console.log(e.target.id)
-        axios.delete(`http://localhost:5000/favorite/delete/${idUser}`
-        ,{ "headers": {"Authorization" : `Bearer ${token}`} },{favoriteCampaign: e.target.id}).then((res) => {
+        axios.delete(`http://localhost:5000/favorite/delete/${e.target.id}/${idUser}`
+        ,{ "headers": {"Authorization" : `Bearer ${token}`} }).then((res) => {
             console.log(res)
-        setDeleteFormFavorite(!deleteFormFavorite)
+            setDeleteFormFavorite(!deleteFormFavorite)
             });
         }
 

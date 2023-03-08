@@ -12,7 +12,7 @@ const { authorization } = require('../middleware/authorization');
 
 favoriteRouter.post("/add/:idCampaign/:idUser",authentication, addfavorite );
 
-favoriteRouter.delete("/delete/:idUser",authentication, removefavorite );
+favoriteRouter.delete("/delete/:idCampaign/:idUser",authentication, removefavorite );
 
 favoriteRouter.get("/:idUser",authentication, getfavoriteByUser );
 

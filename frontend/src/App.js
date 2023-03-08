@@ -12,12 +12,12 @@ export const UserContext = createContext();
 
 function App() {
   const [login, setLogin] = useState(false)
-
+  const [campaignPageShow, setCampaignPageShow] = useState(false)
 
 
 
   return (
-    <UserContext.Provider value={{setLogin , login}}>
+    <UserContext.Provider value={{setLogin , login , campaignPageShow , setCampaignPageShow }}>
     <div className="App">
       <header className="App-header">
       </header>
