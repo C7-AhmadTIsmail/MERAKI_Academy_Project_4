@@ -6,7 +6,7 @@ import Main from "./components/Main/Main"
 import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
 import Campaign from "./components/Campaign/Campaign"
-
+import Favorite from "./components/Favorite/Favorite"
 
 export const UserContext = createContext();
 
@@ -33,6 +33,8 @@ function App() {
       {login?<>
       <Link onClick={Logout}> Logout </Link>
       <Link to="/Campaign"> Campaign </Link>
+      <Link to="/Favorite"> Favorite </Link>
+
       </>:<></>}
     </div>
     <div>
@@ -41,6 +43,8 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Campaign" element={<Campaign />} />
+        <Route path="/Favorite" element={<Favorite />} />
+
     </Routes>
     </div>
     </div>

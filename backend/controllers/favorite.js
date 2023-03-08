@@ -51,7 +51,7 @@ const removefavorite =(req, res)=>{
         res.status(200).json(
             {success: true,
             message: "Success remove favorite",
-            Comment: result })
+            result: result })
     }).catch((err) => {
         res.status(500).json(
             {success: false,
@@ -62,12 +62,12 @@ const removefavorite =(req, res)=>{
 
 const getfavoriteByUser =(req, res)=>{
     const user=req.params.idUser
-    favoriteSchema.find({user})
+    favoriteSchema.find({user}).populate("favoriteCampaign")
     .then((result) => {
         res.status(200).json(
             {success: true,
             message: "Success all favorite for this user",
-            Comment: result })
+            result: result })
     }).catch((err) => {
         res.status(500).json(
             {success: false,
