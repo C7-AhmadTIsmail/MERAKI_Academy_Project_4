@@ -2,41 +2,27 @@ import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { createContext , useEffect , useState } from "react";
 
+import Navbar from "./components/Navbar/Navbar"
 import Main from "./components/Main/Main"
 import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
 import Campaign from "./components/Campaign/Campaign"
 import Favorite from "./components/Favorite/Favorite"
-
 export const UserContext = createContext();
 
 function App() {
   const [login, setLogin] = useState(false)
 
-  const Logout=()=>{
-    localStorage.clear();
-    setLogin(false)
-  }
+
 
 
   return (
-    <UserContext.Provider value={{setLogin}}>
+    <UserContext.Provider value={{setLogin , login}}>
     <div className="App">
       <header className="App-header">
       </header>
       <h1>Project 4 </h1>
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      <Link to="/"> Main </Link>
-      <Link to="/Register"> Register </Link>
-      {login?<></>:<Link to="/Login"> Login </Link>}
-      
-      {login?<>
-      <Link onClick={Logout}> Logout </Link>
-      <Link to="/Campaign"> Campaign </Link>
-      <Link to="/Favorite"> Favorite </Link>
-
-      </>:<></>}
-    </div>
+      <Navbar/>
     <div>
     <Routes >
         <Route path="/" element={<Main />} />

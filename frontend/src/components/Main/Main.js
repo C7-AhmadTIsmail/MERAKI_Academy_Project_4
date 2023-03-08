@@ -3,7 +3,7 @@ import React , {useContext ,useEffect , useState } from "react";
 import { useNavigate  } from "react-router-dom";
 import { UserContext } from "../../App";
 import CampaignPage from "../CampaignPage/CampaignPage"
-
+import "./Main.css"
 
 
 const Main = () => {
@@ -35,9 +35,9 @@ const Main = () => {
 
   return (
     <>
-    <div style={{ marginTop: "8px" }}>Main</div>
-    <div>
-    <>{campaignPageShow?<><CampaignPage data={campaignPageData}/></>:mainGenration}</>
+    <div style={{ marginTop: "20px" }}>Main</div>
+    <div > 
+    {campaignPageShow?  <CampaignPage data={campaignPageData}/>:<div className='grid-container-main'>{mainGenration}</div>}
     </div>
     </>
   )

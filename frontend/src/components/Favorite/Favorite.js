@@ -2,6 +2,7 @@ import axios from 'axios';
 import React , {useContext ,useEffect , useState } from "react";
 import { useNavigate  } from "react-router-dom";
 import { UserContext } from "../../App";
+import "./Favorite.css"
 
 
 const Favorite = () => {
@@ -41,7 +42,7 @@ const Favorite = () => {
     <>
     <div>Favorite</div>
     <div>
-        <>{loopOnFavorite}</>
+        <><div className='grid-container-favorite '>{loopOnFavorite}</div></>
     </div>
     </>
     )

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React , {useContext ,useEffect , useState } from "react";
 import { useNavigate  } from "react-router-dom";
 import { UserContext } from "../../App";
+import "./Login.css";
 
 const Login = () => {
 
@@ -45,16 +46,19 @@ const Login = () => {
   return (
     
     <>
-
+    <div className='LoginStyle'>
+      <div className='LoginStyleInside'>
     <div style={{ marginTop: "8px" }}>Login</div>
+    <hr/>
     <div style={{ marginTop: "40px" }}>
     <label htmlFor="email">Email:</label><br/>
     <input name="email" onChange={handleChamge}></input><br/>
     <label htmlFor="password" >Password:</label><br/>
     <input name="password" onChange={handleChamge}></input><br/>
-    <button onClick={login}>LogIn</button>
+    <button className='LoginButton' onClick={login}>LogIn</button>
     </div>
-    
+      </div>
+    </div>
     </>
   )
 }

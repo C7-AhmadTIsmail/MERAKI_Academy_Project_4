@@ -1,0 +1,12 @@
+.NavMain{
+    display: flex ;
+    justify-content:space-evenly ;
+    border: solid 2px black ;
+    border-radius: 13px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-left: 8px;
+    margin-right: 8px;
+    position: sticky;
+    top:0;
+}
