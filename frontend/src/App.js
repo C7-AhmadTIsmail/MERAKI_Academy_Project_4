@@ -8,6 +8,10 @@ import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
 import Campaign from "./components/Campaign/Campaign"
 import Favorite from "./components/Favorite/Favorite"
+import MyCampaign from "./components/MyCampaign/MyCampaign"
+import MyContribution from "./components/MyContribution/MyContribution"
+import MyProfile from "./components/MyProfile/MyProfile"
+
 export const UserContext = createContext();
 
 function App() {
@@ -30,6 +34,11 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Campaign" element={<Campaign />} />
         <Route path="/Favorite" element={<Favorite />} />
+        <Route path="/MyCampaign" element={<MyCampaign />} />
+        <Route path="/MyContribution" element={<MyContribution />} />
+        <Route path="/MyProfile" element={<MyProfile />} />
+
+
 
     </Routes>
     </div>
@@ -40,4 +49,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
 

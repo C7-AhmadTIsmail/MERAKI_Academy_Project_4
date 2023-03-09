@@ -13,7 +13,7 @@ const campaignSchema = new mongoose.Schema({
     campaignAmounts:{ type: Number },
     darftCampaignLink:{ type: String },
     campaigner:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
-    
+    favorite:{type :mongoose.Schema.Types.ObjectId ,ref:"favorite" },
 });
 
 

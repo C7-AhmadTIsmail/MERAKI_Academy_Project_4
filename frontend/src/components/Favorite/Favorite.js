@@ -1,7 +1,5 @@
 import axios from 'axios';
-import React , {useContext ,useEffect , useState } from "react";
-import { useNavigate  } from "react-router-dom";
-import { UserContext } from "../../App";
+import React , {useEffect , useState } from "react";
 import "./Favorite.css"
 
 
@@ -14,8 +12,8 @@ const Favorite = () => {
         const token =JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.get(`http://localhost:5000/favorite/${idUser}`,{ "headers": {"Authorization" : `Bearer ${token}`}}).then((res) => {
-        setFirst(res.data.result[0].favoriteCampaign);
-        console.log(res.data.result[0].favoriteCampaign)
+        setFirst(res.data.result);
+        console.log(res.data.result)
     });
     }, [deleteFormFavorite]);
 
@@ -30,9 +28,10 @@ const Favorite = () => {
             });
         }
 
-    const loopOnFavorite=first?first.map((element , index ) => {
-        return <div key={element._id} id={element._id}>
-        <p onClick={clickOnCampaignPage} id={element._id}>{ element.campaignTitle}</p>
+    const loopOnFavorite= Array.isArray(first)?first.map((element , index ) => {
+        console.log(element)
+        return <div key={element.favoriteCampaign._id} id={element.favoriteCampaign._id}>
+        <p onClick={clickOnCampaignPage} id={element.favoriteCampaign._id}>{ element.favoriteCampaign.campaignTitle}</p>
         </div>
         
         }):null;

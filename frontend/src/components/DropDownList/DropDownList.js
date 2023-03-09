@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { UserContext } from "../../App";
+import React from "react";
+import {  Link } from "react-router-dom";
 import "./DropDownList.css";
 const DropDownList = () => {
     const [open, setOpen] = React.useState(false);
@@ -16,16 +15,13 @@ const DropDownList = () => {
             {open ? (
                 <ul className="menu">
                     <li className="menu-item">
-                        <button>my profile</button>
+                        <Link to="/MyProfile"> MyProfile </Link>
                     </li>
                     <li className="menu-item">
-                        <button>edite my profile</button>
+                        <Link to="/MyCampaign"> MyCampaign </Link>
                     </li>
                     <li className="menu-item">
-                        <button>my campaign</button>
-                    </li>
-                    <li className="menu-item">
-                        <button>my contribution</button>
+                        <Link to="/MyContribution"> mycontribution </Link>
                     </li>
                 </ul>
             ) : null}
@@ -35,3 +31,5 @@ const DropDownList = () => {
 }
 
 export default DropDownList
+
+

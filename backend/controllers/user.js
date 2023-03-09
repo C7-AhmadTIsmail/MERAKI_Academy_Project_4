@@ -125,4 +125,22 @@ const updateUserByEmail =(req, res)=>{
     });
 }
 
-module.exports = { signUp , logIn , getAll , deleteUser , updateUserById , updateUserByEmail };
+
+const getUserDataById =(req, res)=>{
+    console.log("get user data")
+    const  _id=req.token._id
+    userSchema.find({ _id }).select({password: 0 ,_id: 0 ,role: 0 }).exec()
+    .then((result) => {
+        res.status(201).json(
+            {success: true,
+            message: "Success find  done",
+            result : result })
+    })
+    .catch((err) => {
+        res.status(400).json(
+            {success: false,
+            message:  err })
+    });
+}
+
+module.exports = { signUp , logIn , getAll , deleteUser , updateUserById , updateUserByEmail ,getUserDataById };

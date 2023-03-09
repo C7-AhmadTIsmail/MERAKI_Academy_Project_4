@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React , {useContext ,useEffect , useState } from "react";
-import { useNavigate  } from "react-router-dom";
-import { UserContext } from "../../App";
 import CampaignPage from "../CampaignPage/CampaignPage"
+import { UserContext } from "../../App";
+import Footer from "../Footer/Footer"
+import axios from 'axios';
 import "./Main.css"
 
 
@@ -40,6 +40,7 @@ const Main = () => {
     <div > 
     {campaignPageShow?  <CampaignPage data={campaignPageData}/>:<div className='grid-container-main'>{mainGenration}</div>}
     </div>
+    <Footer/>
     </>
   )
 }

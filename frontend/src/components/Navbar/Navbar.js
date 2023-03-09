@@ -3,15 +3,22 @@ import { Routes, Route, Link } from "react-router-dom";
 import { UserContext } from "../../App";
 import "./Navbar.css";
 import DropDownList from "../DropDownList/DropDownList";
+import { useNavigate  } from "react-router-dom";
 
 const Navbar = () => {
-
+    const navigate = useNavigate();
+    
     const { setLogin, login } = useContext(UserContext);
     const { campaignPageShow, setCampaignPageShow } = useContext(UserContext);
-
+    
     const Logout = () => {
         localStorage.clear();
         setLogin(false)
+        
+        setTimeout(()=>{
+            navigate("/")
+        },300)
+
     }
 
     const backToMain = () => {
@@ -22,9 +29,13 @@ const Navbar = () => {
         <>
             <div className="NavMain">
                 <Link to="/" onClick={backToMain}> Main </Link>
-                <Link to="/Register"> Register </Link>
 
-                {login ? <></> : <Link to="/Login"> Login </Link>}
+                {login ? <></> :<>
+                <Link to="/Register"> Register </Link>
+                <Link to="/Login"> Login </Link>
+                </> 
+                
+                }
 
                 {login ? (
                     <>

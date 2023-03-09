@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React , {useContext ,useEffect , useState } from "react";
+import React , {useContext , useState } from "react";
 import { useNavigate  } from "react-router-dom";
 import { UserContext } from "../../App";
 import "./Login.css";
@@ -13,8 +13,8 @@ const Login = () => {
     password: null,
 }
   const [userData, setUserData] = useState(usertest)
-  const {email , password }=userData
-  const [error, setError] = useState({})
+  // const {email , password }=userData
+  // const [error, setError] = useState({})
 
   // const validateData=()=>{
   //  
@@ -51,7 +51,7 @@ const Login = () => {
     <div style={{ marginTop: "8px" }}>Login</div>
     <hr/>
     <div style={{ marginTop: "40px" }}>
-    <label htmlFor="email">Email:</label><br/>
+    <label htmlFor="email">Email:</label><br className='loginHr'/>
     <input name="email" onChange={handleChamge}></input><br/>
     <label htmlFor="password" >Password:</label><br/>
     <input name="password" onChange={handleChamge}></input><br/>

@@ -44,8 +44,8 @@ const Register = () => {
 
   return (
     <>
-      <div className='LoginStyle'>
-        <div className='LoginStyleInside'>
+      <div className='registerStyle'>
+        <div className='registerStyleInside'>
           <div style={{ marginTop: "8px" }}>Register</div>
           <hr/>
           <div style={{ marginTop: "20px" }}>

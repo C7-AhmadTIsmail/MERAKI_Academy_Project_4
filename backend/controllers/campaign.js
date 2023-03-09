@@ -5,7 +5,9 @@ const campaignSchema =require("../models/campaignSchema");
 
 const addCampaign=(req, res)=>{
     
-    const  campaigner=req.params.id;
+    // const  campaigner=req.params.id;
+    const  campaigner=req.token._id
+    // console.log("campaigner",campaigner)
     const {  bankAccount , campaignTitle , campaignCardImage , 
         pargraphesAboutCampaign , loaction , catgory , campaignDurationDays , 
         urlVideoOrImage , campaignPerks , campaignAmounts,darftCampaignLink  }=req.body

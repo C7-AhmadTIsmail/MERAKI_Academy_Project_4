@@ -1,6 +1,4 @@
 
-
-
 authorization=(string)=>{
 
     return (req,res,next)=>{
@@ -11,12 +9,6 @@ authorization=(string)=>{
     next()
     }
 }
-
-
-
-
-
-
 
 
 module.exports = {authorization};

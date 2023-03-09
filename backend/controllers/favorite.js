@@ -9,11 +9,6 @@ const addfavorite=(req, res)=>{
     
     const newCampaign = new favoriteSchema({ user , favoriteCampaign })
 
-
-    favoriteSchema.findOneAndUpdate(user,{ $addToSet: { favoriteCampaign: favoriteCampaign } })
-    .then((result) => {
-        console.log(result)
-        if(!result){
         newCampaign.save().then((resultSave) => {
             console.log("1")
         res.status(201).json(
@@ -26,19 +21,8 @@ const addfavorite=(req, res)=>{
             {success: false,
             message:  err })
     });
-        }else{
-            console.log("2")
-            res.status(201).json(
-                {success: true,
-                message: "Success add to favorite created",
-                result: result })
         }
-    }).catch((err) => {
-        res.status(500).json(
-            {success: false,
-            message:  err })
-    });
-}
+    
 
 
 
@@ -46,7 +30,7 @@ const removefavorite =(req, res)=>{
     const user=req.params.idUser
     const favoriteCampaign=req.params.idCampaign
     console.log(favoriteCampaign)
-    favoriteSchema.findOneAndUpdate(user,{ $pull: { favoriteCampaign: favoriteCampaign } })
+    favoriteSchema.deleteMany({user, favoriteCampaign })
     .then((result) => {
         res.status(200).json(
             {success: true,

@@ -1,17 +1,17 @@
 import axios from 'axios';
-import React , {useContext ,useEffect , useState } from "react";
-import { useNavigate  } from "react-router-dom";
-import { UserContext } from "../../App";
-
+import React , { useState } from "react";
+import "./CampaignPage.css"
 
 
 const CampaignPage = (props) => {
+    const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id 
 
     const commentTest={
       comment :null
     }
-
+    
     const [userComment, setUserComment] = useState(commentTest)
+    const [commentholder, setCommentholder] = useState(null)
     const { comment }=userComment
     const [error, setError] = useState({})
 
@@ -27,8 +27,6 @@ const CampaignPage = (props) => {
       const addComment=()=>{
       const token =JSON.parse(localStorage.getItem('user')).token
       const idUser = JSON.parse(localStorage.getItem('user')).user._id
-      console.log(token ,'******************',idUser,"*******",props.data._id,"aaaaaa",userComment)
-
       axios.post(`http://localhost:5000/comment/add/${props.data._id}/${idUser}`,userComment,{ headers: {"Authorization" : `Bearer ${token}`}} )
       .then(function (response) {
       console.log(response.data)
@@ -39,11 +37,10 @@ const CampaignPage = (props) => {
       }
 
         const getComment=()=>{
-        const token =JSON.parse(localStorage.getItem('user')).token
-        console.log(token,props.data._id )
-        axios.get(`http://localhost:5000/comment/getCommentCampaign/${props.data._id}`,{ headers: {"Authorization" : `Bearer ${token}`}} )
+        axios.get(`http://localhost:5000/comment/getCommentCampaign/${props.data._id}` )
         .then(function (response) {
-        console.log(response.data)
+        console.log(response.data.Comment)
+        setCommentholder(response.data.Comment)
         })
         .catch(function (error) {
           console.log(error);
@@ -65,13 +62,29 @@ const CampaignPage = (props) => {
   return (
     <>
     <div>CampaignPage</div>
+    <div className='box0'>
+    {idUser?<>
+    <button onClick={addtofaverts}>add to faverts</button><br/>
     <label htmlFor="comment">comment:</label><br/>
     <input name="comment" onChange={handleChamge}></input><br/>
     <button onClick={addComment}>add Comment</button><br/>
+    </> :<></>}
     <button onClick={getComment}>show comment</button><br/>
-    <button onClick={addtofaverts}>add to faverts</button><br/>
+    {commentholder?<>{commentholder.map((element,index)=>{
+      return (<div key={index} >
+              <p>{element.comment}</p>
+              {(element.commenter==idUser)?
+              <>
+              <button className={element._id}>remove comment</button>
+              <button className={element._id}>edite comment</button></>
+              :<></>}
+              </div>
+              )
+      })}</>:<></>}
+    </div>
     </>
   )
 }
 
 export default CampaignPage
+

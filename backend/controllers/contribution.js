@@ -82,7 +82,7 @@ const removecontribution =(req, res)=>{
 
 const getcontributionByUser =(req, res)=>{
     id_=req.params.idUser
-    contributionSchema.find({contributor:id_})
+    contributionSchema.find({contributor:id_}).populate("campaign")
     .then((result) => {
         res.status(200).json(
             {success: true,
