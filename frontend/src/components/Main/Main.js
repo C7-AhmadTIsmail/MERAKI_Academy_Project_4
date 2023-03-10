@@ -12,6 +12,7 @@ const Main = () => {
   const [campaignPageData, setcampaignPageData] = useState(null)
   const {campaignPageShow, setCampaignPageShow} = useContext(UserContext);
   
+  const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   useEffect(() => {
     axios.get(`http://localhost:5000/campaign/get`).then((res) => {
@@ -23,13 +24,32 @@ const Main = () => {
   const clickOnCampaignPage=(e)=>{
     const searchIndex = first.findIndex((campaign) => campaign._id==e.target.id);
     setcampaignPageData(first[searchIndex])
-    console.log(campaignPageData)
+    // console.log(campaignPageData)
     setCampaignPageShow(true)
   }
 
+  const addTOfaverteFromMain=(e)=>{
+    const token = JSON.parse(localStorage.getItem('user')).token
+    const idUser = JSON.parse(localStorage.getItem('user')).user._id
+    axios.post(`http://localhost:5000/favorite/add/${e.target.id}/${idUser}`, "",
+    { headers: { "Authorization": `Bearer ${token}` } })
+      .then(function (response) {
+        // console.log(response.data)
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
+  }
+
     const mainGenration=first?first.map((element , index ) => {
+      // console.log(element)
     return <div key={element._id} id={element._id}>
-      <p onClick={clickOnCampaignPage} id={element._id}>{ element.campaignTitle}</p>
+      <div onClick={clickOnCampaignPage}  id={element._id} >
+      <p className="titleMain" id={element._id}>{ element.campaignTitle}</p>
+      <img className="mainImg"  id={element._id} src={element.campaignCardImage} alt="no photo found" /><br />
+      </div>
+      {idUser?<input  className="addToFavirte"  onClick={addTOfaverteFromMain} id={element._id} type="button" value="+" />:<></>}
+
     </div>
     
     }):null;

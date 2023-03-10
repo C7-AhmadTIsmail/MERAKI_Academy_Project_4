@@ -1,6 +1,12 @@
-.dropdown {
+.dropDown {
     position: relative;
 }
+
+.DropDownButton{
+    border-radius: 8px;
+}
+
+
 .menu {
     position: absolute;
     list-style-type: none;

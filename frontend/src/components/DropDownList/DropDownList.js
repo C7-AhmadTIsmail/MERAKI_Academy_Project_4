@@ -10,18 +10,18 @@ const DropDownList = () => {
 
     return (
 
-        <div className="dropdown">
-            <button onClick={handleOpen}>Dropdown</button>
+        <div className="dropDown">
+            <button className="DropDownButton" onClick={handleOpen}>Dropdown</button>
             {open ? (
                 <ul className="menu">
                     <li className="menu-item">
-                        <Link to="/MyProfile"> MyProfile </Link>
+                        <Link onClick={handleOpen} to="/MyProfile"> MyProfile </Link>
                     </li>
                     <li className="menu-item">
-                        <Link to="/MyCampaign"> MyCampaign </Link>
+                        <Link onClick={handleOpen} to="/MyCampaign"> MyCampaign </Link>
                     </li>
                     <li className="menu-item">
-                        <Link to="/MyContribution"> mycontribution </Link>
+                        <Link onClick={handleOpen}  to="/MyContribution"> mycontribution </Link>
                     </li>
                 </ul>
             ) : null}

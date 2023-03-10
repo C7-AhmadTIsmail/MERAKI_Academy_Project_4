@@ -5,8 +5,9 @@ const jwt = require("jsonwebtoken");
 
 
 const signUp =(req, res)=>{
-    const { email , password , name , age , phoneNumber, zipcode , city , role }=req.body
-    const newUser = new userSchema({ email , password , name , age , phoneNumber, zipcode , city , role })
+    const { email , password , name , age , phoneNumber, zipcode , country , urlMyPhoto , role  }=req.body
+    const newUser = new userSchema({ email , password , name , age , phoneNumber,
+        zipcode , country , urlMyPhoto , role })
     newUser.save().then((result) => {
         res.status(201).json(
             {success: true,
@@ -92,8 +93,9 @@ deleteUser=(req, res)=>{
 const updateUserById =(req, res)=>{
     console.log("update id")
     const id_=req.params.id
-    const {email , password , name , age , phoneNumber, zipcode , city , role }=req.body
-    userSchema.findByIdAndUpdate(id_ ,{ email , password , name , age , phoneNumber, zipcode , city , role }).populate("role").exec()
+    const {email , password , name , age , phoneNumber, zipcode , country , urlMyPhoto , role }=req.body
+    userSchema.findByIdAndUpdate(id_ ,{ email , password , name , age , phoneNumber, zipcode 
+        , country , urlMyPhoto , role }).populate("role").exec()
     .then((result) => {
         res.status(201).json(
             {success: true,
@@ -110,7 +112,7 @@ const updateUserById =(req, res)=>{
 
 const updateUserByEmail =(req, res)=>{
     console.log("upadte email")
-    const {email , newEmail , password , name , age , phoneNumber, zipcode , city , role }=req.body
+    const {email , newEmail , password , name , age , phoneNumber, zipcode , country , urlMyPhoto , role }=req.body
     userSchema.findOneAndUpdate({email} ,{ email : newEmail, name , age  }).exec()
     .then((result) => {
         res.status(201).json(

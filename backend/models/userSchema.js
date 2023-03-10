@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema({
     name: { type: String , required: true },
     age: { type: Number , required: true  },
     phoneNumber: { type: Number },
-    zipCode:{ type: Number },
-    city:{ type: String },
+    zipcode:{ type: Number },
+    country:{ type: String },
+    urlMyPhoto:{ type: String },
     role:{type :mongoose.Schema.Types.ObjectId ,ref:"role"},
 
 });
-
 
 
 userSchema.pre('save', async function() {   
