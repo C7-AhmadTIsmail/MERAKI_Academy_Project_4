@@ -16,3 +16,15 @@
     margin-left: 30px;
 }
 
+.titlefaverte{
+    font-size: 16px;
+}
+.faverteImg{
+    height: 200px;
+    width: 180px;
+    border-radius: 12px;
+}
+
+.removefromFavirte{
+    border-radius: 50%;
+}

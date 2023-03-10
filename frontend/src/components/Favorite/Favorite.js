@@ -31,7 +31,10 @@ const Favorite = () => {
     const loopOnFavorite= Array.isArray(first)?first.map((element , index ) => {
         console.log(element)
         return <div key={element.favoriteCampaign._id} id={element.favoriteCampaign._id}>
-        <p onClick={clickOnCampaignPage} id={element.favoriteCampaign._id}>{ element.favoriteCampaign.campaignTitle}</p>
+
+        <p className='titlefaverte' id={element.favoriteCampaign._id}>{ element.favoriteCampaign.campaignTitle}</p>
+        <img className="faverteImg"  id={element.favoriteCampaign._id} src={element.favoriteCampaign.campaignCardImage} alt="no photo found" /><br />
+        <input  onClick={clickOnCampaignPage} className="removefromFavirte"id={element._id} type="button" value="-" />
         </div>
         
         }):null;

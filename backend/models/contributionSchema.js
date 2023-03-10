@@ -6,7 +6,6 @@ const contributionSchema = new mongoose.Schema({
     dateOfContribution: { type: Number, required: true },
     lastDateOfContributionCanRefund: { type: Number, required: true },
     ammount: { type: Number , required: true  },
-    park: { type: Number },
     visibility:{ type: Boolean },
     contributor:{type :mongoose.Schema.Types.ObjectId ,ref:"user"},
     campaign:{type :mongoose.Schema.Types.ObjectId ,ref:"campaign"},

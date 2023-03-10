@@ -62,7 +62,7 @@ const Campaign = () => {
 return (
     <>
     <div>campaign</div>
-    <div style={{ marginTop: "40px" }}>
+    <div  className='addCampaign' style={{ marginTop: "40px" }}>
     <label htmlFor="bankAccount" >bankAccount:</label><br/>
     <input name="bankAccount" onChange={handleChangeArray}  placeholder="space bettwen account"></input><br/>
     <label htmlFor="campaignTitle" >campaignTitle:</label><br/>

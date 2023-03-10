@@ -11,7 +11,8 @@ const Main = () => {
   const [first, setFirst] = useState(null)
   const [campaignPageData, setcampaignPageData] = useState(null)
   const {campaignPageShow, setCampaignPageShow} = useContext(UserContext);
-  
+
+
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   useEffect(() => {
@@ -57,6 +58,7 @@ const Main = () => {
   return (
     <>
     <div style={{ marginTop: "20px" }}>Main</div>
+
     <div > 
     {campaignPageShow?  <CampaignPage data={campaignPageData}/>:<div className='grid-container-main'>{mainGenration}</div>}
     </div>

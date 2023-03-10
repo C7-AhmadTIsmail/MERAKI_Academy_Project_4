@@ -8,11 +8,11 @@ const addcontribution=(req, res)=>{
     const  contributor =req.params.idcontributor;
     
     const {  dateOfContribution ,lastDateOfContributionCanRefund , name ,
-        ammount , park , visibility }=req.body
+        ammount , visibility }=req.body
     
         const newcontribution = new contributionSchema({ 
             dateOfContribution,lastDateOfContributionCanRefund,name,ammount,
-            park,visibility,campaign , contributor})
+            visibility,campaign , contributor})
 
         newcontribution.save().then((result) => {
         res.status(201).json(
@@ -46,10 +46,10 @@ const getAllcontribution =(req, res)=>{
 const updatecontribution =(req, res)=>{
     id_=req.params.id
     const {  dateOfContribution,lastDateOfContributionCanRefund,
-        name ,ammount,park,visibility,campaign  }=req.body
+        name ,ammount,visibility,campaign  }=req.body
 
     contributionSchema.findByIdAndUpdate(id_,{
-        dateOfContribution,lastDateOfContributionCanRefund, name ,ammount,park,visibility,campaign  })
+        dateOfContribution,lastDateOfContributionCanRefund, name ,ammount,visibility,campaign  })
     .then((result) => {
         res.status(200).json(
             {success: true,

@@ -21,7 +21,7 @@ contributionRouter.delete("/delete/:id",authentication, removecontribution );
 
 contributionRouter.get("/getcontributionUser/:idUser",authentication, getcontributionByUser );
 
-contributionRouter.get("/getcontributionCampaign/:idCampaign",authentication, getcontributionByCampaign );
+contributionRouter.get("/getcontributionCampaign/:idCampaign",getcontributionByCampaign );
 
 module.exports = contributionRouter;
 
