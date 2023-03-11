@@ -20,8 +20,8 @@ const Register = () => {
   }
   const [userData, setUserData] = useState(usertest)
   const { email, password, name, age, country, phoneNumber, zipcode , urlMyPhoto } = userData
-  const [error, setError] = useState({})
-
+  
+  // const [error, setError] = useState({})
   // const validateData=()=>{
   //  
   // }

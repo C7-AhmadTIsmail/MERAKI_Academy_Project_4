@@ -24,7 +24,8 @@ const CampaignPage = (props) => {
   const [showcontribution, setShowcontribution] = useState(false)
   const [valeAchievment, setValeAchievment] = useState(null)
   const [addContributionShow, setAddContributionShow] = useState(false)
-
+  const [elementOnFavriteAlreudy, setElementOnFavriteAlreudy] = useState(false)
+  const [elementOnFavriteAlreudyShow, setElementOnFavriteAlreudyShow] = useState(false)
   const { comment } = userComment
   const { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility } = contribution
 
@@ -73,18 +74,15 @@ const CampaignPage = (props) => {
       .catch(function (error) {
         //console.log(error );
       })
-
+    
+  
   }, [editOnComment , addContributionShow ]);
+
 
   const getComment = () => {
     setShowComment(!showComment)
 
   }
-
-
-
-
-
 
 
   const addtofaverts = () => {
@@ -94,13 +92,13 @@ const CampaignPage = (props) => {
     axios.post(`http://localhost:5000/favorite/add/${props.data._id}/${idUser}`, "", { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
          //console.log(response.data)
+         setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
+
+
       })
       .catch(function (error) {
         // console.log(error);
       });
-
-
-
   }
 
 
@@ -134,7 +132,7 @@ const CampaignPage = (props) => {
         console.log(response)
         // setEditOnComment(!editOnComment)
         setAddContributionShow(!addContributionShow)
-        setShowcontribution(!showcontribution)    //****************11/3/2023***************** */
+        setShowcontribution(!showcontribution)    
       })
       .catch(function (error) {
         console.log(error);
@@ -150,6 +148,40 @@ const totalDone=()=>{
   //console.log(g)
   return (g)
 }
+
+const hide=()=>{
+  setShowcontribution(!showcontribution)    
+}
+//const [elementOnFavriteAlreudyShow, setElementOnFavriteAlreudyShow] = useState(false)
+// const elmentfaverteshow=()=>{
+//   console.log("------------------------------")
+//   elementOnFavriteAlreudy?.forEach(element => {
+//   if(element.favoriteCampaign._id===props.data._id){
+//     console.log("************-**************")
+//     true
+//   }
+// });}
+
+useEffect(() => {
+  //const [elementOnFavriteAlreudy, setElementOnFavriteAlreudy] = useState(null)
+  const token = JSON.parse(localStorage.getItem('user'))?.token
+  if(token){
+    const idUser = JSON.parse(localStorage.getItem('user')).user._id
+  axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
+  let holder=false  
+  res?.data?.result?.forEach(element => {
+    if(element.favoriteCampaign._id===props.data._id){
+      console.log("************-**************")
+      holder=true
+    }
+  })
+  setElementOnFavriteAlreudyShow(holder);
+    console.log(holder,"11111111111111111111111")
+    // elmentfaverteshow()
+  });
+}
+}, [elementOnFavriteAlreudy]);
+
 
   return (
     <>
@@ -170,6 +202,7 @@ const totalDone=()=>{
         </div>
         <div className='box0'>
           {showcontribution?<>
+            <button onClick={hide}>hide</button><br />
             <label htmlFor="name">name:</label><br />
             <input name="name" onChange={handle_Chamge}></input><br />
             <label htmlFor="ammount">ammount:</label><br />
@@ -183,10 +216,11 @@ const totalDone=()=>{
             <button onClick={submetContribution}>submet</button><br />
           </>:<>
           {idUser ? <>
-            <button onClick={addtofaverts}>add to faverts</button><br />
+            {elementOnFavriteAlreudyShow?<></>:<><button onClick={addtofaverts}>add to faverts</button><br /></>}
             <label htmlFor="comment">comment:</label><br />
             <input name="comment" onChange={handleChamge}></input><br />
             <button onClick={addComment}>add Comment</button><br />
+            <button onClick={addContribution}> add Contribution</button><br />
           </> : <></>}
           <button onClick={getComment}>show comment</button><br />
           {showComment ? <>{commentholder.map((element, index) => {
@@ -201,7 +235,6 @@ const totalDone=()=>{
             </div>
             )
           })}</> : <></>}
-          <button onClick={addContribution}> add Contribution</button>
 
           
           </>}

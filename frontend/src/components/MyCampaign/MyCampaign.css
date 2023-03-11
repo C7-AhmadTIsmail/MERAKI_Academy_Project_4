@@ -7,3 +7,8 @@ margin-bottom: 13px;
     border: solid black 1px;
     border-radius: 18px;
 }
+
+.myCampaignPageImg{
+    width: 100px;
+    height: 100px;
+}

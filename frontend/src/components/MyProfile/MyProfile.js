@@ -32,7 +32,7 @@ const MyProfile = () => {
         setFirstMyProfile(res.data.result);
         // console.log(res.data.result[0],"res2")
       });
-  }, [photoedit,profileEdite,editePasswordVlue]);
+  }, [photoedit, profileEdite, editePasswordVlue]);
 
 
 
@@ -53,7 +53,7 @@ const MyProfile = () => {
     console.log(userData)
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.put(`http://localhost:5000/user/update/${idUser}`, { password , email, name, age, country, phoneNumber , zipcode },
+    axios.put(`http://localhost:5000/user/update/${idUser}`, { password, email, name, age, country, phoneNumber, zipcode },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         console.log(res)
       });
@@ -65,7 +65,7 @@ const MyProfile = () => {
     console.log(userData)
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.put(`http://localhost:5000/user/update/${idUser}`, { urlMyPhoto :urlMyPhoto },
+    axios.put(`http://localhost:5000/user/update/${idUser}`, { urlMyPhoto: urlMyPhoto },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         console.log(res)
       });
@@ -77,11 +77,11 @@ const MyProfile = () => {
     setPhotoedit(false)
   }
 
-  const editPassword = () => {
-    seteditePasswordVlue(!editePasswordVlue)
-    setProfileEdite(false)
-    setPhotoedit(false)
-  }
+  // const editPassword = () => {
+  //   seteditePasswordVlue(!editePasswordVlue)
+  //   setProfileEdite(false)
+  //   setPhotoedit(false)
+  // }
 
 
   return (
@@ -125,7 +125,7 @@ const MyProfile = () => {
       }
       <br />
       <button className='submetNewButton' onClick={editProfile}>edit Profile</button>
-      <button className='submetNewButton' onClick={editPassword}>edit Password</button><br />
+      {/* <button className='submetNewButton' onClick={editPassword}>edit Password</button><br /> */}
       {
         profileEdite ? <>
           <label htmlFor="email" >Email: </label><br />
@@ -143,13 +143,13 @@ const MyProfile = () => {
           <button className='submetNewButton' onClick={submetNewData}>submet</button>
         </> : <></>
       }
-      {
+      {/* {
         editePasswordVlue ? <>
           <label htmlFor="password" >new password enter:</label><br />
           <input name="password" type="url" placeholder="new password" onChange={handleChamge}></input><br />
           <button className='submetNewButton' onClick={submetNewData}>submet</button>
         </> : <></>
-      }
+      } */}
     </div>
   )
 }
