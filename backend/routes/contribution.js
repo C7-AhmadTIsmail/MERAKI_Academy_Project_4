@@ -4,7 +4,8 @@ const contributionRouter = express.Router();
 
 
 const { addcontribution , getAllcontribution , updatecontribution ,
-     removecontribution , getcontributionByUser , getcontributionByCampaign } = require('../controllers/contribution')
+     removecontribution , getcontributionByUser , getcontributionByCampaign 
+     ,getcontributionByCampaignMaximum} = require('../controllers/contribution')
 
 const { authentication } = require('../middleware/authentication');
 const { authorization } = require('../middleware/authorization');
@@ -22,6 +23,9 @@ contributionRouter.delete("/delete/:id",authentication, removecontribution );
 contributionRouter.get("/getcontributionUser/:idUser",authentication, getcontributionByUser );
 
 contributionRouter.get("/getcontributionCampaign/:idCampaign",getcontributionByCampaign );
+
+
+contributionRouter.get("/getcontributionCampaignMaximum/:idCampaign",getcontributionByCampaignMaximum );
 
 module.exports = contributionRouter;
 

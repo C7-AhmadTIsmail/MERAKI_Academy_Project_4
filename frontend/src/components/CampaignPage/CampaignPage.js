@@ -92,7 +92,7 @@ const CampaignPage = (props) => {
     axios.post(`http://localhost:5000/favorite/add/${props.data._id}/${idUser}`, "", { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
          //console.log(response.data)
-         setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
+        setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
 
 
       })
@@ -182,6 +182,28 @@ useEffect(() => {
 }
 }, [elementOnFavriteAlreudy]);
 
+const [holdBigContribtution, setHoldBigContribtution] = useState(null)
+const [holdBigContribtutionShowAndHidden, setHoldBigContribtutionShowAndHidden] = useState(false)
+
+const showTheBigestContribution=()=>{
+  const idUser = JSON.parse(localStorage.getItem('user')).user._id
+  const token = JSON.parse(localStorage.getItem('user')).token
+  axios.get(`http://localhost:5000/contribution/getcontributionCampaignMaximum/${props.data._id}`)
+    .then(function (response) {
+      console.log(response)
+      setHoldBigContribtution(response.data.contribution)
+      setHoldBigContribtutionShowAndHidden(true)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+}
+
+const showTheBigestContributionhide=()=>{
+  setHoldBigContribtutionShowAndHidden(false)
+}
+
 
   return (
     <>
@@ -222,6 +244,20 @@ useEffect(() => {
             <button onClick={addComment}>add Comment</button><br />
             <button onClick={addContribution}> add Contribution</button><br />
           </> : <></>}
+            
+            {holdBigContribtutionShowAndHidden?<><button onClick={showTheBigestContributionhide}>hide bigest Contribution</button><br /></>:<><button onClick={showTheBigestContribution}>bigest Contribution</button><br /></>}
+            {holdBigContribtutionShowAndHidden&&holdBigContribtution?<>
+              {holdBigContribtution.map((element, index) => {
+            return (<div key={index} >
+              <br />
+              <p >{element.name}</p>
+              <p>{element.ammount}</p>
+            </div>
+            )
+          })}
+
+            
+            </>:<></>}
           <button onClick={getComment}>show comment</button><br />
           {showComment ? <>{commentholder.map((element, index) => {
             return (<div key={index} >
@@ -230,8 +266,9 @@ useEffect(() => {
               {(element.commenter == idUser) ?
                 <>
                   <button className={element._id} onClick={removecomment}>remove comment</button>
-                  <button className={element._id}>edite comment</button></>
-                : <></>}
+                  {/* <button className={element._id}>edite comment</button> */}
+
+                </>: <></>}
             </div>
             )
           })}</> : <></>}

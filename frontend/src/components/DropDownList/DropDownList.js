@@ -21,7 +21,7 @@ const DropDownList = () => {
                         <Link onClick={handleOpen} to="/MyCampaign"> MyCampaign </Link>
                     </li>
                     <li className="menu-item">
-                        <Link onClick={handleOpen} to="/MyContribution"> mycontribution </Link>
+                        <Link onClick={handleOpen} to="/MyContribution"> MyContribution </Link>
                     </li>
                 </ul>
             ) : null}

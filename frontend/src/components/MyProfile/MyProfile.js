@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import "./MyProfile.css"
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const MyProfile = () => {
   const [firstMyProfile, setFirstMyProfile] = useState(null)
@@ -11,17 +12,15 @@ const MyProfile = () => {
   const [editePasswordVlue, seteditePasswordVlue] = useState(false)
 
   const usertest = {
-    email: null,
-    password: null,
-    name: null,
-    age: null,
-    phoneNumber: null,
-    zipcode: null,
-    country: null,
-    urlMyPhoto: null,
+    name: undefined,
+    age: undefined,
+    phoneNumber: undefined,
+    zipcode: undefined,
+    country: undefined,
+    urlMyPhoto: undefined,
   }
   const [userData, setUserData] = useState(usertest)
-  const { email, password, name, age, country, phoneNumber, zipcode, urlMyPhoto } = userData
+  const {  name, age, country, phoneNumber, zipcode, urlMyPhoto } = userData
 
 
   useEffect(() => {
@@ -53,7 +52,7 @@ const MyProfile = () => {
     console.log(userData)
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.put(`http://localhost:5000/user/update/${idUser}`, { password, email, name, age, country, phoneNumber, zipcode },
+    axios.put(`http://localhost:5000/user/update/${idUser}`, {name, age, country, phoneNumber, zipcode },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         console.log(res)
       });
@@ -103,7 +102,8 @@ const MyProfile = () => {
 
               </div>
             </div>
-
+          
+      
 
             <div className="f2">
               <p>name : {firstMyProfile[0].name}</p>
@@ -126,21 +126,26 @@ const MyProfile = () => {
       <br />
       <button className='submetNewButton' onClick={editProfile}>edit Profile</button>
       {/* <button className='submetNewButton' onClick={editPassword}>edit Password</button><br /> */}
+      <Button variant="primary" >
+        Launch static backdrop modal
+      </Button>
+      
       {
         profileEdite ? <>
-          <label htmlFor="email" >Email: </label><br />
-          <input name="email" placeholder="xxxxx@xxxx.com" onChange={handleChamge}></input><br />
+          <form onSubmit={(event) => event.preventDefault()}>
           <label htmlFor="name" >name: </label><br />
-          <input name="name" placeholder="your full name" onChange={handleChamge}></input><br />
+          <input name="name" required placeholder="your full name" onChange={handleChamge}></input><br />
           <label htmlFor="age" >age:</label><br />
-          <input name="age" type="number" placeholder="your age" onChange={handleChamge}></input><br />
+          <input name="age" type="number" required placeholder="your age" onChange={handleChamge}></input><br />
           <label htmlFor="country" >country:</label><br />
-          <input name="country" placeholder="your country" onChange={handleChamge}></input><br />
+          <input name="country" required placeholder="your country" onChange={handleChamge}></input><br />
           <label htmlFor="phoneNumber" >phone namber:</label><br />
-          <input name="phoneNumber" pattern="[1-9]{1}[0-9]{8,12}" placeholder="no leading zero" onChange={handleChamge}></input><br />
+          <input name="phoneNumber" required pattern="[1-9]{1}[0-9]{8,12}" placeholder="no leading zero" onChange={handleChamge}></input><br />
           <label htmlFor="zipcode" >zibcode:</label><br />
-          <input name="zipcode" placeholder="your zipcode" onChange={handleChamge}></input><br />
+          <input name="zipcode" required placeholder="your zipcode" onChange={handleChamge}></input><br />
           <button className='submetNewButton' onClick={submetNewData}>submet</button>
+        
+          </form>
         </> : <></>
       }
       {/* {
@@ -155,3 +160,8 @@ const MyProfile = () => {
 }
 
 export default MyProfile
+
+
+
+
+

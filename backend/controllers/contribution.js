@@ -110,8 +110,23 @@ const getcontributionByCampaign =(req, res)=>{
     });
 }
 
+const getcontributionByCampaignMaximum =(req, res)=>{
+    id_=req.params.idCampaign
+    contributionSchema.find({campaign:id_ , visibility : true }).sort({ ammount: -1 }).limit( 3 )
+    .then((result) => {
+        res.status(200).json(
+            {success: true,
+            message: "Success get all contribution for this campaign",
+            contribution: result })
+    }).catch((err) => {
+        res.status(500).json(
+            {success: false,
+            message:  err })
+    });
+}
 
 
 
 module.exports = { addcontribution , getAllcontribution , updatecontribution 
-    , removecontribution , getcontributionByUser , getcontributionByCampaign};
+    , removecontribution , getcontributionByUser ,
+    getcontributionByCampaign ,getcontributionByCampaignMaximum};
