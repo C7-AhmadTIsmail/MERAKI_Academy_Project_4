@@ -17,8 +17,7 @@ export const UserContext = createContext();
 function App() {
   const [login, setLogin] = useState(false)
   const [campaignPageShow, setCampaignPageShow] = useState(false)
-
-
+  
 
   return (
     <UserContext.Provider value={{setLogin , login , campaignPageShow , setCampaignPageShow }}>

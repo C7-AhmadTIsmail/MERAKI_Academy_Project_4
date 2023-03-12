@@ -1,9 +1,11 @@
-import axios from 'axios';
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
-import "./Login.css";
 import Button from 'react-bootstrap/Button';
+import { UserContext } from "../../App";
+import axios from 'axios';
+import "./Login.css";
+
+
 const Login = () => {
 
   const { setLogin } = useContext(UserContext);
@@ -29,7 +31,7 @@ const Login = () => {
 
     axios.post('http://localhost:5000/user/logIn', userData)
       .then(function (response) {
-        console.log(response.data.user)
+        // console.log(response.data.user)
         localStorage.setItem("user", JSON.stringify({ token: response.data.token, user: response.data.user }))
         setLogin(true)
         navigate("/")

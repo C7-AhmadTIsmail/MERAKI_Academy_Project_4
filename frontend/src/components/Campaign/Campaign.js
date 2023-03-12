@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../App";
-
+import axios from 'axios';
+import "./Campaign.css";
 
 
 
@@ -60,32 +60,36 @@ const Campaign = () => {
 
 
     return (
-        <>
+        <> 
+            <div className="MainAddCampaign">
             <div>campaign</div>
-            <div className='addCampaign' style={{ marginTop: "40px" }}>
-                <label htmlFor="bankAccount" >bankAccount:</label><br />
-                <input name="bankAccount" onChange={handleChangeArray} placeholder="space bettwen account"></input><br />
-                <label htmlFor="campaignTitle" >campaignTitle:</label><br />
-                <input name="campaignTitle" onChange={handleChange}></input><br />
-                <label htmlFor="campaignCardImage" >campaignCardImage:</label><br />
-                <input name="campaignCardImage" onChange={handleChange}></input><br />
-                <label htmlFor="pargraphesAboutCampaign" >pargraphesAboutCampaign:</label><br />
-                <input name="pargraphesAboutCampaign" onChange={handleChange}></input><br />
-                <label htmlFor="loaction" >loaction:</label><br />
-                <input name="loaction" onChange={handleChangeArray} placeholder="xx,xxxx xx,xxx"></input><br />
-                <label htmlFor="catgory">catgory:</label><br />
-                <input name="catgory" onChange={handleChangeArray} placeholder="space between each catgores" ></input><br />
-                <label htmlFor="campaignDurationDays" >campaignDurationDays:</label><br />
-                <input name="campaignDurationDays" onChange={handleChange}></input><br />
-                <label htmlFor="urlVideoOrImage" >urlVideoOrImage:</label><br />
-                <input name="urlVideoOrImage" onChange={handleChange}></input><br />
-                <label htmlFor="campaignPerks" >campaignPerks:</label><br />
-                <input name="campaignPerks" onChange={handleChangeArray} placeholder="space between each catgores"></input><br />
-                <label htmlFor="campaignAmounts" >campaignAmounts:</label><br />
-                <input name="campaignAmounts" onChange={handleChange}></input><br />
-                <label htmlFor="darftCampaignLink" >darftCampaignLink:</label><br />
-                <input name="darftCampaignLink" onChange={handleChange}></input><br />
+            <div className='AddCampaignStyleInside' style={{ marginTop: "40px" }}>
+            <div className="AddCampaignInside">
+                <label htmlFor="bankAccount" >bankAccount:</label>
+                <input name="bankAccount" onChange={handleChangeArray} placeholder="space bettwen account"></input>
+                <label htmlFor="campaignTitle" >campaignTitle:</label>
+                <input name="campaignTitle" onChange={handleChange}></input>
+                <label htmlFor="campaignCardImage" >campaignCardImage:</label>
+                <input name="campaignCardImage" onChange={handleChange}></input>
+                <label htmlFor="pargraphesAboutCampaign" >pargraphesAboutCampaign:</label>
+                <input name="pargraphesAboutCampaign" onChange={handleChange}></input>
+                <label htmlFor="loaction" >loaction:</label>
+                <input name="loaction" onChange={handleChangeArray} placeholder="xx,xxxx xx,xxx"></input>
+                <label htmlFor="catgory">catgory:</label>
+                <input name="catgory" onChange={handleChangeArray} placeholder="space between each catgores" ></input>
+                <label htmlFor="campaignDurationDays" >campaignDurationDays:</label>
+                <input name="campaignDurationDays" onChange={handleChange}></input>
+                <label htmlFor="urlVideoOrImage" >urlVideoOrImage:</label>
+                <input name="urlVideoOrImage" onChange={handleChange}></input>
+                <label htmlFor="campaignPerks" >campaignPerks:</label>
+                <input name="campaignPerks" onChange={handleChangeArray} placeholder="space between each catgores"></input>
+                <label htmlFor="campaignAmounts" >campaignAmounts:</label>
+                <input name="campaignAmounts" onChange={handleChange}></input>
+                <label htmlFor="darftCampaignLink" >darftCampaignLink:</label>
+                <input name="darftCampaignLink" onChange={handleChange}></input>
                 <button onClick={submet}>submet</button>
+                </div>
+            </div>
             </div>
         </>
     )

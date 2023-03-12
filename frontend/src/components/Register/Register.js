@@ -35,7 +35,7 @@ const Register = () => {
 
     axios.post('http://localhost:5000/user/signUp', userData)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         navigate("/Login")
       })
       .catch(function (error) {

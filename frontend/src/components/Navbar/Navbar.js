@@ -7,13 +7,15 @@ import DropDownList from "../DropDownList/DropDownList";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+
 
 const NavBar = () => {
     const navigate = useNavigate();
 
     const { setLogin, login } = useContext(UserContext);
     const { campaignPageShow, setCampaignPageShow } = useContext(UserContext);
+    const tokencheak = JSON.parse(localStorage.getItem('user'))?.token
+    tokencheak?setLogin(true):setLogin(false);
 
     const Logout = () => {
         localStorage.clear();
@@ -23,7 +25,7 @@ const NavBar = () => {
             navigate("/");
         }, 300);
     };
-
+    console.log(login)
     const backToMain = () => {
         setCampaignPageShow(false);
     };
@@ -77,21 +79,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-{
-    /* 
-  
-  
-  {login ? (
-      <>
-          <Link onClick={Logout}> Logout </Link>
-          <Link to="/Campaign"> Campaign </Link>
-          <Link to="/Favorite"> Favorite </Link>
-          <div className="defiultStyle">
-              <DropDownList/>
-          </div>
-      </>
-  ) : (
-      <></>
-  )} */
-}
