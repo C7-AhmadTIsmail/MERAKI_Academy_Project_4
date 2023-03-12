@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { createContext , useEffect , useState } from "react";
 
-import Navbar from "./components/Navbar/Navbar"
+import NavBar from "./components/NavBar/NavBar"
 import Main from "./components/Main/Main"
 import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
@@ -25,8 +25,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      <h1>Project 4 </h1>
-      <Navbar/>
+      <NavBar/>
     <div>
     <Routes >
         <Route path="/" element={<Main />} />
@@ -37,8 +36,6 @@ function App() {
         <Route path="/MyCampaign" element={<MyCampaign />} />
         <Route path="/MyContribution" element={<MyContribution />} />
         <Route path="/MyProfile" element={<MyProfile />} />
-
-
 
     </Routes>
     </div>

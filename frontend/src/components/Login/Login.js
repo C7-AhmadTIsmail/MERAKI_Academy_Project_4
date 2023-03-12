@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import "./Login.css";
-
+import Button from 'react-bootstrap/Button';
 const Login = () => {
 
   const { setLogin } = useContext(UserContext);
@@ -48,14 +48,14 @@ const Login = () => {
     <>
       <div className='LoginStyle'>
         <div className='LoginStyleInside'>
-          <div style={{ marginTop: "8px" }}>Login</div>
-          <hr />
-          <div style={{ marginTop: "40px" }}>
-            <label htmlFor="email">Email:</label><br className='loginHr' />
-            <input name="email" onChange={handleChamge}></input><br />
-            <label htmlFor="password" >Password:</label><br />
-            <input name="password" onChange={handleChamge}></input><br />
-            <button className='LoginButton' onClick={login}>LogIn</button>
+          <h3 className='LoginWord'>Login</h3>
+          <hr className='LoginHr' />
+          <div className="InsideLoginDiv">
+            <label htmlFor="email">Email:</label>
+            <input name="email" onChange={handleChamge}></input>
+            <label htmlFor="password" >Password:</label>
+            <input name="password" onChange={handleChamge}></input>
+            <Button variant="primary" className='LoginButton' onClick={login}>LogIn</Button>
           </div>
         </div>
       </div>

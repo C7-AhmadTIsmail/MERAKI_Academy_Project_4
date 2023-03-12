@@ -12,35 +12,13 @@ body{
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+-webkit-appearance: none;
+margin: 0;
 }
 /* remve array from input type number  */
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+-moz-appearance: textfield;
 }
 
 
-/* body{
-    background-image: url(photo/photo_site.jpg);
-    background-size: cover;
-} */
-
-/*
-    
-    
-    .btn {
-        border: none;
-        cursor: pointer;
-    } */
-
-    /* .btn:hover {
-        box-shadow: 10px -10px 5px 0px rgba(0,0,0,0.75);
-        } */
-
-        /* .buttonall:active {
-            background-color: #3e8e41;
-            box-shadow: 0 5px #363B3D;
-            transform: translateY(4px);
-        } */

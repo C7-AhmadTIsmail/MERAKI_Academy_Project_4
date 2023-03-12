@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from "react";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
-
+import Button from 'react-bootstrap/Button';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ const Register = () => {
     zipcode: null,
     country: null,
     role: "64047450f9276133c0753cfc",
-    urlMyPhoto:null,
+    urlMyPhoto: null,
   }
   const [userData, setUserData] = useState(usertest)
-  const { email, password, name, age, country, phoneNumber, zipcode , urlMyPhoto } = userData
-  
+  const { email, password, name, age, country, phoneNumber, zipcode, urlMyPhoto } = userData
+
   // const [error, setError] = useState({})
   // const validateData=()=>{
   //  
@@ -47,28 +47,28 @@ const Register = () => {
 
   return (
     <>
-      <div className='registerStyle'>
-        <div className='registerStyleInside'>
-          <div style={{ marginTop: "8px" }}>Register</div>
-          <hr/>
-          <div style={{ marginTop: "20px" }}>
-            <label htmlFor="email" >Email: </label><br />
-            <input name="email" placeholder="xxxxx@xxxx.com" onChange={handleChamge}></input><br />
-            <label htmlFor="password" >Password: </label><br />
-            <input name="password" type="password" placeholder="XXXXXXXX" onChange={handleChamge}></input><br />
-            <label htmlFor="name" >name: </label><br />
-            <input name="name"  placeholder="your full name" onChange={handleChamge}></input><br />
-            <label htmlFor="age" >age:</label><br />
-            <input name="age"  type="number" placeholder="your age" onChange={handleChamge}></input><br />
-            <label htmlFor="country" >country:</label><br />
-            <input name="country" placeholder="your country"  onChange={handleChamge}></input><br />
-            <label htmlFor="phoneNumber" >phone namber:</label><br />
-            <input name="phoneNumber" pattern="[1-9]{1}[0-9]{8,12}" placeholder="no leading zero" onChange={handleChamge}></input><br />
-            <label htmlFor="zipcode" >zibcode:</label><br />
-            <input name="zipcode" placeholder="your zipcode" onChange={handleChamge}></input><br />
-            <label htmlFor="urlMyPhoto" >url my photo:</label><br />
-            <input name="urlMyPhoto"  type="url" placeholder="your url as link" onChange={handleChamge}></input><br />
-            <button className='submetButton' onClick={submet}>submet</button>
+      <div className='RegisterStyle'>
+        <div className='RegisterStyleInside'>
+          <h3 className='RegisterWord'>Register</h3>
+          <hr className='RegisterLine' />
+          <div className='InnerSideOfRegister'>
+            <label htmlFor="email" >Email: </label>
+            <input name="email" placeholder="xxxxx@xxxx.com" onChange={handleChamge}></input>
+            <label htmlFor="password" >Password: </label>
+            <input name="password" type="password" placeholder="XXXXXXXX" onChange={handleChamge}></input>
+            <label htmlFor="name" >name: </label>
+            <input name="name" placeholder="your full name" onChange={handleChamge}></input>
+            <label htmlFor="age" >age:</label>
+            <input name="age" type="number" placeholder="your age" onChange={handleChamge}></input>
+            <label htmlFor="country" >country:</label>
+            <input name="country" placeholder="your country" onChange={handleChamge}></input>
+            <label htmlFor="phoneNumber" >phone namber:</label>
+            <input name="phoneNumber" pattern="[1-9]{1}[0-9]{8,12}" placeholder="no leading zero" onChange={handleChamge}></input>
+            <label htmlFor="zipcode" >zibcode:</label>
+            <input name="zipcode" placeholder="your zipcode" onChange={handleChamge}></input>
+            <label htmlFor="urlMyPhoto" >url my photo:</label>
+            <input name="urlMyPhoto" type="url" placeholder="your url as link" onChange={handleChamge}></input>
+            <Button variant="primary" className='SubmetButtonRegister' onClick={submet}>submet</Button>
           </div>
         </div>
       </div>
