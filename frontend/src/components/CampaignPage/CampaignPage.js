@@ -1,9 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from 'axios';
+import PopupCampaignPageBestContribution from '../PopupCampaignPageBestContribution/PopupCampaignPageBestContribution'
+import PopupCampaignPageAddContribution from '../PopupCampaignPageAddContribution/PopupCampaignPageAddContribution'
+import PopupCampaignPageAddComment from '../PopupCampaignPageAddComment/PopupCampaignPageAddComment'
+import React, { useContext, createContext, useEffect, useState } from "react";
+import Button from 'react-bootstrap/Button';
 import "./CampaignPage.css"
+import axios from 'axios';
 
+
+export const UserContextMain = createContext();
 
 const CampaignPage = (props) => {
+  const holderAllData = props
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   const commentTest = {
@@ -17,6 +24,9 @@ const CampaignPage = (props) => {
     visibility: false
   }
   const [userComment, setUserComment] = useState(commentTest)
+  const [modalShowComment, setModalShowComment] = useState(false)
+  const [modalShowContribution, setModalShowContribution] = useState(false)
+  const [modalShowBestContribution, setModalShowBestContribution] = useState(false)
   const [commentholder, setCommentholder] = useState(null)
   const [showComment, setShowComment] = useState(false)
   const [editOnComment, setEditOnComment] = useState(false)
@@ -26,35 +36,11 @@ const CampaignPage = (props) => {
   const [addContributionShow, setAddContributionShow] = useState(false)
   const [elementOnFavriteAlreudy, setElementOnFavriteAlreudy] = useState(false)
   const [elementOnFavriteAlreudyShow, setElementOnFavriteAlreudyShow] = useState(false)
+
   const { comment } = userComment
   const { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility } = contribution
 
 
-  const handle_Chamge = (e) => {
-    const { name, value } = e.target
-    setContribution((preData) => ({ ...preData, [name]: value }))
-    //console.log(contribution)
-  }
-
-
-  const handleChamge = (e) => {
-    const { name, value } = e.target
-    setUserComment((preData) => ({ ...preData, [name]: value }))
-  }
-
-  const addComment = () => {
-    //console.log(1)
-    const token = JSON.parse(localStorage.getItem('user')).token
-    const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.post(`http://localhost:5000/comment/add/${props.data._id}/${idUser}`, userComment, { headers: { "Authorization": `Bearer ${token}` } })
-      .then(function (response) {
-        // console.log(response.data)
-        setEditOnComment(!editOnComment)
-      })
-      .catch(function (error) {
-        // console.log(error);
-      });
-  }
 
   useEffect(() => {
     axios.get(`http://localhost:5000/comment/getCommentCampaign/${props.data._id}`)
@@ -65,8 +51,8 @@ const CampaignPage = (props) => {
       .catch(function (error) {
         // console.log(error);
       });
-  
-      axios.get(`http://localhost:5000/contribution/getcontributionCampaign/${props.data._id}` )
+
+    axios.get(`http://localhost:5000/contribution/getcontributionCampaign/${props.data._id}`)
       .then(function (response) {
         //console.log(response)
         setValeAchievment(response.data.contribution)
@@ -74,16 +60,13 @@ const CampaignPage = (props) => {
       .catch(function (error) {
         //console.log(error );
       })
-    
-  
-  }, [editOnComment , addContributionShow ]);
 
+
+  }, [editOnComment, addContributionShow]);
 
   const getComment = () => {
     setShowComment(!showComment)
-
   }
-
 
   const addtofaverts = () => {
     //console.log(2)
@@ -91,7 +74,7 @@ const CampaignPage = (props) => {
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.post(`http://localhost:5000/favorite/add/${props.data._id}/${idUser}`, "", { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
-         //console.log(response.data)
+        //console.log(response.data)
         setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
 
 
@@ -118,165 +101,112 @@ const CampaignPage = (props) => {
 
   }
 
-  const addContribution = () => {
-    setShowcontribution(!showcontribution)
+
+  const totalDone = () => {
+    const initialValue = 0;
+    let g = 0
+    g = valeAchievment?.reduce((accumulator, currentValue) => {
+      return currentValue.ammount + accumulator
+    }, initialValue);
+    //console.log(g)
+    return (g)
   }
 
-  const submetContribution=()=>{
-    console.log(4)
-    const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    const token = JSON.parse(localStorage.getItem('user')).token
-    axios.post(`http://localhost:5000/contribution/add/${props.data._id}/${idUser}`,
-    { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility , }, { headers: { "Authorization": `Bearer ${token}` } })
-      .then(function (response) {
-        console.log(response)
-        // setEditOnComment(!editOnComment)
-        setAddContributionShow(!addContributionShow)
-        setShowcontribution(!showcontribution)    
-      })
-      .catch(function (error) {
-        console.log(error);
+
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('user'))?.token
+    if (token) {
+      const idUser = JSON.parse(localStorage.getItem('user')).user._id
+      axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
+        let holder = false
+        res?.data?.result?.forEach(element => {
+          if (element.favoriteCampaign._id === props.data._id) {
+            console.log("************-**************")
+            holder = true
+          }
+        })
+        setElementOnFavriteAlreudyShow(holder);
+        console.log(holder, "11111111111111111111111")
+        // elmentfaverteshow()
       });
-  }
-
-const totalDone=()=>{
-  const initialValue = 0;
-    let g=0
-    g=valeAchievment?.reduce((accumulator,currentValue)=>{
-    return  currentValue.ammount+accumulator
-  },initialValue);
-  //console.log(g)
-  return (g)
-}
-
-const hide=()=>{
-  setShowcontribution(!showcontribution)    
-}
-//const [elementOnFavriteAlreudyShow, setElementOnFavriteAlreudyShow] = useState(false)
-// const elmentfaverteshow=()=>{
-//   console.log("------------------------------")
-//   elementOnFavriteAlreudy?.forEach(element => {
-//   if(element.favoriteCampaign._id===props.data._id){
-//     console.log("************-**************")
-//     true
-//   }
-// });}
-
-useEffect(() => {
-  //const [elementOnFavriteAlreudy, setElementOnFavriteAlreudy] = useState(null)
-  const token = JSON.parse(localStorage.getItem('user'))?.token
-  if(token){
-    const idUser = JSON.parse(localStorage.getItem('user')).user._id
-  axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
-  let holder=false  
-  res?.data?.result?.forEach(element => {
-    if(element.favoriteCampaign._id===props.data._id){
-      console.log("************-**************")
-      holder=true
     }
-  })
-  setElementOnFavriteAlreudyShow(holder);
-    console.log(holder,"11111111111111111111111")
-    // elmentfaverteshow()
-  });
-}
-}, [elementOnFavriteAlreudy]);
+  }, [elementOnFavriteAlreudy]);
 
-const [holdBigContribtution, setHoldBigContribtution] = useState(null)
-const [holdBigContribtutionShowAndHidden, setHoldBigContribtutionShowAndHidden] = useState(false)
+  const [holdBigContribtution, setHoldBigContribtution] = useState(null)
 
-const showTheBigestContribution=()=>{
-  const idUser = JSON.parse(localStorage.getItem('user')).user._id
-  const token = JSON.parse(localStorage.getItem('user')).token
-  axios.get(`http://localhost:5000/contribution/getcontributionCampaignMaximum/${props.data._id}`)
-    .then(function (response) {
-      console.log(response)
-      setHoldBigContribtution(response.data.contribution)
-      setHoldBigContribtutionShowAndHidden(true)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-}
-
-const showTheBigestContributionhide=()=>{
-  setHoldBigContribtutionShowAndHidden(false)
-}
 
 
   return (
     <>
-      <div className='CampaignPageInSideMain'>
-        <div>CampaignPage</div>
-        <div>
-          <img className="CampaignPageImg" src={props.data.campaignCardImage} alt="no photo found" />
+      <UserContextMain.Provider value={{
+        holderAllData, userComment, setUserComment, editOnComment,
+        setEditOnComment, setModalShowComment, setModalShowContribution, contribution, setContribution,
+        addContributionShow, setAddContributionShow, holdBigContribtution, setHoldBigContribtution
+      }}>
+        <div className='CampaignPageInSideMain'>
+          <div>CampaignPage</div>
+          <div>
+            <img className="CampaignPageImg" src={props.data.campaignCardImage} alt="no photo found" />
+          </div>
+          <div>
+            <p>campaign Title: {props.data.campaignTitle}</p>
+            <p>campaign Amounts: ${props.data.campaignAmounts} /{totalDone()}</p>
+
+            <p>campaign Duration Days: {props.data.campaignDurationDays}</p>
+            <p>bank Account: {props.data.bankAccount[0]}</p>
+
+
+
+          </div>
+          <div className='box0'>
+            {showcontribution ? <>
+            </> : <>
+              {idUser ? <>
+                {elementOnFavriteAlreudyShow ? <></> : <><button onClick={addtofaverts}>add to faverts</button><br /></>}
+
+                <Button variant="primary" onClick={() => {
+                  // addComment()
+                  setModalShowComment(true)
+                }}>add Comment</Button>
+                <PopupCampaignPageAddComment
+                  show={modalShowComment}
+                  onHide={() => setModalShowComment(false)} />
+
+                <Button variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
+                <PopupCampaignPageAddContribution
+                  show={modalShowContribution}
+                  onHide={() => setModalShowContribution(false)}
+                />
+
+              </> : <></>}
+
+              <Button variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
+              <PopupCampaignPageBestContribution
+                show={modalShowBestContribution}
+                onHide={() => setModalShowBestContribution(false)}
+              />
+             
+              <button onClick={getComment}>show comment</button><br />
+              {showComment ? <>{commentholder.map((element, index) => {
+                return (<div key={index} >
+                  <br />
+                  <p>{element.comment}</p>
+                  {(element.commenter == idUser) ?
+                    <>
+                      <button className={element._id} onClick={removecomment}>remove comment</button>
+                      {/* <button className={element._id}>edite comment</button> */}
+
+                    </> : <></>}
+                </div>
+                )
+              })}</> : <></>}
+
+
+            </>}
+          </div>
         </div>
-        <div>
-          <p>campaign Title: {props.data.campaignTitle}</p>
-          <p>campaign Amounts: ${props.data.campaignAmounts} /{totalDone()}</p>
-          
-          <p>campaign Duration Days: {props.data.campaignDurationDays}</p>
-          <p>bank Account: {props.data.bankAccount[0]}</p>
-          
-
-
-        </div>
-        <div className='box0'>
-          {showcontribution?<>
-            <button onClick={hide}>hide</button><br />
-            <label htmlFor="name">name:</label><br />
-            <input name="name" onChange={handle_Chamge}></input><br />
-            <label htmlFor="ammount">ammount:</label><br />
-            <input name="ammount" onChange={handle_Chamge}></input><br />
-            <label htmlFor="dateOfContribution">date Of Contribution:</label><br />
-            <input name="dateOfContribution" onChange={handle_Chamge}></input><br />
-            <label htmlFor="lastDateOfContributionCanRefund">last Date Of Contribution Can Refund:</label><br />
-            <input name="lastDateOfContributionCanRefund" onChange={handle_Chamge}></input><br />
-            <label htmlFor="visibility">visibility:</label><br />
-            <input name="visibility" onChange={handle_Chamge}></input><br />
-            <button onClick={submetContribution}>submet</button><br />
-          </>:<>
-          {idUser ? <>
-            {elementOnFavriteAlreudyShow?<></>:<><button onClick={addtofaverts}>add to faverts</button><br /></>}
-            <label htmlFor="comment">comment:</label><br />
-            <input name="comment" onChange={handleChamge}></input><br />
-            <button onClick={addComment}>add Comment</button><br />
-            <button onClick={addContribution}> add Contribution</button><br />
-          </> : <></>}
-            
-            {holdBigContribtutionShowAndHidden?<><button onClick={showTheBigestContributionhide}>hide bigest Contribution</button><br /></>:<><button onClick={showTheBigestContribution}>bigest Contribution</button><br /></>}
-            {holdBigContribtutionShowAndHidden&&holdBigContribtution?<>
-              {holdBigContribtution.map((element, index) => {
-            return (<div key={index} >
-              <br />
-              <p >{element.name}</p>
-              <p>{element.ammount}</p>
-            </div>
-            )
-          })}
-
-            
-            </>:<></>}
-          <button onClick={getComment}>show comment</button><br />
-          {showComment ? <>{commentholder.map((element, index) => {
-            return (<div key={index} >
-              <br />
-              <p>{element.comment}</p>
-              {(element.commenter == idUser) ?
-                <>
-                  <button className={element._id} onClick={removecomment}>remove comment</button>
-                  {/* <button className={element._id}>edite comment</button> */}
-
-                </>: <></>}
-            </div>
-            )
-          })}</> : <></>}
-
-          
-          </>}
-        </div>
-      </div>
+      </UserContextMain.Provider>
     </>
   )
 }

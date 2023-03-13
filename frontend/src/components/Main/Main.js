@@ -28,19 +28,18 @@ const Main = () => {
     axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
       setFavoriteHolder(res.data.result);
     });
-  }
-    
-    
-  }, [showPlusButton]);
+  }}, [showPlusButton]);
   
 
 
   const clickOnCampaignPage = (e) => {
     const searchIndex = first.findIndex((campaign) => campaign._id == e.target.id);
     setcampaignPageData(first[searchIndex])
-    // console.log(campaignPageData)
+    console.log(campaignPageData)
     setCampaignPageShow(true)
+    // console.log(campaignPageShow)
   }
+  console.log(campaignPageShow)
 
   const addTOfaverteFromMain = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
@@ -68,8 +67,8 @@ const Main = () => {
       })
     return <div key={element._id} id={element._id}>
       <div onClick={clickOnCampaignPage} id={element._id} >
-        <p className="titleMain" id={element._id}>{element.campaignTitle}</p>
-        <img className="mainImg" id={element._id} src={element.campaignCardImage} alt="no photo found" /><br />
+        <p className="titleMain"  id={element._id}>{element.campaignTitle}</p>
+        <img className="mainImg"   id={element._id} src={element.campaignCardImage} alt="no photo found" /><br />
       </div>
         {checker?<></>:<>
         
@@ -82,10 +81,11 @@ const Main = () => {
 
   return (
     <>
-      <div style={{ marginTop: "20px" }}>Main</div>
+      <div className="TitalMain">Main</div>
 
       <div >
-        {campaignPageShow ? <CampaignPage data={campaignPageData} /> : <div className='grid-container-main'>{mainGenration}</div>}
+        {campaignPageShow ? <CampaignPage data={campaignPageData} /> :
+         <div className='grid-container-main'>{mainGenration}</div>}
       </div>
       <Footer />
     </>

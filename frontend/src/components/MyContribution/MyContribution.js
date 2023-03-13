@@ -1,16 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import PopupMyContrtibutionEdite from '../PopupMyContrtibutionEdite/PopupMyContrtibutionEdite';
+import React, { createContext, useEffect, useState } from "react";
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import "./MyContribution.css"
 import axios from 'axios';
 
 
+export const UserContext = createContext();
+
 const MyContribution = () => {
   const [allMyContribution, setAllMyContribution] = useState(null)
   const [showThisSectionEditeArea, setshowThisSectionEditeArea] = useState(null)
   const [showContributionEditeArea, setShowContributionEditeArea] = useState(null)
-  const [showContributionEditeAreaAndHide, setShowContributionEditeAreaAndHide] = useState(false)
+  const [contributionEditeHolderData, setShowContributionHolderData] = useState(null)
   const [ContributionDoneAndRefresh, setContributionDoneAndRefresh] = useState(false)
-
+const [modalShowEditeMyContribution, setModalShowEditeMyContribution] = useState(false)
+  
   const myContributionTest = {
     name: null,
     dateOfContribution: 0,
@@ -22,17 +27,6 @@ const MyContribution = () => {
   const {name, dateOfContribution,lastDateOfContributionCanRefund,ammount, visibility} = myContribution
 
 
-
-  const handle_Change_myContribution = (e) => {
-    const { name, value } = e.target
-    setMyContribution((preData) => ({ ...preData, [name]: value }))
-    //console.log(contribution)
-  }
-
-
-
-  
-
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
@@ -43,24 +37,7 @@ const MyContribution = () => {
       });
   }, [ContributionDoneAndRefresh]);
 
-const editeMyContribution=(e)=>{
-  setShowContributionEditeArea(e.target.id)
-  setShowContributionEditeAreaAndHide(!showContributionEditeAreaAndHide)
 
-}
-
-
-
-const submetEdite=(e)=>{
-  const token = JSON.parse(localStorage.getItem('user')).token
-  const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.put(`http://localhost:5000/contribution/update/${e.target.id}`,{name, dateOfContribution,lastDateOfContributionCanRefund,ammount, visibility},
-    { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
-        console.log(res, "0")
-        setContributionDoneAndRefresh(!ContributionDoneAndRefresh)
-        });
-
-}
 
 const deletethisContribution=(e)=>{
     const token = JSON.parse(localStorage.getItem('user')).token
@@ -76,6 +53,8 @@ const deletethisContribution=(e)=>{
 
   return (
     <div>
+      <UserContext.Provider value={{setMyContribution ,setContributionDoneAndRefresh ,
+        ContributionDoneAndRefresh ,myContribution ,contributionEditeHolderData}}>
       <div className="MyContribution">MyContribution</div>
 
       {allMyContribution ? <>{allMyContribution.map((element, index) => {
@@ -92,28 +71,26 @@ const deletethisContribution=(e)=>{
           <p>visibility:  {trueOrFalseVisibilit}</p>
           <p>lastDateOfContributionCanRefund: {element.lastDateOfContributionCanRefund}</p>
           <hr/>
-          <button id={element._id} onClick={editeMyContribution}>edit</button><br  />
+
+          <Button variant="primary" id={element._id} onClick={(e) => {
+                setModalShowEditeMyContribution(true)
+                setShowContributionHolderData(e.target.id)
+              }
+              }>edit</Button>
+
+              <PopupMyContrtibutionEdite
+                show={modalShowEditeMyContribution}
+                onHide={() => setModalShowEditeMyContribution(false)}
+              />
+
+
           <button id={element._id} onClick={deletethisContribution}>delete</button><br  />
           
-          {showContributionEditeAreaAndHide&&showContributionEditeArea===element._id?<>
-            <label htmlFor="name">name :</label><br  />
-            <input name="name" onChange={handle_Change_myContribution}></input><br />
-            <label htmlFor="dateOfContribution">date Of Contribution:</label><br  />
-            <input name="dateOfContribution" onChange={handle_Change_myContribution}></input><br />
-            <label htmlFor="lastDateOfContributionCanRefund">lastDateOfContributionCanRefund:</label><br  />
-            <input name="lastDateOfContributionCanRefund" onChange={handle_Change_myContribution}></input><br />
-            <label htmlFor="ammount">ammount:</label><br  />
-            <input name="ammount" onChange={handle_Change_myContribution}></input><br />
-            <label htmlFor="visibility">visibility:</label><br  />
-            <input name="visibility" onChange={handle_Change_myContribution}></input><br />
-            <button id={element._id} onClick={submetEdite}>submet</button><br  />
-          
-          </>:<></>} 
 
         </div>
         )
       })}</> : <></>}
-
+</UserContext.Provider>
     </div>
   )
 }

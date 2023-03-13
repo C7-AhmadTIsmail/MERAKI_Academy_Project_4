@@ -1,6 +1,7 @@
 .MainAddCampaign{
     display: flex;
-    justify-content: center
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -9,12 +10,25 @@
     border-radius: 10px;
     width: 480px;
     height: 710px;
+
+}
+
+.CampaignWord {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: center;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.CampaignHr {
+    color: black;
+    size: 3px;
 }
 
 .AddCampaignInside{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
 
 }

@@ -1,10 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
-
+import PopupEditeMyPhoto from '../PopupEditeMyPhoto/PopupEditeMyPhoto'
+import PopupEditeMyData from '../PopupEditeMyData/PopupEditeMyData'
+import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import "./MyProfile.css"
-import Button from 'react-bootstrap/Button';
-import PopupEditeMyData from '../PopupEditeMyData/PopupEditeMyData'
-import PopupEditeMyPhoto from '../PopupEditeMyPhoto/PopupEditeMyPhoto'
+
 
 export const UserContext = createContext();
 

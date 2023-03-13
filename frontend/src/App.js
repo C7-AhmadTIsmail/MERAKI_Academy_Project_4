@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import { createContext , useEffect , useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import NavBar from "./components/NavBar/NavBar"
 import Main from "./components/Main/Main"
@@ -17,28 +17,33 @@ export const UserContext = createContext();
 function App() {
   const [login, setLogin] = useState(false)
   const [campaignPageShow, setCampaignPageShow] = useState(false)
-  
+  const [tokenFound, setTokenFound] = useState(JSON.parse(localStorage.getItem('user'))?.token)
+  useEffect(() => {
+    if (tokenFound) {
+      setLogin(!login)
+    }
+  }, [tokenFound])
 
   return (
-    <UserContext.Provider value={{setLogin , login , campaignPageShow , setCampaignPageShow }}>
-    <div className="App">
-      <header className="App-header">
-      </header>
-      <NavBar/>
-    <div>
-    <Routes >
-        <Route path="/" element={<Main />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Campaign" element={<Campaign />} />
-        <Route path="/Favorite" element={<Favorite />} />
-        <Route path="/MyCampaign" element={<MyCampaign />} />
-        <Route path="/MyContribution" element={<MyContribution />} />
-        <Route path="/MyProfile" element={<MyProfile />} />
+    <UserContext.Provider value={{ setLogin, login, setCampaignPageShow ,campaignPageShow }}>
+      <div className="App">
+        <header className="App-header">
+        </header>
+        <NavBar />
+        <div>
+          <Routes >
+            <Route path="/" element={<Main />} />
+            <Route path="/Register" element={<Register />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Campaign" element={<Campaign />} />
+            <Route path="/Favorite" element={<Favorite />} />
+            <Route path="/MyCampaign" element={<MyCampaign />} />
+            <Route path="/MyContribution" element={<MyContribution />} />
+            <Route path="/MyProfile" element={<MyProfile />} />
 
-    </Routes>
-    </div>
-    </div>
+          </Routes>
+        </div>
+      </div>
 
     </UserContext.Provider>
   );

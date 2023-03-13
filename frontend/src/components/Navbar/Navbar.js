@@ -13,9 +13,7 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const { setLogin, login } = useContext(UserContext);
-    const { campaignPageShow, setCampaignPageShow } = useContext(UserContext);
-    const tokencheak = JSON.parse(localStorage.getItem('user'))?.token
-    tokencheak?setLogin(true):setLogin(false);
+    const { setCampaignPageShow } = useContext(UserContext);
 
     const Logout = () => {
         localStorage.clear();
