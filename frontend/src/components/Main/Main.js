@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CampaignPage from "../CampaignPage/CampaignPage"
 import { UserContext } from "../../App";
 import Footer from "../Footer/Footer"
+import Percentage from "../Percentage/Percentage"
 import axios from 'axios';
 import "./Main.css"
 
@@ -13,6 +14,7 @@ const Main = () => {
   const { campaignPageShow, setCampaignPageShow } = useContext(UserContext);
   const [favoriteHolder, setFavoriteHolder] = useState(null)
   const [showPlusButton, setShowPlusButton] = useState(false)
+  const [ValueAchievmentPercentage, setValueAchievmentPercentage] = useState(null)
 
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
@@ -22,13 +24,20 @@ const Main = () => {
       // console.log(res.data.campaign)
     });
 
+    axios.get(`http://localhost:5000/contribution/get/`).then((res) => {
+    //  console.log("her mr roko",res?.data.contribution)
+     setValueAchievmentPercentage(res?.data.contribution);
+   
+   });
     const token = JSON.parse(localStorage.getItem('user'))?.token
     if(token){
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
       setFavoriteHolder(res.data.result);
     });
-  }}, [showPlusButton]);
+  }
+
+}, [showPlusButton]);
   
 
 
@@ -70,6 +79,8 @@ const Main = () => {
         <p className="titleMain"  id={element._id}>{element.campaignTitle}</p>
         <img className="mainImg"   id={element._id} src={element.campaignCardImage} alt="no photo found" /><br />
       </div>
+      
+      <Percentage campaignPercentage={{ID:element._id,ValueAchievmentPercentage,Amounts:element.campaignAmounts}} />
         {checker?<></>:<>
         
       {idUser ? <input className="addToFavirte" onClick={addTOfaverteFromMain} id={element._id} type="button" value="+" /> : <></>}

@@ -29,7 +29,7 @@ const addcontribution=(req, res)=>{
 
 
 const getAllcontribution =(req, res)=>{
-    contributionSchema.find({})
+    contributionSchema.find({}).select({_id: 0,name:0 ,lastDateOfContributionCanRefund:0, visibility:0 ,contributor:0 ,__v:0,dateOfContribution:0})
     .then((result) => {
         res.status(200).json(
             {success: true,

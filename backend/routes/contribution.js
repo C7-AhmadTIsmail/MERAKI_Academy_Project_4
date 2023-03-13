@@ -14,7 +14,7 @@ const { authorization } = require('../middleware/authorization');
 
 contributionRouter.post("/add/:idCampaign/:idcontributor",authentication, addcontribution );
 
-contributionRouter.get("/get",authentication, getAllcontribution );
+contributionRouter.get("/get", getAllcontribution );
 
 contributionRouter.put("/update/:id",authentication, updatecontribution);
 

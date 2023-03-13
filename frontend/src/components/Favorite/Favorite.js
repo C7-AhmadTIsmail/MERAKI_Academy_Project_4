@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import CampaignPage from "../CampaignPage/CampaignPage"
+import Percentage from "../Percentage/Percentage"
 import "./Favorite.css"
 
 
@@ -10,13 +11,22 @@ const Favorite = () => {
     const [deleteFormFavorite, setDeleteFormFavorite] = useState(false)
     const [showCampaignPageFromFavorite, setShowCampaignPageFromFavorite] = useState(false)
     const [campaignPageData, setcampaignPageData] = useState(null)
-    
+    const [ValueAchievmentPercentage, setValueAchievmentPercentage] = useState(null)
+   
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
         axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
             setFirst(res.data.result);
         });
+        axios.get(`http://localhost:5000/contribution/get/`).then((res) => {
+            //  console.log("her mr roko",res?.data.contribution)
+             setValueAchievmentPercentage(res?.data.contribution);
+           
+           });
+
+
+
     }, [deleteFormFavorite]);
 
     const clickOnCampaignPage = (e) => {
@@ -48,6 +58,9 @@ const Favorite = () => {
             <p className='titlefaverte' id={element.favoriteCampaign._id}>{element.favoriteCampaign.campaignTitle}</p>
             <img className="faverteImg" id={element.favoriteCampaign._id} src={element.favoriteCampaign.campaignCardImage} alt="no photo found" /><br />
             </div>
+
+            <Percentage campaignPercentage={{ID:element.favoriteCampaign._id,ValueAchievmentPercentage,Amounts:element.favoriteCampaign.campaignAmounts}} />
+
             <input onClick={clickOnCampaignPage} className="removefromFavirte"  id={element.favoriteCampaign._id} type="button" value="-" />
         </div>
 
