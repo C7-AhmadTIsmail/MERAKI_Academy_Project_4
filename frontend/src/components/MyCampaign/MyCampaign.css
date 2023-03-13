@@ -1,6 +1,7 @@
 .TitalMyCampaign {
     display: flex;
     justify-content: center;
+    z-index: -1;
 }
 
 .notchTitalMyCampaign {
@@ -15,6 +16,7 @@
     transform: translateX(-25%);
     display: flex;
     justify-content: center;
+    z-index: -1;
     /* margin-top: 56px; */
 }
 
@@ -44,10 +46,24 @@
 }
 
 .CampaignListMainDiv{
-    margin-top: 13px;
     border: solid black 1px;
     border-radius: 18px;
+    margin: 7px 9px;
 }
+
+.FirstRowMyCampaign{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.SecandRowMyCampaign{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 6px;
+}
+
+
 
 .myCampaignPageImg{
     width: 100px;

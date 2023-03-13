@@ -92,6 +92,7 @@ const MyCampaign = () => {
         <div className="TitalMyCampaign"> <h3 className="notchTitalMyCampaign">MyCampaign</h3> </div>
         {allMyCampaign ? <>{allMyCampaign.map((element, index) => {
           return (<div key={element._id} className="CampaignListMainDiv">
+            <div className='FirstRowMyCampaign'>
             <img className="myCampaignPageImg" src={element.campaignCardImage} alt="no photo found" />
             <p>campaign Title : {element.campaignTitle}</p>
             <p>campaign Amounts: ${element.campaignAmounts} </p>
@@ -99,8 +100,9 @@ const MyCampaign = () => {
             <p>catgory: {element.catgory}</p>
             <p>pargraphesAboutCampaign: {element.pargraphesAboutCampaign}</p>
             <p>campaign Duration Days: {element.campaignDurationDays}</p>
+            </div>
             <>
-
+              <div className='SecandRowMyCampaign'>
               <Button variant="primary" id={element._id} onClick={(e) => {
                 setmodalShowEditeMyCampaign(true)
                 setElementHolder(e.target.id)
@@ -111,8 +113,8 @@ const MyCampaign = () => {
                 show={modalShowEditeMyCampaign}
                 onHide={() => setmodalShowEditeMyCampaign(false)}
               />
-              <button id={element._id} onClick={deletethisCampaign}>delete</button><br />
-
+              <Button id={element._id} onClick={deletethisCampaign}>delete</Button><br />
+              </div>
             </>
           </div>
           )

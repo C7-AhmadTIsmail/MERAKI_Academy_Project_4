@@ -11,7 +11,7 @@ export const UserContextMain = createContext();
 
 const CampaignPage = (props) => {
   const holderAllData = props
-  console.log(props.data,"data")
+  console.log(props.data, "data")
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   const commentTest = {
@@ -160,7 +160,8 @@ const CampaignPage = (props) => {
         addContributionShow, setAddContributionShow, holdBigContribtution, setHoldBigContribtution
       }}>
         <div className='CampaignPageInSideMain'>
-          <div>CampaignPage</div>
+          <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
+          <div className='ContentCampaignPage'>
           <div>
             <img className="CampaignPageImg" src={props.data?.campaignCardImage} alt="no photo found" />
           </div>
@@ -174,9 +175,11 @@ const CampaignPage = (props) => {
 
 
           </div>
+          </div>
           <div className='box0'>
             {showcontribution ? <>
             </> : <>
+            <div className='FirstRow'>
               {idUser ? <>
                 {elementOnFavriteAlreudyShow ? <><Button variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></> : <><Button variant="primary" onClick={addtofaverts}>add to favorite</Button></>}
 
@@ -195,29 +198,30 @@ const CampaignPage = (props) => {
                 />
 
               </> : <></>}
-
+              </div>
+              <div className='SecandRow'>
               <Button variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
               <PopupCampaignPageBestContribution
                 show={modalShowBestContribution}
                 onHide={() => setModalShowBestContribution(false)}
               />
 
-              <button onClick={getComment}>show comment</button><br />
+              <Button onClick={getComment}>show comment</Button>
               {showComment ? <>{commentholder.map((element, index) => {
                 return (<div key={index} >
-                  <br />
+
                   <p>{element.comment}</p>
                   {(element.commenter == idUser) ?
                     <>
-                      <button className={element._id} onClick={removecomment}>remove comment</button>
-                      {/* <button className={element._id}>edite comment</button> */}
+                      <Button className={element._id} onClick={removecomment}>remove comment</Button>
+                      {/* <Button className={element._id}>edite comment</Button> */}
 
                     </> : <></>}
                 </div>
                 )
               })}</> : <></>}
 
-
+</div>
             </>}
           </div>
         </div>

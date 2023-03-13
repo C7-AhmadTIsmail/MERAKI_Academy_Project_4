@@ -1,14 +1,55 @@
-
-.MyProfile {
-    margin-top: 13px;
-    margin-bottom: 13px;
-    background-color: DodgerBlue;
+.TitalMyProfile {
+    display: flex;
+    justify-content: center;
+    z-index: -1;
 }
+
+.notchTitalMyProfile {
+    /* position: absolute; */
+    top: 0;
+    left: 50%;
+    width: 280px;
+    height: 42px;
+    background-color: #1f1a13;
+    color: white;
+    border-radius: 0 0 28px 28px;
+    transform: translateX(-0%);
+    display: flex;
+    justify-content: center;
+    z-index: -1;
+    /* margin-top: 56px; */
+}
+
+.notchTitalMyProfile::before,
+.notchTitalMyProfile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 14px;
+    height: 7px;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-image: radial-gradient(circle at 0 100%, transparent 6px, #222 7px);
+}
+
+.notchTitalMyProfile::after {
+    left: 100%;
+    margin-right: 7 px;
+    background-image: radial-gradient(circle at 100% 100%, transparent 6px, #222 7px);
+}
+
+@media screen and (max-width: 990px) {
+    .notchTitalMyProfile {
+        display: none;
+    }
+}
+
 
 .flex {
     display: flex;
     flex-wrap: nowrap;
-    margin: 0px 10px;
+    margin: 0px 110px;
 }
 
 
@@ -78,4 +119,10 @@
     color: rgb(0, 0, 0);
     font-weight: bold;
     font-size: 17px;
+}
+
+
+.ButtonEitProfile{
+    display: flex;
+    justify-content: center;
 }

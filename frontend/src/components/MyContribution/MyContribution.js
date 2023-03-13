@@ -61,16 +61,22 @@ const deletethisContribution=(e)=>{
         let trueOrFalseVisibilit="false"
         element.visibility?trueOrFalseVisibilit="true":trueOrFalseVisibilit="false";
         return (<div key={element._id} className="ContributionListMainDiv">
+          <div className='MyContributionfirst'>
           <p>campaignTitle: {element.campaign.campaignTitle}</p>
           <p>bankAccount: {element.campaign.bankAccount}</p>
           <p>catgory: {element.campaign.catgory}</p>
           <p>pargraphesAboutCampaign: {element.campaign.pargraphesAboutCampaign}</p>
+          </div>
           <hr/>
+          <div className='MyContributionSacand'>
           <p>name: {element.name}</p>
           <p>ammount of my Contribution: {element.ammount}</p>
           <p>visibility:  {trueOrFalseVisibilit}</p>
           <p>lastDateOfContributionCanRefund: {element.lastDateOfContributionCanRefund}</p>
           <hr/>
+          </div>
+
+          <div className='MyContributionThird'>
 
           <Button variant="primary" id={element._id} onClick={(e) => {
                 setModalShowEditeMyContribution(true)
@@ -84,8 +90,8 @@ const deletethisContribution=(e)=>{
               />
 
 
-          <button id={element._id} onClick={deletethisContribution}>delete</button><br  />
-          
+          <Button id={element._id} onClick={deletethisContribution}>delete</Button><br  />
+          </div>
 
         </div>
         )

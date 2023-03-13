@@ -62,7 +62,7 @@ const MyProfile = () => {
         <UserContext.Provider value={{seteditePasswordVlue, setModalShow,setModalShowPhoto,
         PopupEditeMyDataAnotherLocation, setPopupEditeMyDataAnotherLocation}}>
     <div>
-      <div className="MyProfile">MyProfile</div>
+      <div className="TitalMyProfile"><h3 className="notchTitalMyCampaign">MyProfile</h3></div>
       <div>
 
         {firstMyProfile ? <>
@@ -95,11 +95,11 @@ const MyProfile = () => {
           </div>
         </> : <p>noData</p>}
       </div>
-      
+      <div className="ButtonEitProfile" >
       <Button variant="primary" onClick={() =>{ 
         editProfile()
         setModalShow(true)}}>edit Profile</Button>
-
+      </div>
       <PopupEditeMyData
         show={modalShow}
         onHide={() => setModalShow(false)}

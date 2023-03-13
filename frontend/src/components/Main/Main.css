@@ -1,6 +1,7 @@
 .TitalMain {
     display: flex;
     justify-content: center;
+    z-index: -1;
 }
 
 .notchTitalMain {
@@ -15,11 +16,12 @@
     transform: translateX(-25%);
     display: flex;
     justify-content: center;
+    z-index: -1;
     /* margin-top: 56px; */
 }
 
 .notchTitalMain::before,
-.notnotchTitalMainch::after {
+.notchTitalMain::after {
     content: '';
     position: absolute;
     top: 0;

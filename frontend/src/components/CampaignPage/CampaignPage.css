@@ -1,6 +1,54 @@
+
 .CampaignPageInSideMain{
     margin: 15px;
     border:black solid 2px;
+}
+
+.TitalCampaignPage {
+    display: flex;
+    justify-content: center;
+    z-index: -1;
+}
+
+.notchTitalCampaignPage {
+    /* position: absolute; */
+    top: 0;
+    left: 50%;
+    width: 280px;
+    height: 42px;
+    background-color: #1f1a13;
+    color: white;
+    border-radius: 0 0 28px 28px;
+    transform: translateX(0%);
+    display: flex;
+    justify-content: center;
+    z-index: -1;
+    /* margin-top: 56px; */
+}
+
+.notchTitalCampaignPage::before,
+.notchTitalCampaignPage::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 14px;
+    height: 7px;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-image: radial-gradient(circle at 0 100%, transparent 6px, #222 7px);
+}
+
+.notchTitalCampaignPage::after {
+    left: 100%;
+    margin-right: 7 px;
+    background-image: radial-gradient(circle at 100% 100%, transparent 6px, #222 7px);
+}
+
+@media screen and (max-width: 990px) {
+    .notchTitalCampaignPage {
+        display: none;
+    }
 }
 
 .box0{
@@ -13,9 +61,29 @@
 margin-top: 12px;
 }
 
+.ContentCampaignPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .CampaignPageImg{
     width:140px;
     height:160px;
     margin-top: 20px;
+}
+
+
+.FirstRow{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.SecandRow{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
