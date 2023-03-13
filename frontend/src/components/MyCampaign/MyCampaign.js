@@ -89,7 +89,7 @@ const MyCampaign = () => {
         setmodalShowEditeMyCampaign,
         campaignDoneAndRefresh, setCampaignDoneAndRefresh, elementHolder
       }}>
-        <div className="MyCampaign">MyCampaign</div>
+        <div className="TitalMyCampaign"> <h3 className="notchTitalMyCampaign">MyCampaign</h3> </div>
         {allMyCampaign ? <>{allMyCampaign.map((element, index) => {
           return (<div key={element._id} className="CampaignListMainDiv">
             <img className="myCampaignPageImg" src={element.campaignCardImage} alt="no photo found" />

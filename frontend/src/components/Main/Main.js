@@ -35,11 +35,11 @@ const Main = () => {
   const clickOnCampaignPage = (e) => {
     const searchIndex = first.findIndex((campaign) => campaign._id == e.target.id);
     setcampaignPageData(first[searchIndex])
-    console.log(campaignPageData)
+    //console.log(campaignPageData)
     setCampaignPageShow(true)
     // console.log(campaignPageShow)
   }
-  console.log(campaignPageShow)
+  //console.log(campaignPageShow)
 
   const addTOfaverteFromMain = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
@@ -81,11 +81,15 @@ const Main = () => {
 
   return (
     <>
-      <div className="TitalMain">Main</div>
+    
 
       <div >
         {campaignPageShow ? <CampaignPage data={campaignPageData} /> :
-         <div className='grid-container-main'>{mainGenration}</div>}
+        <>
+        <div className="TitalMain"><h3 className="notchTitalMain">Main</h3></div>
+        <div className='grid-container-main'>{mainGenration}
+        </div>
+        </>}
       </div>
       <Footer />
     </>

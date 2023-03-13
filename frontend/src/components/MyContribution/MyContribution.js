@@ -55,7 +55,7 @@ const deletethisContribution=(e)=>{
     <div>
       <UserContext.Provider value={{setMyContribution ,setContributionDoneAndRefresh ,
         ContributionDoneAndRefresh ,myContribution ,contributionEditeHolderData}}>
-      <div className="MyContribution">MyContribution</div>
+      <div className="TitalMyContribution"><h3 className='notchTitalMyContribution'>MyContribution</h3></div>
 
       {allMyContribution ? <>{allMyContribution.map((element, index) => {
         let trueOrFalseVisibilit="false"

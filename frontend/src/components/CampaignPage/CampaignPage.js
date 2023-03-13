@@ -11,6 +11,7 @@ export const UserContextMain = createContext();
 
 const CampaignPage = (props) => {
   const holderAllData = props
+  console.log(props.data,"data")
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   const commentTest = {
@@ -83,10 +84,24 @@ const CampaignPage = (props) => {
         // console.log(error);
       });
   }
+  const removieFromFavorite = () => {
+    //console.log(2)
+    const token = JSON.parse(localStorage.getItem('user')).token
+    const idUser = JSON.parse(localStorage.getItem('user')).user._id
+    axios.delete(`http://localhost:5000/favorite/delete/${props.data._id}/${idUser}`, { headers: { "Authorization": `Bearer ${token}` } })
+      .then(function (response) {
+        //console.log(response.data)
+        setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
 
+
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
+  }
 
   const removecomment = (e) => {
-    console.log(3)
+    //console.log(3)
     const idOfComment = e.target.className
     const token = JSON.parse(localStorage.getItem('user')).token
     // console.log(idOfComment)
@@ -122,12 +137,12 @@ const CampaignPage = (props) => {
         let holder = false
         res?.data?.result?.forEach(element => {
           if (element.favoriteCampaign._id === props.data._id) {
-            console.log("************-**************")
+            //console.log("************-**************")
             holder = true
           }
         })
         setElementOnFavriteAlreudyShow(holder);
-        console.log(holder, "11111111111111111111111")
+        //console.log(holder, "11111111111111111111111")
         // elmentfaverteshow()
       });
     }
@@ -147,14 +162,14 @@ const CampaignPage = (props) => {
         <div className='CampaignPageInSideMain'>
           <div>CampaignPage</div>
           <div>
-            <img className="CampaignPageImg" src={props.data.campaignCardImage} alt="no photo found" />
+            <img className="CampaignPageImg" src={props.data?.campaignCardImage} alt="no photo found" />
           </div>
           <div>
-            <p>campaign Title: {props.data.campaignTitle}</p>
-            <p>campaign Amounts: ${props.data.campaignAmounts} /{totalDone()}</p>
+            <p>campaign Title: {props.data?.campaignTitle}</p>
+            <p>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</p>
 
-            <p>campaign Duration Days: {props.data.campaignDurationDays}</p>
-            <p>bank Account: {props.data.bankAccount[0]}</p>
+            <p>campaign Duration Days: {props.data?.campaignDurationDays}</p>
+            <p>bank Account: {props.data?.bankAccount[0]}</p>
 
 
 
@@ -163,7 +178,7 @@ const CampaignPage = (props) => {
             {showcontribution ? <>
             </> : <>
               {idUser ? <>
-                {elementOnFavriteAlreudyShow ? <></> : <><button onClick={addtofaverts}>add to faverts</button><br /></>}
+                {elementOnFavriteAlreudyShow ? <><Button variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></> : <><Button variant="primary" onClick={addtofaverts}>add to favorite</Button></>}
 
                 <Button variant="primary" onClick={() => {
                   // addComment()
@@ -186,7 +201,7 @@ const CampaignPage = (props) => {
                 show={modalShowBestContribution}
                 onHide={() => setModalShowBestContribution(false)}
               />
-             
+
               <button onClick={getComment}>show comment</button><br />
               {showComment ? <>{commentholder.map((element, index) => {
                 return (<div key={index} >
