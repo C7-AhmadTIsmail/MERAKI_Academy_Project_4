@@ -78,11 +78,10 @@ const PopupEditeMyData = (props) => {
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Modal heading
+                    Edite My profile Data
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>Centered Modal</h4>
                 
 
                         <form onSubmit={(event) => event.preventDefault()} className="myProfileAreaEdite">
@@ -100,7 +99,6 @@ const PopupEditeMyData = (props) => {
                             <label htmlFor="age" >age:</label>
                             <input name="age" type="date" required placeholder="your age" onChange={handleChange}></input>
                             <div style={{ color: "red" }}>{errors.age}</div>
-
                         </form>
                 
                 

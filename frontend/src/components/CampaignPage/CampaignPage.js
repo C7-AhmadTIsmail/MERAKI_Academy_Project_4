@@ -20,11 +20,11 @@ const CampaignPage = (props) => {
     comment: null
   }
   const contributionTest = {
-    name: null,
-    dateOfContribution: 0,
-    lastDateOfContributionCanRefund: 0,
-    ammount: 0,
-    visibility: false
+    name: "",
+    dateOfContribution: "",
+    lastDateOfContributionCanRefund: "",
+    ammount: "",
+    visibility: ""
   }
   const [userComment, setUserComment] = useState(commentTest)
   const [modalShowComment, setModalShowComment] = useState(false)

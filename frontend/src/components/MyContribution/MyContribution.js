@@ -17,11 +17,11 @@ const MyContribution = () => {
 const [modalShowEditeMyContribution, setModalShowEditeMyContribution] = useState(false)
   
   const myContributionTest = {
-    name: null,
-    dateOfContribution: 0,
-    lastDateOfContributionCanRefund: 0,
-    ammount: 0,
-    visibility: false
+    name: "",
+    dateOfContribution: "",
+    lastDateOfContributionCanRefund: "",
+    ammount: "",
+    visibility: ""
   }
   const [myContribution, setMyContribution] = useState(myContributionTest)
   const {name, dateOfContribution,lastDateOfContributionCanRefund,ammount, visibility} = myContribution
@@ -72,7 +72,7 @@ const deletethisContribution=(e)=>{
           <p>name: {element.name}</p>
           <p>ammount of my Contribution: {element.ammount}</p>
           <p>visibility:  {trueOrFalseVisibilit}</p>
-          <p>lastDateOfContributionCanRefund: {element.lastDateOfContributionCanRefund}</p>
+          <p>lastDateOfContributionCanRefund: {element.lastDateOfContributionCanRefund.split("T")[0]}</p>
           <hr/>
           </div>
 

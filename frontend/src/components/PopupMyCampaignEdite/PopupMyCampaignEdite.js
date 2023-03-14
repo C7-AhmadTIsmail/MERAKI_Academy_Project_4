@@ -81,11 +81,13 @@ const PopupMyCampaignEdite = (props) => {
             <input name="pargraphesAboutCampaign" onChange={handle_Change_myCampaign}></input><br />
             <label htmlFor="campaignDurationDays">campaign Duration Days:</label><br  />
             <input name="campaignDurationDays" onChange={handle_Change_myCampaign}></input><br />
-            <button id={elementHolder} onClick={submetedite}>submet</button><br  />
         
 
         </Modal.Body>
         <Modal.Footer>
+          <div className="">
+            <button id={elementHolder} onClick={submetedite}>submet</button><br  />
+          </div>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
