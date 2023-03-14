@@ -21,10 +21,7 @@ const Register = () => {
   const [userData, setUserData] = useState(usertest)
   const { email, password, name, age, country, phoneNumber, zipcode, urlMyPhoto } = userData
 
-  // const [error, setError] = useState({})
-  // const validateData=()=>{
-  //  
-  // }
+  
 
   const handleChamge = (e) => {
     const { name, value } = e.target
