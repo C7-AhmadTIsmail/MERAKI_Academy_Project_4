@@ -34,7 +34,8 @@ const MyProfile = () => {
     axios.get(`http://localhost:5000/user/getUserData/${idUser}`,
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setFirstMyProfile(res.data.result);
-        // console.log(res.data.result[0],"res2")
+        console.log(res.data.result[0].age.split("T")[0])
+
       });
   }, [editePasswordVlue,PopupEditeMyDataAnotherLocation]);
 
@@ -51,11 +52,6 @@ const MyProfile = () => {
    
   }
 
-  // const editPassword = () => {
-  //   seteditePasswordVlue(!editePasswordVlue)
-  //  
-  //   
-  // }
 
 
   return (
@@ -87,7 +83,7 @@ const MyProfile = () => {
             <div className="f2">
               <p>name : {firstMyProfile[0].name}</p>
               <p>email: {firstMyProfile[0].email}</p>
-              <p>age: {firstMyProfile[0].age}</p>
+              <p>age: {firstMyProfile[0].age.split("T")[0]}</p>
               <p>country: {firstMyProfile[0].country}</p>
               <p>zipcode : {firstMyProfile[0].zipcode}</p>
               <p>phoneNumber : {firstMyProfile[0].phoneNumber}</p>
@@ -106,15 +102,6 @@ const MyProfile = () => {
       />
       <PopupEditeMyPhoto show={modalShowPhoto}
         onHide={() => setModalShowPhoto(false)} />
-
-      
-      {/* {
-        editePasswordVlue ? <>
-          <label htmlFor="password" >new password enter:</label><br />
-          <input name="password" type="url" placeholder="new password" onChange={handleChamge}></input><br />
-          <button className='submetNewButton' onClick={submetNewData}>submet</button>
-        </> : <></>
-      } */}
     </div>
       </UserContext.Provider>
   )

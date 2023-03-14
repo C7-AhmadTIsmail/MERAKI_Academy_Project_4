@@ -68,10 +68,9 @@ const CampaignPage = (props) => {
      
         
             console.log(7)
-            const token = JSON.parse(localStorage.getItem('user')).token
-            const idUser = JSON.parse(localStorage.getItem('user')).user._id
-            axios.get(`http://localhost:5000/campaignTeams/${props.data._id}`,
-                { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
+            const token = JSON.parse(localStorage.getItem('user'))?.token
+            const idUser = JSON.parse(localStorage.getItem('user'))?.user._id
+            axios.get(`http://localhost:5000/campaignTeams/${props.data._id}`).then((res) => {
                 console.log(res.data.teamsMamber , "************************************************************0")
                 setTeamMamberHolder(res?.data?.teamsMamber)
                 console.log(8)

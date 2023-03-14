@@ -51,6 +51,7 @@
 
 .InputCorner{
     border-radius: 10px;
+    width: 260px;
 }
 
 .LoginButton {

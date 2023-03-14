@@ -9,11 +9,19 @@
     border-radius: 10px;
     margin-top: 30px;
     width: 400px;
-    height: 750px;
+    height: auto;
     background-color: #3d3d3d;
     color:wheat
 }
 
+
+::-webkit-input-placeholder {
+    text-align: center;
+  }
+  
+  :-moz-placeholder {
+    text-align: center;
+  }
 
 .RegisterWord {
     display: flex;
@@ -41,9 +49,13 @@
 .RegisterInputForm{
     border-radius: 10px;
     width: 320px;
-    margin-bottom: 12px;
+}
+.RegisterInputLabel{
+    margin-top: 10px;
 }
 
 .SubmetButtonRegister {
-    margin-top: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 220px;
 }

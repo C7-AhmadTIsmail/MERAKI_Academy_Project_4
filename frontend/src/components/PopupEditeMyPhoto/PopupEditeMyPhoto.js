@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import { UserContext } from "../MyProfile/MyProfile";
 import "./PopupEditeMyPhoto.css"
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -24,8 +25,6 @@ const PopupEditeMyPhoto = (props) => {
 
 
   const submetNewPhtoto = () => {
-    setPhotoedit(false)
-    seteditePasswordVlue(false)
     console.log(userData)
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
@@ -48,21 +47,21 @@ const PopupEditeMyPhoto = (props) => {
         centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+          Edite photo:
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
-
-
-          <label htmlFor="urlMyPhoto" >url my photo:</label><br />
-          <input name="urlMyPhoto" type="url" placeholder="your url as link" onChange={handleChange}></input><br />
-          <button className='submetNewButton' onClick={submetNewPhtoto}>submet</button>
-
+          <h4>New Url :</h4>
+          
+          <Form.Control name="urlMyPhoto" type="url" placeholder="your url as link" onChange={handleChange} />
 
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button className='submetNewButton' onClick={()=>{
+            
+            submetNewPhtoto()
+            props.onHide()
+            }}>submet</Button>
         </Modal.Footer>
       </Modal>
 

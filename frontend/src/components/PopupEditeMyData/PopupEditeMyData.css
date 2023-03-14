@@ -4,4 +4,8 @@
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+}  
+
+.submetNewButton{
+    margin-right: 129px;
 }

@@ -69,13 +69,24 @@
     font-size: 16px;
 }
 
+
+
+.ImgStyle{
+    display: flex;
+    justify-content: center;
+}
 .mainImg {
-    height: 230px;
-    width: 180px;
+    height:260px;
+    width: 220px;
+    border-radius: 2.5%;
     margin-bottom: 20px;
 }
 
+.CirculerMain{display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+}
 .addToFavirte {
-    border-radius: 25%;
+    border-radius: 50%;
     /* border-radius: 50%; */
 }

@@ -13,7 +13,7 @@ const PopupCampaignPageBestContribution = (props) => {
          setHoldBigContribtution,} = useContext(UserContextMain);
 
         const showTheBigestContribution = () => {
-            axios.get(`http://localhost:5000/contribution/getcontributionCampaignMaximum/${holderAllData.data._id}`)
+            axios.get(`http://localhost:5000/contribution/getcontributionCampaignMaximum/${holderAllData.data?._id}`)
               .then(function (response) {
                 console.log(response)
                 setHoldBigContribtution(response.data.contribution)
@@ -21,6 +21,7 @@ const PopupCampaignPageBestContribution = (props) => {
               })
               .catch(function (error) {
                 console.log(error);
+                setHoldBigContribtution(null)
               });
         
           }
@@ -42,7 +43,7 @@ const PopupCampaignPageBestContribution = (props) => {
                     <h4>Centered Modal</h4>
                     {holdBigContribtution?"":showTheBigestContribution()}
                     { holdBigContribtution ? <>
-                {holdBigContribtution.map((element, index) => {
+                {holdBigContribtution?.map((element, index) => {
                   return (<div key={index} >
                     <br />
                     <p >{element.name}</p>

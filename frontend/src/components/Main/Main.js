@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import CampaignPage from "../CampaignPage/CampaignPage"
-import { UserContext } from "../../App";
-import Footer from "../Footer/Footer"
 import Percentage from "../Percentage/Percentage"
+import Button from 'react-bootstrap/Button';
+import { UserContext } from "../../App";
+import Card from 'react-bootstrap/Card';
+import Footer from "../Footer/Footer"
 import axios from 'axios';
 import "./Main.css"
 
@@ -65,27 +67,31 @@ const Main = () => {
   }
 
   const mainGenration = first ? first.map((element, index) => {
-  // console.log(element)
     let checker=false
     favoriteHolder?.map((e)=>{
-        // console.log(e.favoriteCampaign._id)
         if(e.favoriteCampaign._id===element._id){
           checker=true
         }
 
       })
     return <div key={element._id} id={element._id}>
+
       <div onClick={clickOnCampaignPage} id={element._id} >
-        <p className="titleMain"  id={element._id}>{element.campaignTitle}</p>
-        <img className="mainImg"   id={element._id} src={element.campaignCardImage} alt="no photo found" /><br />
+
+      <p className="titleMain"  id={element._id}>{element.campaignTitle}</p>
+      <div className="ImgStyle">
+      <img className="mainImg"  id={element._id} src={element.campaignCardImage} alt="no photo found" />
+      </div>
       </div>
       
+      <div className="CirculerMain">
       <Percentage campaignPercentage={{ID:element._id,ValueAchievmentPercentage,Amounts:element.campaignAmounts}} />
-        {checker?<></>:<>
+      
+      {checker?<></>:<>
         
       {idUser ? <input className="addToFavirte" onClick={addTOfaverteFromMain} id={element._id} type="button" value="+" /> : <></>}
         </>}
-
+      </div>
     </div>
 
   }) : null;

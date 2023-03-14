@@ -73,6 +73,12 @@
     border-radius: 12px;
 }
 
+.MainRow{    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+
 .removefromFavirte {
 
     border-radius: 50%;
