@@ -17,7 +17,7 @@ const signUp =(req, res)=>{
     .catch((err) => {
         res.status(400).json(
             {success: false,
-            message:  err })
+            err: err.message, })
     });
 }
 
@@ -25,6 +25,12 @@ const logIn=(req, res)=>{
     const {email,password}=req.body
     userSchema.findOne({email}).populate("role").exec()
     .then( (result) => {
+        if (!result) {
+        return res.status(403).json({
+        success: false,
+        message: `The email or password is incorrect`,
+        });
+    }
     bcrypt.compare(password, result.password ,(errPassword, resultCompare) => {
         if(errPassword){
             res.status(404).json(
@@ -33,7 +39,7 @@ const logIn=(req, res)=>{
         }else if(!resultCompare){
             res.status(404).json(
             {success: false,
-            message:  "the Password is erorr" })
+            message: `The email or password is incorrect`})
         }else{
             const SECRET = process.env.SECRET ||"ahmad" ;
             const TOKEN_EXP_Time = process.env.TOKEN_EXP_Time || "60m" ;
@@ -52,7 +58,11 @@ const logIn=(req, res)=>{
     });
     })
     .catch((err) => {
-    res.send(err);
+    res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+    });
     });
 }
 

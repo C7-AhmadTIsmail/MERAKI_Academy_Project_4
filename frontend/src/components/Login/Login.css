@@ -9,9 +9,11 @@
 
     border: 2px black solid;
     border-radius: 10px;
-    width: 280px;
-    height: 310px;
+    width: 380px;
+    height: 430px;
     margin-top: 69px;
+    background-color: #3d3d3d;
+    color:wheat
 }
 
 .LoginWord {
@@ -26,6 +28,13 @@
     size: 3px;
 }
 
+.PlaseWord{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 38px;;
+}
+
 
 .InsideLoginDiv {
     justify-content: center;
@@ -33,6 +42,15 @@
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+    
+}
+
+.LoginContainte{
+    margin-top: 5px;
+}
+
+.InputCorner{
+    border-radius: 10px;
 }
 
 .LoginButton {
