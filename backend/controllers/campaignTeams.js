@@ -5,17 +5,11 @@ const teamsCampaignSchema =require("../models/teamsCampaignSchema");
 const addteamsMamber=(req, res)=>{
     
     const  campaign  =req.params.idCampaign;
-    const  {firtsName,lastName,phoneNumber,country,streetAddress} =req.body;
+    const  {firtsName,lastName,phoneNumber,country} =req.body;
     
     const newCampaign = new teamsCampaignSchema(
-        { campaign , teamsMember:[{firtsName,lastName,phoneNumber,country,streetAddress}] })
+        { campaign , firtsName,lastName,phoneNumber,country})
 
-
-    teamsCampaignSchema.findOneAndUpdate(campaign,{
-        $addToSet: {  teamsMember:[{firtsName,lastName,phoneNumber,country,streetAddress}] } })
-    .then((result) => {
-        console.log(result)
-        if(!result){
         newCampaign.save().then((resultSave) => {
             console.log("1")
         res.status(201).json(
@@ -28,26 +22,14 @@ const addteamsMamber=(req, res)=>{
             {success: false,
             message:  err })
     });
-        }else{
-            console.log("2")
-            res.status(201).json(
-                {success: true,
-                message: "Success add to team ",
-                result: result })
-        }
-    }).catch((err) => {
-        res.status(500).json(
-            {success: false,
-            message:  err })
-    });
-}
-
+    }
 
 
 const removeteamsMamber =(req, res)=>{
     const  campaign  =req.params.idCampaign;
-    const {firtsName,lastName,phoneNumber,country,streetAddress} =req.body
-    teamsCampaignSchema.findOneAndUpdate(campaign,{ $pull: { teamsMember:{firtsName,lastName,phoneNumber,country,streetAddress} } })
+    const {firtsName,lastName,phoneNumber,country} =req.body.teamMamberHolder
+
+    teamsCampaignSchema.findOneAndDelete({campaign, firtsName,lastName,phoneNumber,country} )
     .then((result) => {
         res.status(200).json(
             {success: true,

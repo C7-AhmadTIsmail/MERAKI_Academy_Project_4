@@ -1,6 +1,8 @@
 import PopupCampaignPageBestContribution from '../PopupCampaignPageBestContribution/PopupCampaignPageBestContribution'
 import PopupCampaignPageAddContribution from '../PopupCampaignPageAddContribution/PopupCampaignPageAddContribution'
+import PopupCampaignPageMamberTeamShow from '../PopupCampaignPageMamberTeamShow/PopupCampaignPageMamberTeamShow'
 import PopupCampaignPageAddComment from '../PopupCampaignPageAddComment/PopupCampaignPageAddComment'
+
 import React, { useContext, createContext, useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import "./CampaignPage.css"
@@ -37,7 +39,9 @@ const CampaignPage = (props) => {
   const [addContributionShow, setAddContributionShow] = useState(false)
   const [elementOnFavriteAlreudy, setElementOnFavriteAlreudy] = useState(false)
   const [elementOnFavriteAlreudyShow, setElementOnFavriteAlreudyShow] = useState(false)
-
+  const [modalShowTeamMamber, setmodalShowTeamMamber] = useState(false)
+  const [elementHolderTeams, setElementHolderTeams] = useState(null)
+  const [teamMamberHolder, setTeamMamberHolder] = useState(null)
   const { comment } = userComment
   const { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility } = contribution
 
@@ -61,8 +65,19 @@ const CampaignPage = (props) => {
       .catch(function (error) {
         //console.log(error );
       })
-
-
+     
+        
+            console.log(7)
+            const token = JSON.parse(localStorage.getItem('user')).token
+            const idUser = JSON.parse(localStorage.getItem('user')).user._id
+            axios.get(`http://localhost:5000/campaignTeams/${props.data._id}`,
+                { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
+                console.log(res.data.teamsMamber , "************************************************************0")
+                setTeamMamberHolder(res?.data?.teamsMamber)
+                console.log(8)
+    
+                });
+        
   }, [editOnComment, addContributionShow]);
 
   const getComment = () => {
@@ -157,7 +172,8 @@ const CampaignPage = (props) => {
       <UserContextMain.Provider value={{
         holderAllData, userComment, setUserComment, editOnComment,
         setEditOnComment, setModalShowComment, setModalShowContribution, contribution, setContribution,
-        addContributionShow, setAddContributionShow, holdBigContribtution, setHoldBigContribtution
+        addContributionShow, setAddContributionShow, holdBigContribtution, setHoldBigContribtution,
+        elementHolderTeams,teamMamberHolder
       }}>
         <div className='CampaignPageInSideMain'>
           <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
@@ -204,6 +220,14 @@ const CampaignPage = (props) => {
               <PopupCampaignPageBestContribution
                 show={modalShowBestContribution}
                 onHide={() => setModalShowBestContribution(false)}
+              />
+
+              <Button variant="primary" onClick={() => { setmodalShowTeamMamber(true)
+              setElementHolderTeams(props.data._id)
+              }}>show team mamber</Button>
+              <PopupCampaignPageMamberTeamShow
+                show={modalShowTeamMamber}
+                onHide={() => setmodalShowTeamMamber(false)}
               />
 
               <Button onClick={getComment}>show comment</Button>

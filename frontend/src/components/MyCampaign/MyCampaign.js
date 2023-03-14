@@ -1,4 +1,7 @@
+import PopupMyCampaignShowAndDeleteTeamMamber from '../PopupMyCampaignShowAndDeleteTeamMamber/PopupMyCampaignShowAndDeleteTeamMamber';
+import PopupMyCampaignAddTeamMamber from '../PopupMyCampaignAddTeamMamber/PopupMyCampaignAddTeamMamber';
 import PopupMyCampaignEdite from '../PopupMyCampaignEdite/PopupMyCampaignEdite';
+
 import React, { createContext, useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
@@ -10,7 +13,10 @@ const MyCampaign = () => {
   const [allMyCampaign, setAllMyCampaign] = useState(null)
   const [showThisSectionEditeArea, setshowThisSectionEditeArea] = useState(null)
   const [modalShowEditeMyCampaign, setmodalShowEditeMyCampaign] = useState(false)
+  const [modalShowAddTeamMamber, setModalShowAddTeamMamber] = useState(false)
+  const [modalShowTeamMamberAndDelete, setModalShowTeamMamberAndDelete] = useState(false)
   const [elementHolder, setElementHolder] = useState(null)
+  const [elementHolderTeams, setElementHolderTeams] = useState(null)
 
   const userMyCampaign = {
     bankAccount: [0],
@@ -87,7 +93,8 @@ const MyCampaign = () => {
     <div>
       <UserContext.Provider value={{
         setmodalShowEditeMyCampaign,
-        campaignDoneAndRefresh, setCampaignDoneAndRefresh, elementHolder
+        campaignDoneAndRefresh, setCampaignDoneAndRefresh, elementHolder ,
+        elementHolderTeams,setElementHolderTeams ,setModalShowAddTeamMamber,setModalShowTeamMamberAndDelete,
       }}>
         <div className="TitalMyCampaign"> <h3 className="notchTitalMyCampaign">MyCampaign</h3> </div>
         {allMyCampaign ? <>{allMyCampaign.map((element, index) => {
@@ -113,7 +120,38 @@ const MyCampaign = () => {
                 show={modalShowEditeMyCampaign}
                 onHide={() => setmodalShowEditeMyCampaign(false)}
               />
+
+
+            <Button variant="primary" id={element._id} onClick={(e) => {
+              console.log(e.target.id)
+                setElementHolderTeams(e.target.id)
+                setModalShowTeamMamberAndDelete(true)
+                
+              }
+              }>show team mamber</Button>
+
+              <PopupMyCampaignShowAndDeleteTeamMamber
+                show={modalShowTeamMamberAndDelete}
+                onHide={() => setModalShowTeamMamberAndDelete(false)}
+              />
+
+
+
+
+              <Button variant="primary" id={element._id} onClick={(e) => {
+                setModalShowAddTeamMamber(true)
+                setElementHolder(e.target.id)
+              }
+              }>add team mamber</Button>
+
+              <PopupMyCampaignAddTeamMamber
+                show={modalShowAddTeamMamber}
+                onHide={() => setModalShowAddTeamMamber(false)}
+              />
+
+
               <Button id={element._id} onClick={deletethisCampaign}>delete</Button><br />
+
               </div>
             </>
           </div>

@@ -4,12 +4,11 @@ const mongoose = require("mongoose");
 
 const teamsCampaignSchema = new mongoose.Schema({
     campaign:{type :mongoose.Schema.Types.ObjectId ,ref:"campaign"},
-    teamsMember:[
-    {firtsName: { type: String, required: true },
+    firtsName: { type: String, required: true },
     lastName: { type: String, required: true },
     phoneNumber: { type: Number , required: true  },
     country:{ type: String  },
-    streetAddress:{type: String},}],
+    
     
 });
 

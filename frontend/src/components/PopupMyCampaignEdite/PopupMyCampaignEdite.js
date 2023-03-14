@@ -23,7 +23,7 @@ const PopupMyCampaignEdite = (props) => {
       darftCampaignLink: null
   }
 
-  console.log(elementHolder)
+  // console.log(elementHolder)
   const [userDataMyCampaign, setUserDataMyCampaign] = useState(userMyCampaign)
 
   const { bankAccount, campaignTitle, campaignCardImage,
