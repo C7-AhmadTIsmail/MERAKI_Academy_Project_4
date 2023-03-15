@@ -9,7 +9,7 @@ import axios from 'axios';
 const PopupCampaignPageAddContribution = (props) => {
 
   const { holderAllData, userComment, setUserComment, editOnComment,
-    setEditOnComment, setModalShowContribution, contribution, setContribution
+    setEditOnComment, setModalShowContribution, contribution, setContribution ,addContributionShow, setAddContributionShow,
   } = useContext(UserContextMain);
 
   const { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility } = contribution
@@ -63,6 +63,8 @@ const PopupCampaignPageAddContribution = (props) => {
       .then(function (response) {
         console.log(response)
         // setEditOnComment(!editOnComment)
+        
+        setAddContributionShow(!addContributionShow)
 
       })
       .catch(function (error) {

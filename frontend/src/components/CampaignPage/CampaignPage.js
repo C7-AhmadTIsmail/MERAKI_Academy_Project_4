@@ -32,6 +32,7 @@ const CampaignPage = (props) => {
   const [modalShowBestContribution, setModalShowBestContribution] = useState(false)
   const [commentholder, setCommentholder] = useState(null)
   const [showComment, setShowComment] = useState(false)
+  const [showCommentWord, setShowCommentWord] = useState("show Comment")
   const [editOnComment, setEditOnComment] = useState(false)
   const [contribution, setContribution] = useState(contributionTest)
   const [showcontribution, setShowcontribution] = useState(false)
@@ -42,6 +43,9 @@ const CampaignPage = (props) => {
   const [modalShowTeamMamber, setmodalShowTeamMamber] = useState(false)
   const [elementHolderTeams, setElementHolderTeams] = useState(null)
   const [teamMamberHolder, setTeamMamberHolder] = useState(null)
+  
+  const [changeOnAmmount, setChangeOnAmmount] = useState(false)
+
   const { comment } = userComment
   const { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility } = contribution
 
@@ -65,22 +69,27 @@ const CampaignPage = (props) => {
       .catch(function (error) {
         //console.log(error );
       })
-     
-        
-            console.log(7)
-            const token = JSON.parse(localStorage.getItem('user'))?.token
-            const idUser = JSON.parse(localStorage.getItem('user'))?.user._id
-            axios.get(`http://localhost:5000/campaignTeams/${props.data._id}`).then((res) => {
-                console.log(res.data.teamsMamber , "************************************************************0")
-                setTeamMamberHolder(res?.data?.teamsMamber)
-                console.log(8)
-    
-                });
-        
+
+
+    console.log(7)
+    const token = JSON.parse(localStorage.getItem('user'))?.token
+    const idUser = JSON.parse(localStorage.getItem('user'))?.user._id
+    axios.get(`http://localhost:5000/campaignTeams/${props.data._id}`).then((res) => {
+      console.log(res.data.teamsMamber, "************************************************************0")
+      setTeamMamberHolder(res?.data?.teamsMamber)
+      console.log(8)
+
+    });
+
   }, [editOnComment, addContributionShow]);
 
   const getComment = () => {
     setShowComment(!showComment)
+    if(showCommentWord==="show Comment"){
+      setShowCommentWord("hide Comment")
+    }else{
+      setShowCommentWord("show Comment")
+    }
   }
 
   const addtofaverts = () => {
@@ -116,7 +125,7 @@ const CampaignPage = (props) => {
 
   const removecomment = (e) => {
     //console.log(3)
-    const idOfComment = e.target.className
+    const idOfComment = e.target.id
     const token = JSON.parse(localStorage.getItem('user')).token
     // console.log(idOfComment)
     axios.delete(`http://localhost:5000/comment/delete/${idOfComment}`, { headers: { "Authorization": `Bearer ${token}` } })
@@ -150,7 +159,7 @@ const CampaignPage = (props) => {
       axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
         let holder = false
         res?.data?.result?.forEach(element => {
-          if (element.favoriteCampaign._id === props.data._id) {
+          if (element.favoriteCampaign?._id === props.data?._id) {
             //console.log("************-**************")
             holder = true
           }
@@ -166,86 +175,82 @@ const CampaignPage = (props) => {
 
 
 
+
+
+
+
   return (
     <>
       <UserContextMain.Provider value={{
         holderAllData, userComment, setUserComment, editOnComment,
         setEditOnComment, setModalShowComment, setModalShowContribution, contribution, setContribution,
         addContributionShow, setAddContributionShow, holdBigContribtution, setHoldBigContribtution,
-        elementHolderTeams,teamMamberHolder
+        elementHolderTeams, teamMamberHolder
       }}>
+
         <div className='CampaignPageInSideMain'>
-          <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
-          <div className='ContentCampaignPage'>
-          <div>
-            <img className="CampaignPageImg" src={props.data?.campaignCardImage} alt="no photo found" />
-          </div>
-          <div>
-            <p>campaign Title: {props.data?.campaignTitle}</p>
-            <p>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</p>
+          <div className="newOne">
+            <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
+            <div className='ContentCampaignPage'>
+              <div>
+                <img className="CampaignPageImg" src={props.data?.campaignCardImage} alt="no photo found" />
+              </div>
+              <div>
+                <p>campaign Title: {props.data?.campaignTitle}</p>
+                <p>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</p>
 
-            <p>campaign Duration Days: {props.data?.campaignDurationDays}</p>
-            <p>bank Account: {props.data?.bankAccount[0]}</p>
+                <p>campaign Duration Days: {props.data?.campaignDurationDays}</p>
+                <p>bank Account: {props.data?.bankAccount}</p>
+              </div>
+            </div>
+            {showcontribution ? <>
+            </> : <>
+              <div className='FirstRow'>
+                {idUser ? <>
+                  {elementOnFavriteAlreudyShow ? <div  className='ButtonImgCapPage' > <Button  variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div className='ButtonImgCapPage' ><Button  variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
+                  <Button className='ButtonImgCapPage' variant="primary" onClick={() => { setModalShowComment(true) }}>add Comment</Button>
+                  <PopupCampaignPageAddComment show={modalShowComment} onHide={() => setModalShowComment(false)} />
+                  <Button className='ButtonImgCapPage' variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
+                  <PopupCampaignPageAddContribution show={modalShowContribution} onHide={() => setModalShowContribution(false)} />
+                </> : <></>}
+              </div>
+            </>}
 
-
-
-          </div>
           </div>
           <div className='box0'>
             {showcontribution ? <>
             </> : <>
-            <div className='FirstRow'>
-              {idUser ? <>
-                {elementOnFavriteAlreudyShow ? <><Button variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></> : <><Button variant="primary" onClick={addtofaverts}>add to favorite</Button></>}
-
-                <Button variant="primary" onClick={() => {
-                  // addComment()
-                  setModalShowComment(true)
-                }}>add Comment</Button>
-                <PopupCampaignPageAddComment
-                  show={modalShowComment}
-                  onHide={() => setModalShowComment(false)} />
-
-                <Button variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
-                <PopupCampaignPageAddContribution
-                  show={modalShowContribution}
-                  onHide={() => setModalShowContribution(false)}
-                />
-
-              </> : <></>}
-              </div>
               <div className='SecandRow'>
-              <Button variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
-              <PopupCampaignPageBestContribution
-                show={modalShowBestContribution}
-                onHide={() => setModalShowBestContribution(false)}
-              />
+                <Button variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
+                <PopupCampaignPageBestContribution show={modalShowBestContribution} onHide={() => setModalShowBestContribution(false)} />
 
-              <Button variant="primary" onClick={() => { setmodalShowTeamMamber(true)
-              setElementHolderTeams(props.data._id)
-              }}>show team mamber</Button>
-              <PopupCampaignPageMamberTeamShow
-                show={modalShowTeamMamber}
-                onHide={() => setmodalShowTeamMamber(false)}
-              />
+                <Button variant="primary" onClick={() => { setmodalShowTeamMamber(true); setElementHolderTeams(props.data._id) }}>show team mamber</Button>
+                <PopupCampaignPageMamberTeamShow show={modalShowTeamMamber} onHide={() => setmodalShowTeamMamber(false)} />
+              </div>
+            </>}
+          </div>
 
-              <Button onClick={getComment}>show comment</Button>
+          <div className='box1'>
+            {showcontribution ? <>
+
+            </> : <>
+            <div className='showCommentWordButton'>
+              <Button onClick={getComment}>{showCommentWord}</Button>
+            </div>
               {showComment ? <>{commentholder.map((element, index) => {
                 return (<div key={index} >
 
-                  <p>{element.comment}</p>
-                  {(element.commenter == idUser) ?
-                    <>
-                      <Button className={element._id} onClick={removecomment}>remove comment</Button>
-                      {/* <Button className={element._id}>edite comment</Button> */}
-
-                    </> : <></>}
+                  <h4>{element.comment}</h4>
+                  <div className="RemoveCommentButton">
+                  {(element.commenter == idUser) ? <><Button className='RemoveCommentButton' id={element._id} onClick={removecomment}>remove comment</Button></> : <></>}
+                  </div>
                 </div>
                 )
               })}</> : <></>}
 
-</div>
             </>}
+
+
           </div>
         </div>
       </UserContextMain.Provider>

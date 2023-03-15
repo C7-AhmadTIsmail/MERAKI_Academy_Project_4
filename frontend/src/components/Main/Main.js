@@ -69,7 +69,7 @@ const Main = () => {
   const mainGenration = first ? first.map((element, index) => {
     let checker=false
     favoriteHolder?.map((e)=>{
-        if(e.favoriteCampaign._id===element._id){
+        if(e.favoriteCampaign?._id===element?._id){
           checker=true
         }
 

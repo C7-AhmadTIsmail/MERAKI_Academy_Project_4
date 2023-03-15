@@ -1,38 +1,3 @@
-/* .MainAddCampaign{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.AddCampaignStyleInside{
-    border: 2px black solid;
-    border-radius: 10px;
-    width: 480px;
-    height: 710px;
-
-}
-
-.CampaignWord {
-    display: flex;
-    justify-content: center;
-    margin-top: 6px;
-}
-
-.CampaignHr {
-    color: black;
-    size: 3px;
-}
-
-.AddCampaignInside{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-
-} */
-
 .Page1{
     display: flex;
     flex-direction: column;
@@ -43,6 +8,9 @@
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+    margin-top:10px;
+    margin-left:6px;
+    margin-right: 6px;
 }
 .page1Input{}
 
@@ -56,6 +24,10 @@
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 10px;
+    margin-top:10px;
+    margin-left:6px;
+    margin-right: 6px;
 }
 .page2Input{}
 
@@ -69,5 +41,16 @@
     padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 10px;
+    margin-top:10px;
+    margin-left:6px;
+    margin-right: 6px;
+    
 }
 .page3Input{}
+
+.ButtonCampaignSubmet{
+    margin-top:10px;
+ 
+
+}

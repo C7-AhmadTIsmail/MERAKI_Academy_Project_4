@@ -64,26 +64,55 @@ margin-top: 12px;
 .ContentCampaignPage{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin: 0px 20px;
 }
 
 
 .CampaignPageImg{
-    width:140px;
-    height:160px;
+    width:340px;
+    height:460px;
     margin-top: 20px;
 }
 
+.newOne{
+    display: flex;
+}
+.ButtonImgCapPage{
+    margin-top: 45px;
+}
 
 .FirstRow{
+    flex-wrap: wrap; 
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 120px;
+    margin-left: 85px;
 }
+
 
 .SecandRow{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+.box1{
+    margin: 15px;
+    border:black solid 1px;
+    padding: 6px;
+}
+
+.box1 > *{
+margin-top: 12px;
+}
+
+.showCommentWordButton{
+    display: flex;
+    justify-content: center;
+}
+
+.RemoveCommentButton{
+    display: flex;
+    justify-content: center;
 }

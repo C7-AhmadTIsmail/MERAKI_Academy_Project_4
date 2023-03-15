@@ -12,7 +12,7 @@ const Campaign = () => {
     const { setLogin } = useContext(UserContext);
 
     const userCampaign = {
-        bankAccount: "",
+        bankAccount: undefined,
         campaignTitle: "",
         campaignCardImage: "",
         pargraphesAboutCampaign: "",
@@ -20,8 +20,8 @@ const Campaign = () => {
         catgory: [""],
         campaignDurationDays: "",
         urlVideoOrImage: "",
-        campaignPerks: [null, null],
-        campaignAmounts: "",
+        campaignPerks: "",
+        campaignAmounts: undefined,
         darftCampaignLink: ""
     }
 
@@ -50,22 +50,23 @@ const Campaign = () => {
 
     const validateData = () => {
         let errors = {};
-        console.log(0)
+  
         if (isNaN(bankAccount)) {
-            errors.bankAccount = "campaign Amounts is required";
+            errors.bankAccount = "bank Account is required";
         }
-        console.log(2)
+    
         if (!campaignTitle) {
 
             errors.campaignTitle = "campaign Title is required";
         }
+      
         if (!validator.isURL(campaignCardImage)) {
             errors.campaignCardImage = "Url is required";
         }
-        console.log(5)
+       
         if (!pargraphesAboutCampaign) {
 
-            errors.pargraphesAboutCampaign = "Date is required";
+            errors.pargraphesAboutCampaign = "pargraphes About Campaign is required";
         }
         if (!validator.isDate(campaignDurationDays)) {
 
@@ -73,12 +74,21 @@ const Campaign = () => {
         }
         if (!validator.isURL(urlVideoOrImage)) {
             errors.urlVideoOrImage = "Url is required";
+            
         }
-        console.log(8)
+        if (!campaignPerks) {
+
+            errors.campaignPerks = "campaign Perks is required";
+        }
+        
+        if (isNaN(campaignAmounts)) {
+            errors.campaignAmounts = "campaign Amounts is required";
+        }
+    
         if (!validator.isURL(darftCampaignLink)) {
             errors.darftCampaignLink = "Url is required";
         }
-        console.log(10)
+        console.log(errors,"errerosmy")
         
         return errors
     }
@@ -92,13 +102,13 @@ const Campaign = () => {
             //console.log(errors,"10")
             return;
         }
-        console.log(userData)
+        console.log(userData,"userdats")
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
         console.log(token, idUser)
         axios.post(`http://localhost:5000/campaign/add/${idUser}`, userData, { headers: { "Authorization": `Bearer ${token}` } })
             .then(function (response) {
-                console.log(response.data, response)
+                console.log(response)
             })
             .catch(function (error) {
                 console.log(error);
@@ -125,21 +135,21 @@ const Campaign = () => {
                     </Nav>
                 </Card.Header>
                
-                    <Card.Title>Special title treatment</Card.Title>
+                    <Card.Title>Criete Campaign </Card.Title>
                     <div>
 
                         {nextPage === "1" ? <>
                             
                         <div className="Page1">
-                            <label htmlFor="bankAccount" >bankAccount:</label><br />
-                            <Form.Control className="page1Input" name="bankAccount" onChange={handleChangeArray} placeholder="space bettwen account"></Form.Control><br />
-                            <div style={{ color: "red" }}>{errors.name}</div>
-                            <label htmlFor="campaignTitle" >campaignTitle:</label><br />
-                            <Form.Control className="page1Input" name="campaignTitle" onChange={handleChange}></Form.Control><br />
-                            <div style={{ color: "red" }}>{errors.campaignTitle}</div>
-                            <label htmlFor="campaignCardImage" >campaignCardImage:</label><br />
-                            <Form.Control className="page1Input" name="campaignCardImage" onChange={handleChange}></Form.Control><br />
-                            <div style={{ color: "red" }}>{errors.campaignCardImage}</div>
+                            <label htmlFor="bankAccount" >bankAccount:</label>
+                            <Form.Control className="page1Input" name="bankAccount" onChange={handleChange} placeholder="space bettwen account"></Form.Control>
+                            <div style={{ color: "red"  , marginBottom: "10px" }}>{errors.bankAccount}</div>
+                            <label htmlFor="campaignTitle" >campaignTitle:</label>
+                            <Form.Control className="page1Input" name="campaignTitle" onChange={handleChange}></Form.Control>
+                            <div style={{ color: "red" , marginBottom: "10px" }}>{errors.campaignTitle}</div>
+                            <label htmlFor="campaignCardImage" >campaignCardImage:</label>
+                            <Form.Control className="page1Input" name="campaignCardImage" onChange={handleChange}></Form.Control>
+                            <div style={{ color: "red" , marginBottom: "10px" }}>{errors.campaignCardImage}</div>
                         </div>
 
                         </> : <></>}
@@ -147,17 +157,16 @@ const Campaign = () => {
                         {nextPage === "2" ? <>
 
                         <div className="Page2">
-                            <label htmlFor="loaction" >loaction:</label><br />
-                            <Form.Control  className="page2Input"  name="loaction" onChange={handleChangeArray} placeholder="xx.xxxx xx.xxx"></Form.Control><br />
-                            <div style={{ color: "red" }}>{errors.bankAccount}</div>
-                            <label htmlFor="catgory">catgory:</label><br />
-                            <Form.Control className="page2Input"  name="catgory" onChange={handleChangeArray} placeholder="space between each catgores" ></Form.Control><br />
-                            <label htmlFor="campaignDurationDays" >campaignDurationDays:</label><br />
-                            <Form.Control  className="page2Input"  name="campaignDurationDays" onChange={handleChange}></Form.Control><br />
-                            <div style={{ color: "red" }}>{errors.campaignDurationDays}</div>
-                            <label htmlFor="pargraphesAboutCampaign" >pargraphesAboutCampaign:</label><br />
-                            <Form.Control className="page2Input"  name="pargraphesAboutCampaign" onChange={handleChange}as="textarea" rows={4} /><br />
-                            <div style={{ color: "red" }}>{errors.pargraphesAboutCampaign}</div>
+                            <label htmlFor="loaction" >loaction:</label>
+                            <Form.Control  className="page2Input"  name="loaction" onChange={handleChangeArray} placeholder="xx.xxxx xx.xxx"></Form.Control>
+                            <label htmlFor="catgory">catgory:</label>
+                            <Form.Control className="page2Input"  name="catgory" onChange={handleChangeArray} placeholder="space between each catgores" ></Form.Control>
+                            <label htmlFor="campaignDurationDays" >campaignDurationDays:</label>
+                            <Form.Control  className="page2Input" type="date" name="campaignDurationDays" onChange={handleChange}></Form.Control>
+                            <div style={{ color: "red" , marginBottom: "10px" }}>{errors.campaignDurationDays}</div>
+                            <label htmlFor="pargraphesAboutCampaign" >pargraphesAboutCampaign:</label>
+                            <Form.Control className="page2Input"  name="pargraphesAboutCampaign" onChange={handleChange}as="textarea" rows={4} />
+                            <div style={{ color: "red", marginBottom: "10px"  }}>{errors.pargraphesAboutCampaign}</div>
                         </div>
 
                         </> : <></>}
@@ -165,17 +174,19 @@ const Campaign = () => {
                         {nextPage === "3" ? <>
 
                         <div className="Page3">
-                            <label htmlFor="urlVideoOrImage" >urlVideoOrImage:</label><br />
-                            <Form.Control className="page3Input"  name="urlVideoOrImage" onChange={handleChange}></Form.Control><br />
-                            <div style={{ color: "red" }}>{errors.urlVideoOrImage}</div>
-                            <label htmlFor="campaignPerks" >campaignPerks:</label><br />
-                            <Form.Control className="page3Input"  name="campaignPerks" onChange={handleChangeArray} placeholder="space between each catgores"></Form.Control><br />
-                            <label htmlFor="campaignAmounts" >campaignAmounts:</label><br />
-                            <Form.Control className="page3Input"  name="campaignAmounts" onChange={handleChange}></Form.Control><br />
-                            <label htmlFor="darftCampaignLink" >darftCampaignLink:</label><br />
-                            <Form.Control className="page3Input" name="darftCampaignLink" onChange={handleChange}></Form.Control><br />
-                            <div style={{ color: "red" }}>{errors.darftCampaignLink}</div>
-                            <Button variant="primary" onClick={submet}>submet</Button>
+                            <label htmlFor="urlVideoOrImage" >urlVideoOrImage:</label>
+                            <Form.Control className="page3Input"  name="urlVideoOrImage" onChange={handleChange}></Form.Control>
+                            <div style={{ color: "red" , marginBottom: "10px" }}>{errors.urlVideoOrImage}</div>
+                            <label htmlFor="campaignPerks" >campaignPerks:</label>
+                            <Form.Control className="page3Input"  name="campaignPerks" onChange={handleChange} placeholder="space between each catgores"></Form.Control>
+                            <div style={{ color: "red" , marginBottom: "10px" }}>{errors.campaignPerks}</div>
+                            <label htmlFor="campaignAmounts" >campaignAmounts:</label>
+                            <Form.Control className="page3Input"  name="campaignAmounts" onChange={handleChange}></Form.Control>
+                            <div style={{ color: "red" , marginBottom: "10px" }}>{errors.campaignAmounts}</div>
+                            <label htmlFor="darftCampaignLink" >darftCampaignLink:</label>
+                            <Form.Control className="page3Input" name="darftCampaignLink" onChange={handleChange}></Form.Control>
+                            <div style={{ color: "red" , marginBottom: "10px"  }}>{errors.darftCampaignLink}</div>
+                            <Button className="ButtonCampaignSubmet" variant="primary" onClick={submet}>submet</Button>
                         </div>
 
                         </> : <></>}

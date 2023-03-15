@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
 import { UserContextMain } from "../CampaignPage/CampaignPage";
 import "./PopupEditeCampaignPageComment.css"
 import Button from 'react-bootstrap/Button';
+import React, { useContext } from "react";
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 const PopupCampaignPageAddComment = (props) => {
@@ -38,18 +39,19 @@ const PopupCampaignPageAddComment = (props) => {
                 centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Modal heading
+                        Add Comment
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Centered Modal</h4>
 
-                    <label htmlFor="comment">comment:</label><br />
-                    <input name="comment" onChange={handleChange}></input><br />
-                    <Button variant="primary" onClick={addComment}>submet</Button>
-
+                    <Form.Label>comment:</Form.Label>
+                    <Form.Control name="comment" onChange={handleChange} placeholder="comment" />
                 </Modal.Body>
+
                 <Modal.Footer>
+                    <div className="addCommentSubmet">
+                    <Button variant="primary" onClick={addComment}>submet</Button>
+                    </div>
                     <Button onClick={props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
