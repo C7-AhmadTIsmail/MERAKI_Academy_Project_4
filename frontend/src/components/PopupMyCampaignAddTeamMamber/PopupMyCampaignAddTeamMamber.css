@@ -1,0 +1,9 @@
+.midInput{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonChange{
+    margin-right: 120px;
+
+}

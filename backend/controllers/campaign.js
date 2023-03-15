@@ -62,6 +62,7 @@ const updateCampaign = (req, res) => {
         pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
         urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink } = req.body
 
+        
     campaignSchema.findByIdAndUpdate(id_, {
         bankAccount, campaignTitle, campaignCardImage,
         pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,

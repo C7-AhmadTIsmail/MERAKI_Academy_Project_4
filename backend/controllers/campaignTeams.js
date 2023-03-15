@@ -5,10 +5,10 @@ const teamsCampaignSchema =require("../models/teamsCampaignSchema");
 const addteamsMamber=(req, res)=>{
     
     const  campaign  =req.params.idCampaign;
-    const  {firtsName,lastName,phoneNumber,country} =req.body;
+    const  {firstName,lastName,phoneNumber,country} =req.body;
     
     const newCampaign = new teamsCampaignSchema(
-        { campaign , firtsName,lastName,phoneNumber,country})
+        { campaign , firstName,lastName,phoneNumber,country})
 
         newCampaign.save().then((resultSave) => {
             console.log("1")
@@ -27,9 +27,9 @@ const addteamsMamber=(req, res)=>{
 
 const removeteamsMamber =(req, res)=>{
     const  campaign  =req.params.idCampaign;
-    const {firtsName,lastName,phoneNumber,country} =req.body.teamMamberHolder
+    const {firstName,lastName,phoneNumber,country} =req.body.teamMamberHolder
 
-    teamsCampaignSchema.findOneAndDelete({campaign, firtsName,lastName,phoneNumber,country} )
+    teamsCampaignSchema.findOneAndDelete({campaign, firstName,lastName,phoneNumber,country} )
     .then((result) => {
         res.status(200).json(
             {success: true,

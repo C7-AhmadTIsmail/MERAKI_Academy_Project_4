@@ -51,7 +51,7 @@ const PopupCampaignPageMamberTeamShow = (props) => {
                         <div key={index}>
                         <>
                         
-                        <h5>name: {element.firtsName} {element.lastName}</h5>
+                        <h5>name: {element.firstName} {element.lastName}</h5>
                         <p>phone number: {element.phoneNumber}</p>
                         <p>country: {element.country}</p>
                         

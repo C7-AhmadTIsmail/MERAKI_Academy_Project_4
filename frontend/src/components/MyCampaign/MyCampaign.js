@@ -1,7 +1,6 @@
 import PopupMyCampaignShowAndDeleteTeamMamber from '../PopupMyCampaignShowAndDeleteTeamMamber/PopupMyCampaignShowAndDeleteTeamMamber';
 import PopupMyCampaignAddTeamMamber from '../PopupMyCampaignAddTeamMamber/PopupMyCampaignAddTeamMamber';
 import PopupMyCampaignEdite from '../PopupMyCampaignEdite/PopupMyCampaignEdite';
-
 import React, { createContext, useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
@@ -18,19 +17,20 @@ const MyCampaign = () => {
   const [elementHolder, setElementHolder] = useState(null)
   const [elementHolderTeams, setElementHolderTeams] = useState(null)
 
+
   const userMyCampaign = {
-    bankAccount: [0],
-    campaignTitle: null,
-    campaignCardImage: null,
-    pargraphesAboutCampaign: null,
-    loaction: [0, 0],
-    catgory: [null],
-    campaignDurationDays: 0,
-    urlVideoOrImage: null,
-    campaignPerks: [null, null],
-    campaignAmounts: 0,
-    darftCampaignLink: null
-  }
+    bankAccount: undefined,
+    campaignTitle: undefined,
+    campaignCardImage: undefined,
+    pargraphesAboutCampaign:undefined,
+    loaction: [undefined, undefined],
+    catgory: [undefined],
+    campaignDurationDays: undefined,
+    urlVideoOrImage: undefined,
+    campaignPerks: undefined,
+    campaignAmounts: undefined,
+    darftCampaignLink: undefined,
+}
 
 
   const [userDataMyCampaign, setUserDataMyCampaign] = useState(userMyCampaign)
@@ -61,20 +61,6 @@ const MyCampaign = () => {
 
 
 
-  const editeMyCampaign = (e) => {
-    setshowThisSectionEditeArea(e.target.id)
-  }
-
-  const submetedite = (e) => {
-    const token = JSON.parse(localStorage.getItem('user')).token
-    const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.put(`http://localhost:5000/campaign/update/${e.target.id}`, { campaignTitle, campaignAmounts, bankAccount, catgory, pargraphesAboutCampaign, campaignDurationDays, },
-      { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
-        console.log(res, "0")
-        setCampaignDoneAndRefresh(!campaignDoneAndRefresh)
-      });
-
-  }
 
   const deletethisCampaign = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
@@ -99,15 +85,20 @@ const MyCampaign = () => {
         <div className="TitalMyCampaign"> <h3 className="notchTitalMyCampaign">MyCampaign</h3> </div>
         {allMyCampaign ? <>{allMyCampaign.map((element, index) => {
           return (<div key={element._id} className="CampaignListMainDiv">
+            <div className='FirstColume'>
             <div className='FirstRowMyCampaign'>
             <img className="myCampaignPageImg" src={element.campaignCardImage} alt="no photo found" />
+            </div>
+            <div className='SecondColume'>
+              
             <p>campaign Title : {element.campaignTitle}</p>
             <p>campaign Amounts: ${element.campaignAmounts} </p>
             <p>bankAccount: {element.bankAccount}</p>
             <p>catgory: {element.catgory}</p>
-            <p>pargraphesAboutCampaign: {element.pargraphesAboutCampaign}</p>
-            <p>campaign Duration Days: {element.campaignDurationDays}</p>
+            <p>campaign Duration Days: {element?.campaignDurationDays?.split("T")[0]}</p>
             </div>
+            </div>
+            <p id="pargraphesAboutCampaign">pargraphesAboutCampaign: {element?.pargraphesAboutCampaign}</p>
             <>
               <div className='SecandRowMyCampaign'>
               <Button variant="primary" id={element._id} onClick={(e) => {
@@ -122,7 +113,7 @@ const MyCampaign = () => {
               />
 
 
-            <Button variant="primary" id={element._id} onClick={(e) => {
+              <Button variant="primary" id={element._id} onClick={(e) => {
               console.log(e.target.id)
                 setElementHolderTeams(e.target.id)
                 setModalShowTeamMamberAndDelete(true)
