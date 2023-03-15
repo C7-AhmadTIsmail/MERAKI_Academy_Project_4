@@ -16,6 +16,8 @@ const CampaignPage = (props) => {
   console.log(props.data, "data")
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
+
+
   const commentTest = {
     comment: null
   }
@@ -43,7 +45,7 @@ const CampaignPage = (props) => {
   const [modalShowTeamMamber, setmodalShowTeamMamber] = useState(false)
   const [elementHolderTeams, setElementHolderTeams] = useState(null)
   const [teamMamberHolder, setTeamMamberHolder] = useState(null)
-  
+
   const [changeOnAmmount, setChangeOnAmmount] = useState(false)
 
   const { comment } = userComment
@@ -85,9 +87,9 @@ const CampaignPage = (props) => {
 
   const getComment = () => {
     setShowComment(!showComment)
-    if(showCommentWord==="show Comment"){
+    if (showCommentWord === "show Comment") {
       setShowCommentWord("hide Comment")
-    }else{
+    } else {
       setShowCommentWord("show Comment")
     }
   }
@@ -177,7 +179,8 @@ const CampaignPage = (props) => {
 
 
 
-
+  // console.log(`https://www.youtube.com/embed/${props.data?.urlVideoOrImage.split('https://www.youtube.com/watch?v=')[0]}`,"sss")
+  // console.log(props.data?.urlVideoOrImage.split("v=")[1].substring(0, 11),"id")
 
   return (
     <>
@@ -203,11 +206,13 @@ const CampaignPage = (props) => {
                 <p>bank Account: {props.data?.bankAccount}</p>
               </div>
             </div>
+
+
             {showcontribution ? <>
             </> : <>
               <div className='FirstRow'>
                 {idUser ? <>
-                  {elementOnFavriteAlreudyShow ? <div  className='ButtonImgCapPage' > <Button  variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div className='ButtonImgCapPage' ><Button  variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
+                  {elementOnFavriteAlreudyShow ? <div className='ButtonImgCapPage' > <Button variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div className='ButtonImgCapPage' ><Button variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
                   <Button className='ButtonImgCapPage' variant="primary" onClick={() => { setModalShowComment(true) }}>add Comment</Button>
                   <PopupCampaignPageAddComment show={modalShowComment} onHide={() => setModalShowComment(false)} />
                   <Button className='ButtonImgCapPage' variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
@@ -217,6 +222,13 @@ const CampaignPage = (props) => {
             </>}
 
           </div>
+
+            <iframe
+            className='Video'
+              src={`https://www.youtube.com/embed/${props.data?.urlVideoOrImage?.split("v=")[1].substring(0, 11)}`}
+              width="350" height="250"
+            ></iframe>
+
           <div className='box0'>
             {showcontribution ? <>
             </> : <>
@@ -234,15 +246,15 @@ const CampaignPage = (props) => {
             {showcontribution ? <>
 
             </> : <>
-            <div className='showCommentWordButton'>
-              <Button onClick={getComment}>{showCommentWord}</Button>
-            </div>
+              <div className='showCommentWordButton'>
+                <Button onClick={getComment}>{showCommentWord}</Button>
+              </div>
               {showComment ? <>{commentholder.map((element, index) => {
                 return (<div key={index} >
 
                   <h4>{element.comment}</h4>
                   <div className="RemoveCommentButton">
-                  {(element.commenter == idUser) ? <><Button className='RemoveCommentButton' id={element._id} onClick={removecomment}>remove comment</Button></> : <></>}
+                    {(element.commenter == idUser) ? <><Button className='RemoveCommentButton' id={element._id} onClick={removecomment}>remove comment</Button></> : <></>}
                   </div>
                 </div>
                 )

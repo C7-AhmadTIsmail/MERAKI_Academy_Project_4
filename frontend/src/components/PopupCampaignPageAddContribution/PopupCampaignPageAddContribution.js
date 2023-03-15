@@ -22,7 +22,7 @@ const PopupCampaignPageAddContribution = (props) => {
   }
 
   const [errors, setErrors] = useState({})
-
+const [done, setDone] = useState(undefined)
   const validateData = () => {
     let errors = {};
     if (!name) {
@@ -65,7 +65,10 @@ const PopupCampaignPageAddContribution = (props) => {
         // setEditOnComment(!editOnComment)
         
         setAddContributionShow(!addContributionShow)
-
+        setDone("Add Contribution is Done")
+        setTimeout(() => {
+          setDone(undefined)
+        }, 2000);
       })
       .catch(function (error) {
         console.log(error);
@@ -103,11 +106,12 @@ const PopupCampaignPageAddContribution = (props) => {
           <label htmlFor="lastDateOfContributionCanRefund">last Date Of Contribution Can Refund:</label>
           <input name="lastDateOfContributionCanRefund"  type="date"  onChange={handle_Chamge}></input>
           <div style={{ color: "red" }}>{errors.lastDateOfContributionCanRefund}</div>
+          <div style={{ color: "green" }}>{done}</div>
         </Modal.Body>
 
         <Modal.Footer>
           <div>
-            <button onClick={submetContribution}>submet</button>
+            <Button onClick={submetContribution}>submet</Button>
           </div>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
