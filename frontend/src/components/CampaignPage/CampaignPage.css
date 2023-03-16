@@ -64,9 +64,13 @@ margin-top: 12px;
     margin: 0px 20px;
 }
 
-.row1{}
+.row1{
+    margin-bottom: 30px;
+}
+
 .row2{
-    margin-right: 43px;
+    margin-left: 97px;
+    margin-top: 128px;
 }
 .CampaignPageImg{
     width:340px;
