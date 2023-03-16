@@ -23,7 +23,7 @@ campaignPercentage?.ValueAchievmentPercentage?.forEach(elementArray =>
    
     <div style={{ width: 40, height: 40 }} className="Circuler">
           {/* <p  >%{holder/campaignPercentage.Amounts}%</p> */}
-          <CircularProgressbar value={(holder/campaignPercentage.Amounts)*100} />
+          <CircularProgressbar    text={`${Math.floor((holder/campaignPercentage.Amounts)*100)}%`} value={(holder/campaignPercentage.Amounts)*100} />
     </div>
 
 

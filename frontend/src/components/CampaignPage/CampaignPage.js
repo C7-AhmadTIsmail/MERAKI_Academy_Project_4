@@ -6,7 +6,7 @@ import React, { useContext, createContext, useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import "./CampaignPage.css";
 import axios from 'axios';
-import Map , {Marker ,NavigationControl}  from 'react-map-gl';
+import Map , {Marker ,GeolocateControl}  from 'react-map-gl';
 import Card from 'react-bootstrap/Card';
 
 
@@ -221,10 +221,9 @@ let latitude =props.data?.loaction[1]
 
 <Card style={{ width: '17.2rem' , height: 280 ,margin: '0 0 40px 20px'}}>
       
-      <Card.Body style={{  padding:'8px 16px 16px 8px' }}>
+      <Card.Body style={{  padding:'14px 16px 14px 6px' }}>
       
-     
-      <Map 
+      <Map style={{ width: '14.2rem' , height: 240 ,margin: '0 0 40px 20px'}}
               mapboxAccessToken={"pk.eyJ1IjoiYWhtYWRpc2FtaWwiLCJhIjoiY2xmYThtNThvMDE0NzN2cWdsMGFhaHZhdSJ9.hMUTU1E226JBVgx7YQm9ug"}
 
               initialViewState={{
@@ -232,20 +231,25 @@ let latitude =props.data?.loaction[1]
               latitude ,
               zoom: 8,
               attributionControl: false,
-              Marker:'center'
+              Marker:'center',
               
               }}
-              style={{width: '16rem', height: 240}}
               mapStyle="mapbox://styles/mapbox/streets-v9"
             >
                {/* <Marker longitude={longitude} latitude={latitude}  anchor='top'  >
 
-                </Marker> */}
-                {/* <NavigationControl/> */}
+                </Marker>
+                <GeolocateControl/> */}
                </Map>
+     
            
       </Card.Body>
     </Card>
+
+
+
+    
+
     </div>
 
 
