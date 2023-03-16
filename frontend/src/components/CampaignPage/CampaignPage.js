@@ -2,11 +2,14 @@ import PopupCampaignPageBestContribution from '../PopupCampaignPageBestContribut
 import PopupCampaignPageAddContribution from '../PopupCampaignPageAddContribution/PopupCampaignPageAddContribution'
 import PopupCampaignPageMamberTeamShow from '../PopupCampaignPageMamberTeamShow/PopupCampaignPageMamberTeamShow'
 import PopupCampaignPageAddComment from '../PopupCampaignPageAddComment/PopupCampaignPageAddComment'
-
 import React, { useContext, createContext, useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
-import "./CampaignPage.css"
+import "./CampaignPage.css";
 import axios from 'axios';
+import Map from 'react-map-gl';
+
+
+
 
 
 export const UserContextMain = createContext();
@@ -15,8 +18,6 @@ const CampaignPage = (props) => {
   const holderAllData = props
   console.log(props.data, "data")
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
-
-
 
   const commentTest = {
     comment: null
@@ -192,13 +193,13 @@ const CampaignPage = (props) => {
       }}>
 
         <div className='CampaignPageInSideMain'>
-          <div className="newOne">
             <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
+          <div className="newOne">
             <div className='ContentCampaignPage'>
-              <div>
+              <div className="row1">
                 <img className="CampaignPageImg" src={props.data?.campaignCardImage} alt="no photo found" />
               </div>
-              <div>
+              <div className="row2">
                 <p>campaign Title: {props.data?.campaignTitle}</p>
                 <p>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</p>
 
@@ -208,38 +209,79 @@ const CampaignPage = (props) => {
             </div>
 
 
-            {showcontribution ? <>
-            </> : <>
-              <div className='FirstRow'>
-                {idUser ? <>
-                  {elementOnFavriteAlreudyShow ? <div className='ButtonImgCapPage' > <Button variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div className='ButtonImgCapPage' ><Button variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
-                  <Button className='ButtonImgCapPage' variant="primary" onClick={() => { setModalShowComment(true) }}>add Comment</Button>
-                  <PopupCampaignPageAddComment show={modalShowComment} onHide={() => setModalShowComment(false)} />
-                  <Button className='ButtonImgCapPage' variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
-                  <PopupCampaignPageAddContribution show={modalShowContribution} onHide={() => setModalShowContribution(false)} />
-                </> : <></>}
-              </div>
-            </>}
 
-          </div>
-
-            <iframe
+            <div>
+              {/* <iframe
             className='Video'
               src={`https://www.youtube.com/embed/${props.data?.urlVideoOrImage?.split("v=")[1].substring(0, 11)}`}
               width="350" height="250"
-            ></iframe>
+            ></iframe> */}
 
-          <div className='box0'>
-            {showcontribution ? <>
-            </> : <>
-              <div className='SecandRow'>
-                <Button variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
-                <PopupCampaignPageBestContribution show={modalShowBestContribution} onHide={() => setModalShowBestContribution(false)} />
 
-                <Button variant="primary" onClick={() => { setmodalShowTeamMamber(true); setElementHolderTeams(props.data._id) }}>show team mamber</Button>
-                <PopupCampaignPageMamberTeamShow show={modalShowTeamMamber} onHide={() => setmodalShowTeamMamber(false)} />
-              </div>
-            </>}
+              {/* <Map
+              mapboxAccessToken={"pk.eyJ1IjoiYWhtYWRpc2FtaWwiLCJhIjoiY2xmYThtNThvMDE0NzN2cWdsMGFhaHZhdSJ9.hMUTU1E226JBVgx7YQm9ug"}
+
+              initialViewState={{
+              longitude: -100,
+              latitude: 20.155,
+              zoom: 3.5
+              }}
+              style={{width: 300, height: 200}}
+              mapStyle="mapbox://styles/mapbox/streets-v9"
+             /> */}
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+          <div className='OneRow'>
+         
+                {showcontribution ? <>
+                </> : <>
+                  <Button variant="primary" onClick={() => { setmodalShowTeamMamber(true); setElementHolderTeams(props.data._id) }}>show team mamber</Button>
+                  <PopupCampaignPageMamberTeamShow show={modalShowTeamMamber} onHide={() => setmodalShowTeamMamber(false)} />
+
+                </>}
+             
+                {showcontribution ? <>
+                </> : <>
+
+                  <Button variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
+                  <PopupCampaignPageBestContribution show={modalShowBestContribution} onHide={() => setModalShowBestContribution(false)} />
+                </>}
+           
+                {showcontribution ? <>
+                </> : <>
+
+                  {idUser ? <>
+                    {elementOnFavriteAlreudyShow ? <div  > <Button variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div  ><Button variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
+                    <Button  variant="primary" onClick={() => { setModalShowComment(true) }}>add Comment</Button>
+                    <PopupCampaignPageAddComment show={modalShowComment} onHide={() => setModalShowComment(false)} />
+                  </> : <></>}
+                </>}
+
+             
+
+                {showcontribution ? <>
+                </> : <>
+
+                  {idUser ? <>
+                    <Button  variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
+                    <PopupCampaignPageAddContribution show={modalShowContribution} onHide={() => setModalShowContribution(false)} />
+                  </> : <></>}
+
+                </>}
+
+             
+           
           </div>
 
           <div className='box1'>
@@ -264,7 +306,9 @@ const CampaignPage = (props) => {
 
 
           </div>
+
         </div>
+
       </UserContextMain.Provider>
     </>
   )

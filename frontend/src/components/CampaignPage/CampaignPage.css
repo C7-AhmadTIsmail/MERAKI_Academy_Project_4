@@ -11,7 +11,6 @@
 }
 
 .notchTitalCampaignPage {
-    /* position: absolute; */
     top: 0;
     left: 50%;
     width: 280px;
@@ -23,7 +22,6 @@
     display: flex;
     justify-content: center;
     z-index: -1;
-    /* margin-top: 56px; */
 }
 
 .notchTitalCampaignPage::before,
@@ -63,15 +61,18 @@ margin-top: 12px;
 
 .ContentCampaignPage{
     display: flex;
-    flex-direction: column;
     margin: 0px 20px;
 }
 
-
+.row1{}
+.row2{
+    margin-right: 43px;
+}
 .CampaignPageImg{
     width:340px;
     height:460px;
     margin-top: 20px;
+    border-radius: 12px;
 }
 
 .newOne{
@@ -119,4 +120,8 @@ margin-top: 12px;
 
 .Video{
 margin-left: 35px;
+}
+.OneRow{
+    display: flex;
+    justify-content: space-evenly;
 }

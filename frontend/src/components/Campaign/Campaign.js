@@ -134,9 +134,9 @@ const Campaign = () => {
                         </Nav.Item>
                     </Nav>
                 </Card.Header>
-               
                     <Card.Title>Criete Campaign </Card.Title>
-                    <div>
+               
+                    <div className="mainCamp">
 
                         {nextPage === "1" ? <>
                             

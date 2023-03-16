@@ -74,9 +74,10 @@ const Main = () => {
         }
 
       })
-    return <div key={element._id} id={element._id}>
+    return <div key={element._id} >
 
-      <div onClick={clickOnCampaignPage} id={element._id} >
+{/* key={element._id} id={element._id} */}
+      {/* <div onClick={clickOnCampaignPage} id={element._id} >
 
       <p className="titleMain"  id={element._id}>{element.campaignTitle}</p>
       <div className="ImgStyle">
@@ -87,11 +88,25 @@ const Main = () => {
       <div className="CirculerMain">
       <Percentage campaignPercentage={{ID:element._id,ValueAchievmentPercentage,Amounts:element.campaignAmounts}} />
       
-      {checker?<></>:<>
-        
-      {idUser ? <input className="addToFavirte" onClick={addTOfaverteFromMain} id={element._id} type="button" value="+" /> : <></>}
-        </>}
       </div>
+      {checker?<></>:<>{idUser ? <input className="addToFavirte" onClick={addTOfaverteFromMain} id={element._id} type="button" value="+" /> : <></>}</>}
+    
+     */}
+      <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" id={element._id} onClick={clickOnCampaignPage}  src={element.campaignCardImage} alt="no photo found" />
+      <Card.Body>
+        <Card.Title  id={element._id} onClick={clickOnCampaignPage}  >{element.campaignTitle}</Card.Title>
+        <Card.Text>
+          <div className="CirculerMain">
+        <Percentage campaignPercentage={{ID:element._id,ValueAchievmentPercentage,Amounts:element.campaignAmounts}} />
+        </div>
+        </Card.Text>
+        {/* <Button variant="primary">Go somewhere</Button> */}
+        
+      {checker?<></>:<>{idUser ? <Button  onClick={addTOfaverteFromMain} id={element._id} >+</Button> : <></>}</>}
+      </Card.Body>
+    </Card>
+    
     </div>
 
   }) : null;
