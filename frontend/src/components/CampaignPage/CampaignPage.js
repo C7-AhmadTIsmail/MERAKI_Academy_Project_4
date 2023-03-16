@@ -6,8 +6,8 @@ import React, { useContext, createContext, useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import "./CampaignPage.css";
 import axios from 'axios';
-import Map from 'react-map-gl';
-
+import Map , {Marker ,NavigationControl}  from 'react-map-gl';
+import Card from 'react-bootstrap/Card';
 
 
 
@@ -178,8 +178,9 @@ const CampaignPage = (props) => {
 
 
 
-
-
+// console.log(props.data.loaction[0] )
+let longitude =props.data?.loaction[0]
+let latitude =props.data?.loaction[1]
   // console.log(`https://www.youtube.com/embed/${props.data?.urlVideoOrImage.split('https://www.youtube.com/watch?v=')[0]}`,"sss")
   // console.log(props.data?.urlVideoOrImage.split("v=")[1].substring(0, 11),"id")
 
@@ -203,12 +204,12 @@ const CampaignPage = (props) => {
                 <p>campaign Title: {props.data?.campaignTitle}</p>
                 <p>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</p>
 
-                <p>campaign Duration Days: {props.data?.campaignDurationDays}</p>
+                <p>campaign Duration Days: {props.data?.campaignDurationDays?.split("T")[0]}</p>
                 <p>bank Account: {props.data?.bankAccount}</p>
               </div>
             </div>
 
-
+            </div>
 
             <div>
               {/* <iframe
@@ -218,18 +219,34 @@ const CampaignPage = (props) => {
             ></iframe> */}
 
 
-              {/* <Map
+<Card style={{ width: '17.2rem' , height: 280 ,margin: '0 0 40px 20px'}}>
+      
+      <Card.Body style={{  padding:'8px 16px 16px 8px' }}>
+      
+     
+      <Map 
               mapboxAccessToken={"pk.eyJ1IjoiYWhtYWRpc2FtaWwiLCJhIjoiY2xmYThtNThvMDE0NzN2cWdsMGFhaHZhdSJ9.hMUTU1E226JBVgx7YQm9ug"}
 
               initialViewState={{
-              longitude: -100,
-              latitude: 20.155,
-              zoom: 3.5
+              longitude ,
+              latitude ,
+              zoom: 8,
+              attributionControl: false,
+              Marker:'center'
+              
               }}
-              style={{width: 300, height: 200}}
+              style={{width: '16rem', height: 240}}
               mapStyle="mapbox://styles/mapbox/streets-v9"
-             /> */}
-            </div>
+            >
+               {/* <Marker longitude={longitude} latitude={latitude}  anchor='top'  >
+
+                </Marker> */}
+                {/* <NavigationControl/> */}
+               </Map>
+           
+      </Card.Body>
+    </Card>
+    </div>
 
 
 
@@ -241,7 +258,7 @@ const CampaignPage = (props) => {
 
 
 
-          </div>
+         
           <div className='OneRow'>
          
                 {showcontribution ? <>

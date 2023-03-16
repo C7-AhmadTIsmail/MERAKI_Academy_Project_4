@@ -76,8 +76,8 @@ const Main = () => {
     })
     return <div key={element._id} >
 
-      <Card style={{ width: '18rem',height:'339px' }}>
-        <Card.Img variant="top" id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
+      <Card style={{ width: '20rem',height:'339px' }}>
+        <Card.Img variant="top" style={{ width: '20rem',height:'239px' }} id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
         <Card.Body>
           <Card.Title id={element._id} onClick={clickOnCampaignPage}  >{element.campaignTitle}</Card.Title>
           <Card.Text>

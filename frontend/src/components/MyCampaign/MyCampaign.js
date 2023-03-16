@@ -98,7 +98,7 @@ const MyCampaign = () => {
             <p>campaign Duration Days: {element?.campaignDurationDays?.split("T")[0]}</p>
             </div>
             </div>
-            <p id="pargraphesAboutCampaign">pargraphesAboutCampaign: {element?.pargraphesAboutCampaign}</p>
+            <p id="pargraphesAboutCampaign">pargraphes About Campaign: {element?.pargraphesAboutCampaign}</p>
             <>
               <div className='SecandRowMyCampaign'>
               <Button variant="primary" id={element._id} onClick={(e) => {

@@ -93,6 +93,7 @@ const Campaign = () => {
         return errors
     }
 
+    const [submetDone, setSubmetDone] = useState()
 
     const submet = () => {
 
@@ -109,6 +110,7 @@ const Campaign = () => {
         axios.post(`http://localhost:5000/campaign/add/${idUser}`, userData, { headers: { "Authorization": `Bearer ${token}` } })
             .then(function (response) {
                 console.log(response)
+                setSubmetDone('Add Campaign is Done')
             })
             .catch(function (error) {
                 console.log(error);
@@ -186,6 +188,7 @@ const Campaign = () => {
                             <label htmlFor="darftCampaignLink" >darftCampaignLink:</label>
                             <Form.Control className="page3Input" name="darftCampaignLink" onChange={handleChange}></Form.Control>
                             <div style={{ color: "red" , marginBottom: "10px"  }}>{errors.darftCampaignLink}</div>
+                            <p style={{ color: "green" , marginBottom: "10px"  }}>{submetDone}</p>
                             <Button className="ButtonCampaignSubmet" variant="primary" onClick={submet}>submet</Button>
                         </div>
 

@@ -56,8 +56,8 @@ const Favorite = () => {
         console.log("mytarget all data campane", element)
         return (<div key={element.favoriteCampaign?._id} id={element.favoriteCampaign?._id}>
 
-            <Card style={{ width: '18rem' }}>
-                <Card.Img onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id} src={element?.favoriteCampaign?.campaignCardImage} alt="no photo found" />
+            <Card style={{ width: '20rem',height:'359px' }}>
+                <Card.Img  style={{ width: '20rem',height:'239px' }} onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id} src={element?.favoriteCampaign?.campaignCardImage} alt="no photo found" />
                 <Card.Body>
                     <Card.Title onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id}>{element?.favoriteCampaign?.campaignTitle}</Card.Title>
 
