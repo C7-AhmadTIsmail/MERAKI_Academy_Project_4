@@ -8,6 +8,17 @@ body{
     opacity: 0.9;
 }
 
+#dark{
+    background-color: rgb(110, 106, 101);
+}
+#light{
+    
+}
+#darkCard{
+    background-color: rgb(128, 124, 118);
+}
+
+
 /* remve array from input type number  */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

@@ -88,7 +88,6 @@ const Campaign = () => {
         if (!validator.isURL(darftCampaignLink)) {
             errors.darftCampaignLink = "Url is required";
         }
-        console.log(errors,"errerosmy")
         
         return errors
     }
@@ -100,16 +99,13 @@ const Campaign = () => {
         const errors = validateData(); 
         if (Object.keys(errors).length) {
             setErrors(errors);
-            //console.log(errors,"10")
             return;
         }
-        console.log(userData,"userdats")
+
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
-        console.log(token, idUser)
         axios.post(`http://localhost:5000/campaign/add/${idUser}`, userData, { headers: { "Authorization": `Bearer ${token}` } })
             .then(function (response) {
-                console.log(response)
                 setSubmetDone('Add Campaign is Done')
             })
             .catch(function (error) {
@@ -122,7 +118,7 @@ const Campaign = () => {
     return (
         <>
 
-            <Card>
+            <Card id="Card" >
                 <Card.Header>
                     <Nav variant="tabs" defaultActiveKey="#first">
                         <Nav.Item>
@@ -137,7 +133,7 @@ const Campaign = () => {
                     </Nav>
                 </Card.Header>
                     <Card.Title>Criete Campaign </Card.Title>
-               
+                
                     <div className="mainCamp">
 
                         {nextPage === "1" ? <>

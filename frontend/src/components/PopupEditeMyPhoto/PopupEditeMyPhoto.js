@@ -25,12 +25,10 @@ const PopupEditeMyPhoto = (props) => {
 
 
   const submetNewPhtoto = () => {
-    console.log(userData)
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.put(`http://localhost:5000/user/update/${idUser}`, { urlMyPhoto: urlMyPhoto },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
-        console.log(res)
         setPopupEditeMyDataAnotherLocation(!PopupEditeMyDataAnotherLocation)
         setModalShowPhoto(false)
       });
@@ -57,7 +55,7 @@ const PopupEditeMyPhoto = (props) => {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button className='submetNewButton' onClick={()=>{
+          <Button className='submetNewButton shadowButton' onClick={()=>{
             
             submetNewPhtoto()
             props.onHide()

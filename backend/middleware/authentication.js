@@ -8,9 +8,7 @@ const authentication=(req, res , next)=>{
     }
     const token = req.headers.authorization.split(" ").pop()
     const SECRET = process.env.SECRET || "ahmad" ;
-    // console.log("token:",token)
     jwt.verify(token,SECRET,function(err, resultVerify) {
-        // console.log(resultVerify,err) // bar
 
         if(err){
         return  res.json("no token are expired")

@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 const PopupCampaignPageAddComment = (props) => {
-    const { holderAllData, userComment, setUserComment, editOnComment, 
+    const { holderAllData, userComment, setUserComment, editOnComment,
         setEditOnComment, setModalShowComment } = useContext(UserContextMain);
 
     const handleChange = (e) => {
@@ -16,17 +16,17 @@ const PopupCampaignPageAddComment = (props) => {
     }
 
     const addComment = () => {
-        console.log(1)
+
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
         axios.post(`http://localhost:5000/comment/add/${holderAllData.data._id}/${idUser}`, userComment, { headers: { "Authorization": `Bearer ${token}` } })
             .then(function (response) {
-                console.log(response.data)
+
                 setEditOnComment(!editOnComment)
                 setModalShowComment(false)
             })
             .catch(function (error) {
-                // console.log(error);
+                console.log(error);
             });
     }
 
@@ -50,9 +50,9 @@ const PopupCampaignPageAddComment = (props) => {
 
                 <Modal.Footer>
                     <div className="addCommentSubmet">
-                    <Button variant="primary" onClick={addComment}>submet</Button>
+                        <Button variant="primary" onClick={addComment}>submet</Button>
                     </div>
-                    <Button onClick={props.onHide}>Close</Button>
+                    <Button className="shadowButton" onClick={props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </div>

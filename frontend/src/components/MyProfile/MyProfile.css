@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     z-index: -1;
-   
+    
 }
 
 .notchTitalMyProfile::before,
@@ -56,7 +56,7 @@
 .f2{
     margin-top: 40px;
     margin-right: 25px;
-    margin-left: 192px;
+    margin-left: 331px;
 }
 
 
@@ -129,4 +129,9 @@
     display: flex;
     justify-content: center;
     margin-top: 35px;
+}
+
+.ButtonEditProfile:hover {
+    box-shadow: 3px -3px 4px 0px rgba(0, 0, 0, 0.75);
+    opacity: 0.8;
 }

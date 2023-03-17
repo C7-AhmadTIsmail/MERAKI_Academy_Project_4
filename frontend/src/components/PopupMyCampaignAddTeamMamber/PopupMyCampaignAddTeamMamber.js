@@ -14,7 +14,7 @@ const PopupMyCampaignAddTeamMamber = (props) => {
   const userMyTeams = {
     firstName: "",
     lastName: "",
-    phoneNumber:undefined,
+    phoneNumber: undefined,
     country: "",
   }
   const [errors, setErrors] = useState({})
@@ -43,25 +43,19 @@ const PopupMyCampaignAddTeamMamber = (props) => {
     return errors
   }
 
-
-
-
   const [userDataMyCampaign, setUserDataMyCampaign] = useState(userMyTeams)
-
   const { firstName, lastName, phoneNumber, country } = userDataMyCampaign
 
   const submeteTeam = (e) => {
     const errors = validateData();
     if (Object.keys(errors).length) {
       setErrors(errors);
-      //console.log(errors,"10")
       return;
     }
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.post(`http://localhost:5000/campaignTeams/add/${e.target.id}`, { firstName, lastName, phoneNumber, country },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
-        console.log(res, "0")
         setCampaignDoneAndRefresh(!campaignDoneAndRefresh)
 
       });
@@ -108,9 +102,9 @@ const PopupMyCampaignAddTeamMamber = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <div className="buttonChange">
-            <Button id={elementHolder} onClick={submeteTeam}>submet</Button><br />
+            <Button className="shadowButton" id={elementHolder} onClick={submeteTeam}>submet</Button><br />
           </div>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button className="shadowButton" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
 

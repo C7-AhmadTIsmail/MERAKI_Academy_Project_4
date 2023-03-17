@@ -3,12 +3,12 @@ import PopupCampaignPageAddContribution from '../PopupCampaignPageAddContributio
 import PopupCampaignPageMamberTeamShow from '../PopupCampaignPageMamberTeamShow/PopupCampaignPageMamberTeamShow'
 import PopupCampaignPageAddComment from '../PopupCampaignPageAddComment/PopupCampaignPageAddComment'
 import React, { useContext, createContext, useEffect, useState } from "react";
+import Map, { Marker, GeolocateControl } from 'react-map-gl';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import "./CampaignPage.css";
 import axios from 'axios';
-import Map , {Marker ,GeolocateControl}  from 'react-map-gl';
-import Card from 'react-bootstrap/Card';
-
 
 
 
@@ -16,7 +16,6 @@ export const UserContextMain = createContext();
 
 const CampaignPage = (props) => {
   const holderAllData = props
-  console.log(props.data, "data")
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   const commentTest = {
@@ -57,30 +56,26 @@ const CampaignPage = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:5000/comment/getCommentCampaign/${props.data._id}`)
       .then(function (response) {
-        // console.log(response.data.Comment)
         setCommentholder(response.data.Comment)
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
 
     axios.get(`http://localhost:5000/contribution/getcontributionCampaign/${props.data._id}`)
       .then(function (response) {
-        //console.log(response)
         setValeAchievment(response.data.contribution)
       })
       .catch(function (error) {
-        //console.log(error );
+        console.log(error);
       })
 
 
-    console.log(7)
+
     const token = JSON.parse(localStorage.getItem('user'))?.token
     const idUser = JSON.parse(localStorage.getItem('user'))?.user._id
     axios.get(`http://localhost:5000/campaignTeams/${props.data._id}`).then((res) => {
-      console.log(res.data.teamsMamber, "************************************************************0")
       setTeamMamberHolder(res?.data?.teamsMamber)
-      console.log(8)
 
     });
 
@@ -96,48 +91,43 @@ const CampaignPage = (props) => {
   }
 
   const addtofaverts = () => {
-    //console.log(2)
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.post(`http://localhost:5000/favorite/add/${props.data._id}/${idUser}`, "", { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
-        //console.log(response.data)
         setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
 
 
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
   }
   const removieFromFavorite = () => {
-    //console.log(2)
+
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.delete(`http://localhost:5000/favorite/delete/${props.data._id}/${idUser}`, { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
-        //console.log(response.data)
         setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
 
 
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
   }
 
   const removecomment = (e) => {
-    //console.log(3)
     const idOfComment = e.target.id
     const token = JSON.parse(localStorage.getItem('user')).token
-    // console.log(idOfComment)
     axios.delete(`http://localhost:5000/comment/delete/${idOfComment}`, { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
-        // console.log(response.data)
+        console.log(response.data)
         setEditOnComment(!editOnComment)
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
 
   }
@@ -149,7 +139,6 @@ const CampaignPage = (props) => {
     g = valeAchievment?.reduce((accumulator, currentValue) => {
       return currentValue.ammount + accumulator
     }, initialValue);
-    //console.log(g)
     return (g)
   }
 
@@ -163,13 +152,10 @@ const CampaignPage = (props) => {
         let holder = false
         res?.data?.result?.forEach(element => {
           if (element.favoriteCampaign?._id === props.data?._id) {
-            //console.log("************-**************")
             holder = true
           }
         })
         setElementOnFavriteAlreudyShow(holder);
-        //console.log(holder, "11111111111111111111111")
-        // elmentfaverteshow()
       });
     }
   }, [elementOnFavriteAlreudy]);
@@ -177,10 +163,8 @@ const CampaignPage = (props) => {
   const [holdBigContribtution, setHoldBigContribtution] = useState(null)
 
 
-
-// console.log(props.data.loaction[0] )
-let longitude =props.data?.loaction[0]
-let latitude =props.data?.loaction[1]
+  let longitude = props.data?.loaction[0]
+  let latitude = props.data?.loaction[1]
   // console.log(`https://www.youtube.com/embed/${props.data?.urlVideoOrImage.split('https://www.youtube.com/watch?v=')[0]}`,"sss")
   // console.log(props.data?.urlVideoOrImage.split("v=")[1].substring(0, 11),"id")
 
@@ -194,115 +178,95 @@ let latitude =props.data?.loaction[1]
       }}>
 
         <div className='CampaignPageInSideMain'>
-            <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
+          <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
           <div className="newOne">
             <div className='ContentCampaignPage'>
               <div className="row1">
                 <img className="CampaignPageImg" src={props.data?.campaignCardImage} alt="no photo found" />
               </div>
               <div className="row2">
-                <p>campaign Title: {props.data?.campaignTitle}</p>
-                <p>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</p>
 
-                <p>campaign Duration Days: {props.data?.campaignDurationDays?.split("T")[0]}</p>
-                <p>bank Account: {props.data?.bankAccount}</p>
+                <Card style={{ width: '27rem' }}>
+                  <ListGroup>
+                    <ListGroup.Item>campaign Title: {props.data?.campaignTitle}</ListGroup.Item>
+                    <ListGroup.Item>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</ListGroup.Item>
+                    <ListGroup.Item>campaign Duration Days: {props.data?.campaignDurationDays?.split("T")[0]}</ListGroup.Item>
+                    <ListGroup.Item>bank Account: {props.data?.bankAccount}</ListGroup.Item>
+                  </ListGroup>
+                </Card>
               </div>
             </div>
 
-            </div>
+          </div>
 
-            <div>
-              {/* <iframe
+          <div>
+            {/* <iframe
             className='Video'
               src={`https://www.youtube.com/embed/${props.data?.urlVideoOrImage?.split("v=")[1].substring(0, 11)}`}
               width="350" height="250"
             ></iframe> */}
 
 
-<Card style={{ width: '17.2rem' , height: 280 ,margin: '0 0 40px 20px'}}>
-      
-      <Card.Body style={{  padding:'14px 16px 14px 6px' }}>
-      
-      <Map style={{ width: '14.2rem' , height: 240 ,margin: '0 0 40px 20px'}}
-              mapboxAccessToken={"pk.eyJ1IjoiYWhtYWRpc2FtaWwiLCJhIjoiY2xmYThtNThvMDE0NzN2cWdsMGFhaHZhdSJ9.hMUTU1E226JBVgx7YQm9ug"}
+            <Card style={{ width: '17.2rem', height: 280, margin: '0 0 40px 20px' }}>
 
-              initialViewState={{
-              longitude ,
-              latitude ,
-              zoom: 8,
-              attributionControl: false,
-              Marker:'center',
-              
-              }}
-              mapStyle="mapbox://styles/mapbox/streets-v9"
-            >
-               {/* <Marker longitude={longitude} latitude={latitude}  anchor='top'  >
+              <Card.Body style={{ padding: '14px 16px 14px 6px' }}>
 
-                </Marker>
-                <GeolocateControl/> */}
-               </Map>
-     
-           
-      </Card.Body>
-    </Card>
+                <Map style={{ width: '14.2rem', height: 240, margin: '0 0 40px 20px' }}
+                  mapboxAccessToken={"pk.eyJ1IjoiYWhtYWRpc2FtaWwiLCJhIjoiY2xmYThtNThvMDE0NzN2cWdsMGFhaHZhdSJ9.hMUTU1E226JBVgx7YQm9ug"}
+
+                  initialViewState={{
+                    longitude,
+                    latitude,
+                    zoom: 8,
+                    attributionControl: false,
+                    Marker: 'center',
+
+                  }}
+                  mapStyle="mapbox://styles/mapbox/streets-v9"
+                >
+                </Map>
 
 
+              </Card.Body>
+            </Card>
+          </div>
 
-    
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-         
           <div className='OneRow'>
-         
-                {showcontribution ? <>
-                </> : <>
-                  <Button variant="primary" onClick={() => { setmodalShowTeamMamber(true); setElementHolderTeams(props.data._id) }}>show team mamber</Button>
-                  <PopupCampaignPageMamberTeamShow show={modalShowTeamMamber} onHide={() => setmodalShowTeamMamber(false)} />
 
-                </>}
-             
-                {showcontribution ? <>
-                </> : <>
+            {showcontribution ? <>
+            </> : <>
+              <Button className='shadowButton' variant="primary" onClick={() => { setmodalShowTeamMamber(true); setElementHolderTeams(props.data._id) }}>show team mamber</Button>
+              <PopupCampaignPageMamberTeamShow show={modalShowTeamMamber} onHide={() => setmodalShowTeamMamber(false)} />
 
-                  <Button variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
-                  <PopupCampaignPageBestContribution show={modalShowBestContribution} onHide={() => setModalShowBestContribution(false)} />
-                </>}
-           
-                {showcontribution ? <>
-                </> : <>
+            </>}
 
-                  {idUser ? <>
-                    {elementOnFavriteAlreudyShow ? <div  > <Button variant="primary" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div  ><Button variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
-                    <Button  variant="primary" onClick={() => { setModalShowComment(true) }}>add Comment</Button>
-                    <PopupCampaignPageAddComment show={modalShowComment} onHide={() => setModalShowComment(false)} />
-                  </> : <></>}
-                </>}
+            {showcontribution ? <>
+            </> : <>
 
-             
+              <Button className='shadowButton' variant="primary" onClick={() => { setModalShowBestContribution(true) }}>best Contribution</Button>
+              <PopupCampaignPageBestContribution show={modalShowBestContribution} onHide={() => setModalShowBestContribution(false)} />
+            </>}
 
-                {showcontribution ? <>
-                </> : <>
 
-                  {idUser ? <>
-                    <Button  variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
-                    <PopupCampaignPageAddContribution show={modalShowContribution} onHide={() => setModalShowContribution(false)} />
-                  </> : <></>}
 
-                </>}
+            {showcontribution ? <>
+            </> : <>
 
-             
-           
+              {idUser ? <>
+                <Button className='shadowButton' variant="primary" onClick={() => { setModalShowContribution(true) }}>add Contribution</Button>
+                <PopupCampaignPageAddContribution show={modalShowContribution} onHide={() => setModalShowContribution(false)} />
+              </> : <></>}
+
+            </>}
+            {showcontribution ? <>
+            </> : <>
+
+              {idUser ? <>
+                <Button variant="primary" className='shadowButton' onClick={() => { setModalShowComment(true) }}>add Comment</Button>
+                <PopupCampaignPageAddComment show={modalShowComment} onHide={() => setModalShowComment(false)} />
+                {elementOnFavriteAlreudyShow ? <div  > <Button className='shadowButton' variant="danger" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div  ><Button className='shadowButton' variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
+              </> : <></>}
+            </>}
           </div>
 
           <div className='box1'>
@@ -310,26 +274,24 @@ let latitude =props.data?.loaction[1]
 
             </> : <>
               <div className='showCommentWordButton'>
-                <Button onClick={getComment}>{showCommentWord}</Button>
+                <Button className='shadowButton' onClick={getComment}>{showCommentWord}</Button>
               </div>
               {showComment ? <>{commentholder.map((element, index) => {
                 return (<div key={index} >
-
-                  <h4>{element.comment}</h4>
+                  <Card style={{ width: '90%' , margin: '0px 0px 8px 20px'  }}>
+                    <ListGroup variant="flush">
+                      <ListGroup.Item><h5 style={{ margin: '0px 0px 0px 6px' }}>{element.comment}</h5></ListGroup.Item>
+                    </ListGroup>
+                  </Card>
                   <div className="RemoveCommentButton">
-                    {(element.commenter == idUser) ? <><Button className='RemoveCommentButton' id={element._id} onClick={removecomment}>remove comment</Button></> : <></>}
+                    {(element.commenter == idUser) ? <><Button variant="danger" className='RemoveCommentButton shadowButton' id={element._id} onClick={removecomment}>Remove</Button></> : <></>}
                   </div>
                 </div>
                 )
               })}</> : <></>}
-
             </>}
-
-
           </div>
-
         </div>
-
       </UserContextMain.Provider>
     </>
   )

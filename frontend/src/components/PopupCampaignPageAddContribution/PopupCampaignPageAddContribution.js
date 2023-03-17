@@ -18,7 +18,7 @@ const PopupCampaignPageAddContribution = (props) => {
   const handle_Chamge = (e) => {
     const { name, value } = e.target
     setContribution((preData) => ({ ...preData, [name]: value }))
-    //console.log(contribution)
+    
   }
 
   const [errors, setErrors] = useState({})
@@ -42,7 +42,6 @@ const [done, setDone] = useState(undefined)
     }
     if (!validator.isBoolean(visibility)) {
       errors.urlMyPhoto = "visibility is required";
-      //console.log(8)
     }
     return errors
   }
@@ -61,9 +60,6 @@ const [done, setDone] = useState(undefined)
     axios.post(`http://localhost:5000/contribution/add/${holderAllData.data._id}/${idUser}`,
       { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility, }, { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
-        console.log(response)
-        // setEditOnComment(!editOnComment)
-        
         setAddContributionShow(!addContributionShow)
         setDone("Add Contribution is Done")
         setTimeout(() => {
@@ -111,9 +107,9 @@ const [done, setDone] = useState(undefined)
 
         <Modal.Footer>
           <div>
-            <Button onClick={submetContribution}>submet</Button>
+            <Button className="shadowButton" onClick={submetContribution}>submet</Button>
           </div>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button  className="shadowButton" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
 

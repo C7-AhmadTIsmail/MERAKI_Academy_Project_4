@@ -11,9 +11,10 @@ import "./Main.css";
 
 const Main = () => {
 
+  
   const [first, setFirst] = useState(null)
   const [campaignPageData, setcampaignPageData] = useState(null)
-  const { campaignPageShow, setCampaignPageShow } = useContext(UserContext);
+  const { campaignPageShow, setCampaignPageShow ,cardTheme} = useContext(UserContext);
   const [favoriteHolder, setFavoriteHolder] = useState(null)
   const [showPlusButton, setShowPlusButton] = useState(false)
   const [ValueAchievmentPercentage, setValueAchievmentPercentage] = useState(null)
@@ -23,11 +24,9 @@ const Main = () => {
   useEffect(() => {
     axios.get(`http://localhost:5000/campaign/get`).then((res) => {
       setFirst(res.data.campaign);
-      // console.log(res.data.campaign)
     });
 
     axios.get(`http://localhost:5000/contribution/get/`).then((res) => {
-      //  console.log("her mr roko",res?.data.contribution)
       setValueAchievmentPercentage(res?.data.contribution);
 
     });
@@ -46,11 +45,9 @@ const Main = () => {
   const clickOnCampaignPage = (e) => {
     const searchIndex = first.findIndex((campaign) => campaign._id == e.target.id);
     setcampaignPageData(first[searchIndex])
-    //console.log(campaignPageData)
     setCampaignPageShow(true)
-    // console.log(campaignPageShow)
   }
-  //console.log(campaignPageShow)
+
 
   const addTOfaverteFromMain = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
@@ -58,11 +55,10 @@ const Main = () => {
     axios.post(`http://localhost:5000/favorite/add/${e.target.id}/${idUser}`, "",
       { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
-        // console.log(response.data)
         setShowPlusButton(!showPlusButton)
       })
       .catch(function (error) {
-        // console.log(error);
+        console.log(error);
       });
   }
 
@@ -76,10 +72,10 @@ const Main = () => {
     })
     return <div key={element._id} >
 
-      <Card style={{ width: '20rem',height:'339px' }}>
-        <Card.Img variant="top" style={{ width: '20rem',height:'239px' }} id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
+      <Card style={{ width: '20rem',height:'339px' }} id={cardTheme}>
+        <Card.Img variant="top" style={{ width: '20rem',height:'239px',cursor: "pointer" }} id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
         <Card.Body>
-          <Card.Title id={element._id} onClick={clickOnCampaignPage}  >{element.campaignTitle}</Card.Title>
+          <Card.Title id={element._id} onClick={clickOnCampaignPage} style={{cursor: "pointer"}}  >{element.campaignTitle}</Card.Title>
           <Card.Text>
             <div className="CirculerMain">
               <Percentage campaignPercentage={{ ID: element._id, ValueAchievmentPercentage, Amounts: element.campaignAmounts }} />

@@ -2,28 +2,26 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import React from 'react'
 import "./Percentage.css"
-const Percentage = ( {campaignPercentage}) => {
+const Percentage = ({ campaignPercentage }) => {
 
-let IDHolder=campaignPercentage.ID
-console.log(campaignPercentage.element,"aaaaaaaaaa")
-let holder=0
+  let IDHolder = campaignPercentage.ID
 
-campaignPercentage?.ValueAchievmentPercentage?.forEach(elementArray =>
-    { 
-    //   console.log(IDHolder,elementArray.campaign,"aaaaaaaaaa")
-        if(IDHolder===elementArray.campaign){
-            // console.log(elementArray.ammount)
-            holder+=elementArray.ammount
-        };
-    
-    });
-    console.log(holder/campaignPercentage.Amounts)
-    
+  let holder = 0
+
+  campaignPercentage?.ValueAchievmentPercentage?.forEach(elementArray => {
+
+    if (IDHolder === elementArray.campaign) {
+
+      holder += elementArray.ammount
+    };
+
+  });
+
+
   return (
-   
+
     <div style={{ width: 40, height: 40 }} className="Circuler">
-          {/* <p  >%{holder/campaignPercentage.Amounts}%</p> */}
-          <CircularProgressbar    text={`${Math.floor((holder/campaignPercentage.Amounts)*100)}%`} value={(holder/campaignPercentage.Amounts)*100} />
+      <CircularProgressbar text={`${Math.floor((holder / campaignPercentage.Amounts) * 100)}%`}  value={(holder / campaignPercentage.Amounts) * 100} />
     </div>
 
 

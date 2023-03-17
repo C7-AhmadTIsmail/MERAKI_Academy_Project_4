@@ -5,7 +5,6 @@
 }
 
 .notchTitalMain {
-    /* position: absolute; */
     top: 0;
     left: 50%;
     width: 280px;
@@ -17,7 +16,6 @@
     display: flex;
     justify-content: center;
     z-index: -1;
-    /* margin-top: 56px; */
 }
 
 .notchTitalMain::before,
@@ -88,10 +86,9 @@
 }
 .addToFavirte {
     border-radius: 50%;
-    /* border-radius: 50%; */
 }
-/* .card{
-    height:339px;
-    width: 288px;
-    
-} */
+
+.addToFavirte:hover {
+    box-shadow: 3px -3px 4px 0px rgba(0, 0, 0, 0.75);
+    opacity: 0.8;
+}

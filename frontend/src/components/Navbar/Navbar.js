@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
 import "./NavBar.css";
 import DropDownList from "../DropDownList/DropDownList";
 import Container from "react-bootstrap/Container";
@@ -12,7 +12,7 @@ import Navbar from "react-bootstrap/Navbar";
 const NavBar = () => {
     const navigate = useNavigate();
 
-    const { setLogin, login } = useContext(UserContext);
+    const { setLogin, login ,setTheme ,theme,cardTheme, setCardTheme } = useContext(UserContext);
     const { setCampaignPageShow } = useContext(UserContext);
 
     const Logout = () => {
@@ -23,10 +23,16 @@ const NavBar = () => {
             navigate("/");
         }, 300);
     };
-    console.log(login)
+    
     const backToMain = () => {
         setCampaignPageShow(false);
     };
+    const ChangeTheme=()=>{
+        setTheme((curr)=>(curr==="light"?"dark":"light"))
+        setCardTheme((curr)=>(curr==="light"?"darkCard":"light"))
+    }
+
+
 
     return (
         <>
@@ -64,7 +70,7 @@ const NavBar = () => {
                                     </>
                                 )}
 
-                                <Nav.Link eventKey={2} href="#memes">
+                                <Nav.Link onClick={ChangeTheme}>
                                     dark mood
                                 </Nav.Link>
                             </Nav>

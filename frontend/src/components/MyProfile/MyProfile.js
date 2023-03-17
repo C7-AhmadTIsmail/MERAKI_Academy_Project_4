@@ -34,8 +34,7 @@ const MyProfile = () => {
     axios.get(`http://localhost:5000/user/getUserData/${idUser}`,
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setFirstMyProfile(res.data.result);
-        console.log(res.data.result[0].age.split("T")[0])
-
+        
       });
   }, [editePasswordVlue,PopupEditeMyDataAnotherLocation]);
 
@@ -49,7 +48,7 @@ const MyProfile = () => {
 
   const editProfile = () => {
     seteditePasswordVlue(false)
-   
+    
   }
 
 
@@ -92,7 +91,7 @@ const MyProfile = () => {
         </> : <p>noData</p>}
       </div>
       <div className="ButtonEitProfile" >
-      <Button variant="primary" onClick={() =>{ 
+      <Button variant="primary" className="ButtonEditProfile" onClick={() =>{ 
         editProfile()
         setModalShow(true)}}>edit Profile</Button>
       </div>

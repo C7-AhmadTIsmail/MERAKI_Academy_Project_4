@@ -17,10 +17,8 @@ const PopupMyContrtibutionEdite = (props) => {
   const handle_Change_myContribution = (e) => {
     const { name, value } = e.target
     setMyContribution((preData) => ({ ...preData, [name]: value }))
-    //console.log(contribution)
   }
 
-  console.log(contributionEditeHolderData)
 
   const [errors, setErrors] = useState({})
 
@@ -43,7 +41,6 @@ const PopupMyContrtibutionEdite = (props) => {
     }
     if (!validator.isBoolean(visibility)) {
       errors.urlMyPhoto = "visibility is required";
-      //console.log(8)
     }
     return errors
   }
@@ -64,7 +61,6 @@ const PopupMyContrtibutionEdite = (props) => {
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
     axios.put(`http://localhost:5000/contribution/update/${e.target.id}`, { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
-        console.log(res, "0")
         setContributionDoneAndRefresh(!ContributionDoneAndRefresh)
       });
 
@@ -95,7 +91,7 @@ const PopupMyContrtibutionEdite = (props) => {
           <input name="visibility" onChange={handle_Change_myContribution}></input>
           <div style={{ color: "red" }}>{errors.visibility}</div>
           <label htmlFor="dateOfContribution">date Of Contribution:</label>
-          <input name="dateOfContribution"  type="date" onChange={handle_Change_myContribution}></input>
+          <input name="dateOfContribution" type="date" onChange={handle_Change_myContribution}></input>
           <div style={{ color: "red" }}>{errors.dateOfContribution}</div>
           <label htmlFor="lastDateOfContributionCanRefund">lastDateOfContributionCanRefund:</label>
           <input name="lastDateOfContributionCanRefund" type="date" onChange={handle_Change_myContribution}></input>

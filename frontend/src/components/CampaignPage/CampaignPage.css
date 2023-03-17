@@ -107,7 +107,7 @@ margin-top: 12px;
     margin: 15px;
     border:black solid 1px;
     padding: 6px;
-    border-radius: 25%;
+    border-radius: 12px;
 }
 
 .box1 > *{
@@ -121,7 +121,7 @@ margin-top: 12px;
 
 .RemoveCommentButton{
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
 
 .Video{
@@ -130,4 +130,12 @@ margin-left: 35px;
 .OneRow{
     display: flex;
     justify-content: space-evenly;
+}
+
+.shadowButton:hover {
+    box-shadow: 3px -3px 4px 0px rgba(0, 0, 0, 0.75);
+}
+
+.shadowButton:hover {
+    opacity: 0.8;
 }

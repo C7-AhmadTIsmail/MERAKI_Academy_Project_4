@@ -16,10 +16,9 @@ const Footer = () => {
                 <section className=''>
                     <p className='d-flex justify-content-center align-items-center'>
                         <span className='me-3'>Register for free</span>
-                        <Link to="/Login">
-                            <Button type='button' >
-                                Sign up!
-
+                        <Link to="/Register">
+                            <Button className='ButtonFooter' type='button' >
+                                Register !
                             </Button>
                         </Link>
                     </p>

@@ -1,13 +1,14 @@
 import CampaignPage from "../CampaignPage/CampaignPage";
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useContext, useState } from "react";
 import Percentage from "../Percentage/Percentage";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import "./Favorite.css";
+import { UserContext } from "../../App";
 
 const Favorite = () => {
-
+    const {cardTheme} = useContext(UserContext);
     const [first, setFirst] = useState(null)
     const [deleteFormFavorite, setDeleteFormFavorite] = useState(false)
     const [showCampaignPageFromFavorite, setShowCampaignPageFromFavorite] = useState(false)
@@ -21,7 +22,6 @@ const Favorite = () => {
             setFirst(res.data.result);
         });
         axios.get(`http://localhost:5000/contribution/get/`).then((res) => {
-            //  console.log("her mr roko",res?.data.contribution)
             setValueAchievmentPercentage(res?.data.contribution);
 
         });
@@ -35,7 +35,6 @@ const Favorite = () => {
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
         axios.delete(`http://localhost:5000/favorite/delete/${e.target.id}/${idUser}`
             , { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
-                console.log(res)
                 setDeleteFormFavorite(!deleteFormFavorite)
             });
     }
@@ -43,9 +42,7 @@ const Favorite = () => {
     const clickOnCampaignPageInnerSide = (e) => {
         const searchIndex = first.findIndex((favert) => favert.favoriteCampaign._id == e.target.id);
         setcampaignPageData(first[searchIndex].favoriteCampaign)
-        //console.log(first[searchIndex].favoriteCampaign,"xxxxxxxxxxxxxxxxxxxx")
         setShowCampaignPageFromFavorite(true)
-        // console.log(campaignPageShow)
     }
 
 
@@ -53,17 +50,17 @@ const Favorite = () => {
 
 
     const loopOnFavorite = Array.isArray(first) ? first.map((element, index) => {
-        console.log("mytarget all data campane", element)
-        return (<div key={element.favoriteCampaign?._id} id={element.favoriteCampaign?._id}>
+        
+        return (<div key={element.favoriteCampaign?._id} >
 
-            <Card style={{ width: '20rem',height:'359px' }}>
-                <Card.Img  style={{ width: '20rem',height:'239px' }} onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id} src={element?.favoriteCampaign?.campaignCardImage} alt="no photo found" />
+            <Card style={{ width: '20rem',height:'359px' }} id={cardTheme}>
+                <Card.Img  variant="top" style={{ width: '20rem',height:'239px',cursor: "pointer" }} onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id} src={element?.favoriteCampaign?.campaignCardImage} alt="no photo found" />
                 <Card.Body>
-                    <Card.Title onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id}>{element?.favoriteCampaign?.campaignTitle}</Card.Title>
+                    <Card.Title onClick={clickOnCampaignPageInnerSide} style={{cursor: "pointer"}} id={element?.favoriteCampaign?._id}>{element?.favoriteCampaign?.campaignTitle}</Card.Title>
 
                     <div className='MainRow'>
                         <Percentage campaignPercentage={{ ID: element.favoriteCampaign?._id, ValueAchievmentPercentage, Amounts: element.favoriteCampaign?.campaignAmounts }} />
-                        <Button onClick={clickOnCampaignPage} className="removefromFavirte" id={element.favoriteCampaign?._id} >-</Button>
+                        <Button onClick={clickOnCampaignPage} className="removefromFavirte" variant="danger" id={element.favoriteCampaign?._id} >-</Button>
                     </div>
 
                 </Card.Body>
@@ -83,8 +80,8 @@ const Favorite = () => {
                 {showCampaignPageFromFavorite ? <>
                     <CampaignPage data={campaignPageData} />
                 </> : <>
-                    <div className='TitalFavorite'><h5 className='notchTitalFavorite' >Favorite</h5></div>
-                    <><div className='grid-container-favorite '>{loopOnFavorite}</div></>
+                    <div className='TitalFavorite'><h3 className='notchTitalFavorite' >Favorite</h3></div>
+                    <><div><div className='grid-Container-Favorite'>{loopOnFavorite}</div></div></>
                 </>}
             </div>
         </>

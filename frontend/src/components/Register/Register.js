@@ -26,9 +26,8 @@ const Register = () => {
 
   const validateData = () => {
     let errors = {};
-    //console.log(5)
     if (!validator.isEmail(email)) {
-     
+    
 
       errors.email = "A vailed email is required";
     }
@@ -49,7 +48,6 @@ const Register = () => {
     }
     if(!validator.isURL(urlMyPhoto)){
       errors.urlMyPhoto = "Url is required";
-      //console.log(8)
     }
     return errors
   }
@@ -65,12 +63,10 @@ const Register = () => {
 const errors = validateData();  
 if (Object.keys(errors).length) {
   setErrors(errors);
-  //console.log(errors,"10")
   return;
 }
     axios.post('http://localhost:5000/user/signUp', userData)
       .then(function (response) {
-         console.log(response);
         navigate("/Login")
       })
       .catch(function (error) {
@@ -109,7 +105,7 @@ if (Object.keys(errors).length) {
             <label htmlFor="age" className='RegisterInputLabel' >age:</label>
             <input name="age"  type="date" className='RegisterInputForm'  placeholder="mm/dd/yyyy" onChange={handleChamge}></input>
             <div style={{ color: "red" }}>{errors.age}</div>
-            <Button variant="primary" className='SubmetButtonRegister' onClick={submet}>submet</Button>
+            <Button variant="primary" className='SubmetButtonRegister shadowButton' onClick={submet}>submet</Button>
           </div>
         </div>
       </div>

@@ -5,9 +5,9 @@ const contributionSchema = require("../models/contributionSchema");
 
 const addCampaign = (req, res) => {
 
-    // const  campaigner=req.params.id;
+
     const campaigner = req.token._id
-    // console.log("campaigner",campaigner)
+
     const { bankAccount, campaignTitle, campaignCardImage,
         pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
         urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink } = req.body
@@ -37,7 +37,7 @@ const addCampaign = (req, res) => {
 
 
 const getAllCampaign = (req, res) => {
-    // console.log("000000000000000")
+
     campaignSchema.find({})
         .then((result) => {
             res.status(200).json(
@@ -62,7 +62,7 @@ const updateCampaign = (req, res) => {
         pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
         urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink } = req.body
 
-        
+
     campaignSchema.findByIdAndUpdate(id_, {
         bankAccount, campaignTitle, campaignCardImage,
         pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
@@ -90,9 +90,9 @@ const removeCampaign = (req, res) => {
 
     campaignSchema.findByIdAndDelete(id_)
         .then((result_0) => {
-            favoriteSchema.deleteMany({ favoriteCampaign:id_ })
+            favoriteSchema.deleteMany({ favoriteCampaign: id_ })
                 .then((result_1) => {
-                    contributionSchema.deleteMany({ campaign:id_})
+                    contributionSchema.deleteMany({ campaign: id_ })
                         .then((result_2) => {
                             res.status(200).json(
                                 {

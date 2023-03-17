@@ -18,6 +18,8 @@ function App() {
   const [login, setLogin] = useState(false)
   const [campaignPageShow, setCampaignPageShow] = useState(false)
   const [tokenFound, setTokenFound] = useState(JSON.parse(localStorage.getItem('user'))?.token)
+  const [theme, setTheme] = useState("light")
+  const [cardTheme, setCardTheme] = useState("light")
   useEffect(() => {
     if (tokenFound) {
       setLogin(!login)
@@ -25,8 +27,8 @@ function App() {
   }, [tokenFound])
 
   return (
-    <UserContext.Provider value={{ setLogin, login, setCampaignPageShow ,campaignPageShow }}>
-      <div className="App">
+    <UserContext.Provider value={{ setLogin, login, setCampaignPageShow ,campaignPageShow ,setTheme ,theme ,cardTheme, setCardTheme}}>
+      <div className="APP" id={theme}>
         <header className="App-header">
         </header>
         <NavBar />

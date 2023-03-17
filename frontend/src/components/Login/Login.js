@@ -74,7 +74,7 @@ const Login = () => {
             <label className="LoginContainte" htmlFor="password" >Password:</label>
             <input className="LoginContainte InputCorner" name="password"  type="password"  onChange={handleChamge}  placeholder="Password"></input>
             <div style={{ color: "red" }}>{errors.password}</div>
-            <Button variant="primary" className='LoginButton' onClick={login}>LogIn</Button>
+            <Button variant="primary" className='LoginButton shadowButton' onClick={login}>LogIn</Button>
             <div style={{ color: "red" }}>{loginErrors?.message}</div>
             <p>don't have account <a href="/Register">Register</a></p>
           </div>
