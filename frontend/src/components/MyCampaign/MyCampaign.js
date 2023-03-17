@@ -114,12 +114,12 @@ const MyCampaign = () => {
             </div>
             <p id="pargraphesAboutCampaign">pargraphes About Campaign: {element?.pargraphesAboutCampaign}</p>
             <>
-             <div className='SecandRowMyCampaign'>
-             {(diff <= 0) ? <>   <Button variant="primary" className="shadowButton" id={element._id} onClick={(e) => {
+              <div className='SecandRowMyCampaign'>
+                {(diff <= 0) ? <>   <Button variant="primary" className="shadowButton" id={element._id} onClick={(e) => {
                   setmodalShowEditeMyCampaign(true)
                   setElementHolder(e.target.id)
                 }
-                }>edit</Button></>:<></>}
+                }>edit</Button></> : <></>}
 
                 <PopupMyCampaignEdite
                   show={modalShowEditeMyCampaign}
@@ -155,7 +155,7 @@ const MyCampaign = () => {
                 />
 
 
-              {(diff <= 0) ? <> <Button className="shadowButton" id={element._id} onClick={deletethisCampaign}>delete</Button><br /></>:<></>}
+                {(diff <= 0) ? <> <Button className="shadowButton" id={element._id} onClick={deletethisCampaign}>delete</Button><br /></> : <></>}
 
               </div>
             </>

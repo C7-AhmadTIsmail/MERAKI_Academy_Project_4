@@ -49,6 +49,8 @@
     margin-top: 13px;
     border: solid black 1px;
     border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .ContributionListMainDiv:hover {
     box-shadow: 3px -3px 4px 0px rgba(0, 0, 0, 0.75);

@@ -1,10 +1,11 @@
 import PopupMyContrtibutionEdite from '../PopupMyContrtibutionEdite/PopupMyContrtibutionEdite';
 import React, { createContext, useEffect, useState } from "react";
-import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import "./MyContribution.css"
 import axios from 'axios';
-
 
 export const UserContext = createContext();
 
@@ -77,9 +78,16 @@ const MyContribution = () => {
             <div className='MyContributionfirst'>
             <img className="myCampaignPageImg" src={element.campaign.campaignCardImage} alt="no photo found" />
               <div>
-              <p>campaignTitle: {element.campaign.campaignTitle}</p>
-              <p>bankAccount: {element.campaign.bankAccount}</p>
-              <p>catgory: {element.campaign.catgory}</p>
+
+              <Card style={{ width: '25rem', marginTop: "10vh" }}>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>campaignTitle: {element.campaign.campaignTitle}</ListGroup.Item>
+                    <ListGroup.Item>bankAccount: {element.campaign.bankAccount}</ListGroup.Item>
+                    <ListGroup.Item>catgory: {element.campaign.catgory}</ListGroup.Item>
+                  </ListGroup>
+                </Card>
+
+
               </div>
             </div>
             <hr />
