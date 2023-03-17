@@ -186,7 +186,7 @@ const CampaignPage = (props) => {
               </div>
               <div className="row2">
 
-                <Card style={{ width: '27rem' }}>
+                <Card style={{ width: '27rem' , marginLeft: "127px"}}>
                   <ListGroup>
                     <ListGroup.Item>campaign Title: {props.data?.campaignTitle}</ListGroup.Item>
                     <ListGroup.Item>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</ListGroup.Item>

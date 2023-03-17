@@ -1,11 +1,14 @@
-import React from 'react';
 import "./Footer.css";
 import Button from 'react-bootstrap/Button';
 import { MDBFooter, MDBContainer, } from 'mdb-react-ui-kit';
 import { Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { UserContext } from "../../App";
 
 const Footer = () => {
-
+    const navigate = useNavigate();
+    const { setLogin, login  } = useContext(UserContext);
     const year = new Date().getFullYear();
 
 
@@ -15,12 +18,14 @@ const Footer = () => {
             <MDBContainer className='p-4 pb-0'>
                 <section className=''>
                     <p className='d-flex justify-content-center align-items-center'>
-                        <span className='me-3'>Register for free</span>
-                        <Link to="/Register">
+                       {login?<><h5>Welcome to our website </h5></> : 
+                       <>
+                       <span className='me-3'>Register for free</span>
+                       <Link to="/Register">
                             <Button className='ButtonFooter' type='button' >
                                 Register !
                             </Button>
-                        </Link>
+                        </Link></>}
                     </p>
                 </section>
             </MDBContainer>
