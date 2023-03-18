@@ -1,15 +1,16 @@
 <p align="center">
-<a href="https://www.meraki-academy.org" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="https://www.meraki-academy.org/assets/img/logov02.svg" alt="Project logo">
+<a href="https://www.meraki-academy.org"
+ target="_blank" rel="noopener noreferrer">
+ <img width="150px" height="100px" src="./photo/LOGO.png" alt="Project logo">
  </a>
 </p>
 
-<h3 align="center">Project Title
+<h3 align="center">Fund-me
 </h3>
 
 ---
 
-<p align="center"> An awesome Project to describe README 
+<p align="center"> Help other people to  achieve their ambitions
     <br> 
 <a href=''>Demo</a>
     <br> 
@@ -27,9 +28,8 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
-
-Ex. Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
+Do you want to provide support for charitable projects or provide support for some emerging projects that will revolutionize?
+Fund me is the most suitable application for you. It provides an easy way for people to provide support and contribute to financing charitable and investment projects. It also provides individuals with a simple way to present their ideas and receive financial support. It is also characterized by ease of use and simplicity of design.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -37,17 +37,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- Visual Studio Code follow this <a href=''>link</a> to install.
-- Git Bash follow this <a href=''>link</a> to install.
-- MongoDB follow this <a href=''>link</a> to install.
-- Node.js follow this <a href=''>link</a> to install.
+- Visual Studio Code follow this <a href='https://code.visualstudio.com/download'>link</a> to install.
+- Git Bash follow this <a href='https://git-scm.com/downloads'>link</a> to install.
+- MongoDB follow this <a href='https://www.mongodb.com/try/download/shell'>link</a> to install.
+- Node.js follow this <a href='https://nodejs.org/en'>link</a> to install.
 
 ### Installing:
 
 1. Clone the repo to your local machine using git bash.
 
 ```
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/your_username_/Project-4.git
 ```
 
 2. Install packeges repeat this step in backend and frontend folder
@@ -70,15 +70,20 @@ npm run start
 
 Now app ready to use
 
+-Ex form main page:-
+
+
+<img width=250px height=250px src="./photo/MainPage.jpg" alt="Diagram"></a>
+
 ## 🎈 Usage <a name="usage"></a>
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+- You don't have to register to browse our web app 
+- You can click the navigation bar to view the homepage, register and log in.
+- You can click register add user when registration is finished you automatically go to login.
+- After you finish logging in, you can browse all web page.
+- You can publish and edit your campaign and collect donations.
 
-Ex.
 
-- You don't have to register to navigate our web app
-- You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -90,12 +95,12 @@ Ex.
 ## User Story <a name = "#user_story"></a>
 
 Your trello board link
-<a href=''>Trello</a>
+<a href='https://trello.com/b/VTPzDYU5/project-4'>Trello</a>
 
 ## Data Flow <a name = "#data_flow"></a>
 
-<img width=200px height=200px src="https://cacoo.com/assets/site/img/templates/screenshots/er-database-diagram.png" alt="Diagram"></a>
+<img width=200px height=200px src="./photo/SchemaPhoto.jpg" alt="Diagram"></a>
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 
-This project is guided by ©️ **[MERAKI Academy](https://www.meraki-academy.org)**
+This project is guided by ©️ **[Ahmad Ismail](ahmad.thaer.ismail@gmail.com)**
