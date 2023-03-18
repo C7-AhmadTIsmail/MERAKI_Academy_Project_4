@@ -32,6 +32,10 @@ const PopupEditeMyData = (props) => {
 
             errors.name = "Name is required";
         }
+        if (!country) {
+
+            errors.country = "country is required";
+        }
         if (!validator.isDate(age)) {
 
             errors.age = "Date is required";
@@ -83,6 +87,7 @@ const PopupEditeMyData = (props) => {
                     <div style={{ color: "red" }}>{errors.name}</div>
                     <label htmlFor="country" >country:</label>
                     <input name="country" required placeholder="your country" onChange={handleChange}></input>
+                    <div style={{ color: "red" }}>{errors.country}</div>
                     <label htmlFor="phoneNumber" >phone namber:</label>
                     <input name="phoneNumber" required pattern="[1-9]{1}[0-9]{8,12}" placeholder="no leading zero" onChange={handleChange}></input>
                     <div style={{ color: "red" }}>{errors.phoneNumber}</div>

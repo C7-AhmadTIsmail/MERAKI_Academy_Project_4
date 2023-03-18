@@ -165,9 +165,7 @@ const CampaignPage = (props) => {
 
   let longitude = props.data?.loaction[0]
   let latitude = props.data?.loaction[1]
-  // console.log(`https://www.youtube.com/embed/${props.data?.urlVideoOrImage.split('https://www.youtube.com/watch?v=')[0]}`,"sss")
-  // console.log(props.data?.urlVideoOrImage.split("v=")[1].substring(0, 11),"id")
-
+  // console.log(props.data)
   return (
     <>
       <UserContextMain.Provider value={{
@@ -186,7 +184,7 @@ const CampaignPage = (props) => {
               </div>
               <div className="row2">
 
-                <Card style={{ width: '27rem' , marginLeft: "127px"}}>
+                <Card style={{ width: '27rem', marginLeft: "127px" }}>
                   <ListGroup>
                     <ListGroup.Item>campaign Title: {props.data?.campaignTitle}</ListGroup.Item>
                     <ListGroup.Item>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</ListGroup.Item>
@@ -200,37 +198,47 @@ const CampaignPage = (props) => {
           </div>
 
           <div>
-            {/* <iframe
-            className='Video'
-              src={`https://www.youtube.com/embed/${props.data?.urlVideoOrImage?.split("v=")[1].substring(0, 11)}`}
-              width="350" height="250"
-            ></iframe> */}
-
-
-            <Card style={{ width: '17.2rem', height: 280, margin: '0 0 40px 20px' }}>
-
-              <Card.Body style={{ padding: '14px 16px 14px 6px' }}>
-
-                <Map style={{ width: '14.2rem', height: 240, margin: '0 0 40px 20px' }}
-                  mapboxAccessToken={"pk.eyJ1IjoiYWhtYWRpc2FtaWwiLCJhIjoiY2xmYThtNThvMDE0NzN2cWdsMGFhaHZhdSJ9.hMUTU1E226JBVgx7YQm9ug"}
-
-                  initialViewState={{
-                    longitude,
-                    latitude,
-                    zoom: 8,
-                    attributionControl: false,
-                    Marker: 'center',
-
-                  }}
-                  mapStyle="mapbox://styles/mapbox/streets-v9"
-                >
-                </Map>
-
-
-              </Card.Body>
+            <Card style={{ width: '88%', marginLeft: "20px", marginBottom: "20px" }}>
+              <ListGroup>
+                <ListGroup.Item> {props.data?.pargraphesAboutCampaign}</ListGroup.Item>
+              </ListGroup>
             </Card>
-          </div>
 
+
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              <iframe
+                className='Video'
+                src={`https://www.youtube.com/embed/${props.data?.urlVideoOrImage?.split("v=")[1].substring(0, 11)}`}
+                width="350" height="250"
+              ></iframe>
+
+
+              <Card style={{ width: '16.2rem', height: 280, margin: '0 0 40px 20px' }}>
+
+                <Card.Body style={{ padding: '14px 16px 14px 6px' }}>
+
+                  <Map style={{ width: '13.2rem', height: 240, margin: '0 0 40px 20px' }}
+                    mapboxAccessToken={"pk.eyJ1IjoiYWhtYWRpc2FtaWwiLCJhIjoiY2xmYThtNThvMDE0NzN2cWdsMGFhaHZhdSJ9.hMUTU1E226JBVgx7YQm9ug"}
+
+                    initialViewState={{
+                      longitude,
+                      latitude,
+                      zoom: 11.2,
+                      attributionControl: false,
+                      Marker: 'center',
+
+                    }}
+                    mapStyle="mapbox://styles/mapbox/streets-v9"
+                  >
+                  </Map>
+
+
+                </Card.Body>
+              </Card>
+            </div>
+
+          </div>
+          
           <div className='OneRow'>
 
             {showcontribution ? <>
@@ -278,7 +286,7 @@ const CampaignPage = (props) => {
               </div>
               {showComment ? <>{commentholder.map((element, index) => {
                 return (<div key={index} >
-                  <Card style={{ width: '90%' , margin: '0px 0px 8px 20px'  }}>
+                  <Card style={{ width: '90%', margin: '0px 0px 8px 20px' }}>
                     <ListGroup variant="flush">
                       <ListGroup.Item><h5 style={{ margin: '0px 0px 0px 6px' }}>{element.comment}</h5></ListGroup.Item>
                     </ListGroup>
@@ -291,6 +299,7 @@ const CampaignPage = (props) => {
               })}</> : <></>}
             </>}
           </div>
+          <a href={props.data?.darftCampaignLink} className="linkcapimge">Reference website</a>
         </div>
       </UserContextMain.Provider>
     </>

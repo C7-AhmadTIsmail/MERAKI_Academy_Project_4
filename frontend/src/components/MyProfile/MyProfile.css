@@ -129,9 +129,14 @@
     display: flex;
     justify-content: center;
     margin-top: 35px;
+   
 }
 
 .ButtonEditProfile:hover {
     box-shadow: 3px -3px 4px 0px rgba(0, 0, 0, 0.75);
     opacity: 0.8;
+}
+
+.Mypage{
+    height: 100%;
 }

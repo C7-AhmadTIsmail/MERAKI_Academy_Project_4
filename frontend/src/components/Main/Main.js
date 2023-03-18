@@ -72,7 +72,7 @@ const Main = () => {
     })
     return <div key={element._id} >
 
-      <Card style={{ width: '20rem',height:'339px' }} id={cardTheme}>
+      <Card style={{ width: '20rem',height:'379px' }} id={cardTheme}>
         <Card.Img variant="top" style={{ width: '20rem',height:'239px',cursor: "pointer" }} id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
         <Card.Body>
           <Card.Title id={element._id} onClick={clickOnCampaignPage} style={{cursor: "pointer"}}  >{element.campaignTitle}</Card.Title>
