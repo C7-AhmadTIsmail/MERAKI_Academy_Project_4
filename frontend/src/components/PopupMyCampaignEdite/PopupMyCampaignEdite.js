@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../MyCampaign/MyCampaign";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import "./PopupMyCampaignEdite.css"
 import axios from 'axios';
 
@@ -62,24 +63,24 @@ const PopupMyCampaignEdite = (props) => {
         centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            edit campaign 
+            Edit campaign 
           </Modal.Title>
         </Modal.Header>
         <Modal.Body  style={{ display: "flex", flexDirection: "column" }}>
         
 
-          <label htmlFor="campaignTitle">campaign Title :</label>
-          <input name="campaignTitle" onChange={handle_Change_myCampaign}></input>
+          <label htmlFor="campaignTitle">campaign Title:</label>
+          <Form.Control name="campaignTitle" onChange={handle_Change_myCampaign} placeholder="campaign Title"/>
           <label htmlFor="campaignAmounts">campaign Amounts:</label>
-          <input name="campaignAmounts" onChange={handle_Change_myCampaign}></input>
+          <Form.Control name="campaignAmounts" onChange={handle_Change_myCampaign} placeholder="campaign Amounts" />
           <label htmlFor="bankAccount">bank Account:</label>
-          <input name="bankAccount" onChange={handle_Change_myCampaign}></input>
+          <Form.Control name="bankAccount" onChange={handle_Change_myCampaign} placeholder="bank Account"/>
           <label htmlFor="category">category:</label>
-          <input name="category" onChange={handle_Change_myCampaign}></input>
+          <Form.Control name="category" onChange={handle_Change_myCampaign} placeholder="campaign Title"/>
           <label htmlFor="paragraphsAboutCampaign">paragraph About Campaign:</label>
-          <input name="paragraphsAboutCampaign" onChange={handle_Change_myCampaign}></input>
+          <Form.Control name="paragraphsAboutCampaign" onChange={handle_Change_myCampaign} placeholder="paragraph About Campaign"/>
           <label htmlFor="campaignDurationDays">campaign Duration Days:</label>
-          <input name="campaignDurationDays" onChange={handle_Change_myCampaign}></input>
+          <Form.Control name="campaignDurationDays" onChange={handle_Change_myCampaign} placeholder="campaign Duration Days"/>
 
 
         </Modal.Body>

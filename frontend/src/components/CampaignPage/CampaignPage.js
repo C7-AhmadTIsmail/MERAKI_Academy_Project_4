@@ -65,6 +65,7 @@ const CampaignPage = (props) => {
 
     axios.get(`${BACKEND}/contribution/getcontributionCampaign/${props.data._id}`)
       .then(function (response) {
+        console.log(response.data.contribution)
         setValeAchievment(response.data.contribution)
       })
       .catch(function (error) {
@@ -138,7 +139,7 @@ const CampaignPage = (props) => {
     const initialValue = 0;
     let g = 0
     g = valeAchievment?.reduce((accumulator, currentValue) => {
-      return currentValue.Amount + accumulator
+      return currentValue.amount + accumulator
     }, initialValue);
     return (g)
   }

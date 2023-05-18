@@ -3,6 +3,7 @@ import { UserContextMain } from "../CampaignPage/CampaignPage";
 import "./PopupCampaignPageAddContribution.css"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import validator from 'validator';
 import axios from 'axios';
 
@@ -88,19 +89,19 @@ const [done, setDone] = useState(undefined)
         <Modal.Body style={{ display: "flex", flexDirection: "column" }}>
 
           <label htmlFor="name">name:</label>
-          <input name="name" onChange={handle_Change}></input>
+          <Form.Control name="name" onChange={handle_Change}  placeholder="name"/>
           <div style={{ color: "red" }}>{errors.name}</div>
           <label htmlFor="amount">amount:</label>
-          <input name="amount" onChange={handle_Change}></input>
+          <Form.Control name="amount" onChange={handle_Change} placeholder="amount"/>
           <div style={{ color: "red" }}>{errors.amount}</div>
           <label htmlFor="visibility">visibility:</label>
-          <input name="visibility" onChange={handle_Change}></input>
+          <Form.Control name="visibility" onChange={handle_Change} placeholder="visibility"/>
           <div style={{ color: "red" }}>{errors.visibility}</div>
           <label htmlFor="dateOfContribution">date Of Contribution:</label>
-          <input name="dateOfContribution" type="date" onChange={handle_Change}></input>
+          <Form.Control name="dateOfContribution" type="date" onChange={handle_Change}/>
           <div style={{ color: "red" }}>{errors.dateOfContribution}</div>
           <label htmlFor="lastDateOfContributionCanRefund">last Date Of Contribution Can Refund:</label>
-          <input name="lastDateOfContributionCanRefund"  type="date"  onChange={handle_Change}></input>
+          <Form.Control name="lastDateOfContributionCanRefund"  type="date"  onChange={handle_Change}/>
           <div style={{ color: "red" }}>{errors.lastDateOfContributionCanRefund}</div>
           <div style={{ color: "green" }}>{done}</div>
         </Modal.Body>
