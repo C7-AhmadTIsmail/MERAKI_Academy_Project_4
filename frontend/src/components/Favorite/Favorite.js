@@ -8,6 +8,7 @@ import "./Favorite.css";
 import { UserContext } from "../../App";
 
 const Favorite = () => {
+    const BACKEND = process.env.REACT_APP_BACKEND;
     const {cardTheme} = useContext(UserContext);
     const [first, setFirst] = useState(null)
     const [deleteFormFavorite, setDeleteFormFavorite] = useState(false)
@@ -18,10 +19,10 @@ const Favorite = () => {
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
-        axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
+        axios.get(`${BACKEND}/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
             setFirst(res.data.result);
         });
-        axios.get(`http://localhost:5000/contribution/get/`).then((res) => {
+        axios.get(`${BACKEND}/contribution/get/`).then((res) => {
             setValueAchievmentPercentage(res?.data.contribution);
 
         });
@@ -33,14 +34,14 @@ const Favorite = () => {
     const clickOnCampaignPage = (e) => {
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
-        axios.delete(`http://localhost:5000/favorite/delete/${e.target.id}/${idUser}`
+        axios.delete(`${BACKEND}/favorite/delete/${e.target.id}/${idUser}`
             , { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
                 setDeleteFormFavorite(!deleteFormFavorite)
             });
     }
 
     const clickOnCampaignPageInnerSide = (e) => {
-        const searchIndex = first.findIndex((favert) => favert.favoriteCampaign._id == e.target.id);
+        const searchIndex = first.findIndex((favorite) => favorite.favoriteCampaign._id == e.target.id);
         setcampaignPageData(first[searchIndex].favoriteCampaign)
         setShowCampaignPageFromFavorite(true)
     }
@@ -60,7 +61,7 @@ const Favorite = () => {
 
                     <div className='MainRow'>
                         <Percentage campaignPercentage={{ ID: element.favoriteCampaign?._id, ValueAchievmentPercentage, Amounts: element.favoriteCampaign?.campaignAmounts }} />
-                        <Button onClick={clickOnCampaignPage} className="removefromFavirte" variant="danger" id={element.favoriteCampaign?._id} >-</Button>
+                        <Button onClick={clickOnCampaignPage} className="removeFromFavorite" variant="danger" id={element.favoriteCampaign?._id} >-</Button>
                     </div>
 
                 </Card.Body>
@@ -80,7 +81,7 @@ const Favorite = () => {
                 {showCampaignPageFromFavorite ? <>
                     <CampaignPage data={campaignPageData} />
                 </> : <>
-                    <div className='TitalFavorite'><h3 className='notchTitalFavorite' >Favorite</h3></div>
+                    <div className='TitleFavorite'><h3 className='notchTitleFavorite' >Favorite</h3></div>
                     <><div><div className='grid-Container-Favorite'>{loopOnFavorite}</div></div></>
                 </>}
             </div>

@@ -9,13 +9,13 @@ const addCampaign = (req, res) => {
     const campaigner = req.token._id
 
     const { bankAccount, campaignTitle, campaignCardImage,
-        pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
-        urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink } = req.body
+        paragraphsAboutCampaign, location, category, campaignDurationDays,
+        urlVideoOrImage, campaignPerks, campaignAmounts, draftCampaignLink } = req.body
 
     const newCampaign = new campaignSchema({
         bankAccount, campaignTitle, campaignCardImage,
-        pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
-        urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink, campaigner
+        paragraphsAboutCampaign,  location, category, campaignDurationDays,
+        urlVideoOrImage, campaignPerks, campaignAmounts, draftCampaignLink, campaigner
     })
 
     newCampaign.save().then((result) => {
@@ -59,14 +59,14 @@ const getAllCampaign = (req, res) => {
 const updateCampaign = (req, res) => {
     id_ = req.params.id
     const { bankAccount, campaignTitle, campaignCardImage,
-        pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
-        urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink } = req.body
+        paragraphsAboutCampaign, location, category, campaignDurationDays,
+        urlVideoOrImage, campaignPerks, campaignAmounts, draftCampaignLink } = req.body
 
 
     campaignSchema.findByIdAndUpdate(id_, {
         bankAccount, campaignTitle, campaignCardImage,
-        pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
-        urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink
+        paragraphsAboutCampaign, location, category, campaignDurationDays,
+        urlVideoOrImage, campaignPerks, campaignAmounts, draftCampaignLink
     })
         .then((result) => {
             res.status(200).json(
@@ -126,7 +126,7 @@ const removeCampaign = (req, res) => {
 }
 
 //
-const getCampaignByOriginter = (req, res) => {
+const getCampaignByOriginates = (req, res) => {
     id_ = req.params.id
 
     campaignSchema.find({ campaigner: id_ })
@@ -147,4 +147,4 @@ const getCampaignByOriginter = (req, res) => {
 }
 
 
-module.exports = { addCampaign, getAllCampaign, updateCampaign, removeCampaign, getCampaignByOriginter };
+module.exports = { addCampaign, getAllCampaign, updateCampaign, removeCampaign, getCampaignByOriginates };

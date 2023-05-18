@@ -1,4 +1,4 @@
-.myProfileAreaEdite{
+.myProfileAreaEdit{
     justify-content: center;
     display: flex;
     align-items: center;
@@ -6,6 +6,6 @@
     flex-direction: column;
 }  
 
-.submetNewButton{
+.submitNewButton{
     margin-right: 129px;
 }

@@ -1,11 +1,11 @@
 
-.TitalMyContribution {
+.TitleMyContribution {
     display: flex;
     justify-content: center;
     z-index: -1;
 }
 
-.notchTitalMyContribution {
+.notchTitleMyContribution {
     top: 0;
     left: 50%;
     width: 280px;
@@ -20,8 +20,8 @@
 
 }
 
-.notchTitalMyContribution::before,
-.notchTitalMyContribution::after {
+.notchTitleMyContribution::before,
+.notchTitleMyContribution::after {
     content: '';
     position: absolute;
     top: 0;
@@ -33,14 +33,14 @@
     background-image: radial-gradient(circle at 0 100%, transparent 6px, #222 7px);
 }
 
-.notchTitalMyContribution::after {
+.notchTitleMyContribution::after {
     left: 100%;
     margin-right: 7 px;
     background-image: radial-gradient(circle at 100% 100%, transparent 6px, #222 7px);
 }
 
 @media screen and (max-width: 990px) {
-    .notchTitalMyContribution {
+    .notchTitleMyContribution {
         display: none;
     }
 }
@@ -64,7 +64,7 @@
     align-items: center;
     margin-top: 12px;
 }
-.MyContributionSacand{
+.MyContributionSecond{
     display: flex;
     justify-content: center;
     flex-direction: column;

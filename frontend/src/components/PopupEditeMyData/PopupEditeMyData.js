@@ -8,18 +8,18 @@ import axios from 'axios';
 
 
 const PopupEditeMyData = (props) => {
-
+    const BACKEND = process.env.REACT_APP_BACKEND;
     const { setPhotoedit, seteditePasswordVlue, setModalShow,
         PopupEditeMyDataAnotherLocation, setPopupEditeMyDataAnotherLocation } = useContext(UserContext);
-    const usertest = {
+    const userTest = {
         name: undefined,
         age: undefined,
         phoneNumber: undefined,
-        zipcode: undefined,
+        zipCode: undefined,
         country: undefined,
     }
-    const [userData, setUserData] = useState(usertest)
-    const { name, age, country, phoneNumber, zipcode } = userData
+    const [userData, setUserData] = useState(userTest)
+    const { name, age, country, phoneNumber, zipCode } = userData
     const [errors, setErrors] = useState({})
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -43,14 +43,14 @@ const PopupEditeMyData = (props) => {
         if (isNaN(phoneNumber)) {
             errors.phoneNumber = "Number is required";
         }
-        if (isNaN(zipcode)) {
-            errors.zipcode = "zipcode is required";
+        if (isNaN(zipCode)) {
+            errors.zipCode = "zipCode is required";
         }
         return errors
     }
 
 
-    const submetNewData = () => {
+    const submitNewData = () => {
 
         const errors = validateData();
         if (Object.keys(errors).length) {
@@ -59,7 +59,7 @@ const PopupEditeMyData = (props) => {
         }
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
-        axios.put(`http://localhost:5000/user/update/${idUser}`, { name, age, country, phoneNumber, zipcode },
+        axios.put(`${BACKEND}/user/update/${idUser}`, { name, age, country, phoneNumber, zipCode },
             { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
                 setPopupEditeMyDataAnotherLocation(!PopupEditeMyDataAnotherLocation)
                 setModalShow(false)
@@ -81,19 +81,19 @@ const PopupEditeMyData = (props) => {
             <Modal.Body>
 
 
-                <form onSubmit={(event) => event.preventDefault()} className="myProfileAreaEdite">
+                <form onSubmit={(event) => event.preventDefault()} className="myProfileAreaEdit">
                     <label htmlFor="name" >name: </label>
                     <input name="name" required placeholder="your full name" onChange={handleChange}></input>
                     <div style={{ color: "red" }}>{errors.name}</div>
                     <label htmlFor="country" >country:</label>
                     <input name="country" required placeholder="your country" onChange={handleChange}></input>
                     <div style={{ color: "red" }}>{errors.country}</div>
-                    <label htmlFor="phoneNumber" >phone namber:</label>
+                    <label htmlFor="phoneNumber" >phone number:</label>
                     <input name="phoneNumber" required pattern="[1-9]{1}[0-9]{8,12}" placeholder="no leading zero" onChange={handleChange}></input>
                     <div style={{ color: "red" }}>{errors.phoneNumber}</div>
-                    <label htmlFor="zipcode" >zibcode:</label>
-                    <input name="zipcode" required placeholder="your zipcode" onChange={handleChange}></input>
-                    <div style={{ color: "red" }}>{errors.zibcode}</div>
+                    <label htmlFor="zipCode" >zibCode:</label>
+                    <input name="zipCode" required placeholder="your zipCode" onChange={handleChange}></input>
+                    <div style={{ color: "red" }}>{errors.zipCode}</div>
                     <label htmlFor="age" >age:</label>
                     <input name="age" type="date" required placeholder="your age" onChange={handleChange}></input>
                     <div style={{ color: "red" }}>{errors.age}</div>
@@ -102,8 +102,8 @@ const PopupEditeMyData = (props) => {
 
             </Modal.Body>
             <Modal.Footer>
-                <div className='submetNewButton' >
-                    <Button className="shadowButton" onClick={submetNewData}>submet</Button>
+                <div className='submitNewButton' >
+                    <Button className="shadowButton" onClick={submitNewData}>submit</Button>
                 </div>
                 <Button className="shadowButton" onClick={props.onHide}>Close</Button>
             </Modal.Footer>

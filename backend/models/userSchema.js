@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     name: { type: String , required: true },
     age: { type: Date },
     phoneNumber: { type: Number },
-    zipcode:{ type: Number },
+    zipCode:{ type: Number },
     country:{ type: String },
     urlMyPhoto:{ type: String },
     role:{type :mongoose.Schema.Types.ObjectId ,ref:"role"},

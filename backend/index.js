@@ -28,7 +28,7 @@ app.use("/comment",commentRouter);
 app.use("/contribution",contributionRouter);
 app.use("/favorite",favoriteRouter);
 app.use("/campaignTeams",campaignTeamsRouter);
-// Undefiend end point
+// Undefined end point
 
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 

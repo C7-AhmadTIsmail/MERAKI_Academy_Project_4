@@ -10,6 +10,7 @@ import axios from 'axios';
 export const UserContext = createContext();
 
 const MyContribution = () => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const [allMyContribution, setAllMyContribution] = useState(null)
   const [showThisSectionEditeArea, setshowThisSectionEditeArea] = useState(null)
   const [showContributionEditeArea, setShowContributionEditeArea] = useState(null)
@@ -21,17 +22,17 @@ const MyContribution = () => {
     name: "",
     dateOfContribution: "",
     lastDateOfContributionCanRefund: "",
-    ammount: "",
+    amount: "",
     visibility: ""
   }
   const [myContribution, setMyContribution] = useState(myContributionTest)
-  const { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility } = myContribution
+  const { name, dateOfContribution, lastDateOfContributionCanRefund, amount, visibility } = myContribution
 
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.get(`http://localhost:5000/contribution/getcontributionUser/${idUser}`,
+    axios.get(`${BACKEND}/contribution/getContributionUser/${idUser}`,
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setAllMyContribution(res.data.contribution);
 
@@ -40,10 +41,10 @@ const MyContribution = () => {
 
 
 
-  const deletethisContribution = (e) => {
+  const deleteThisContribution = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.delete(`http://localhost:5000/contribution/delete/${e.target.id}`,
+    axios.delete(`${BACKEND}/contribution/delete/${e.target.id}`,
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
 
         setContributionDoneAndRefresh(!ContributionDoneAndRefresh)
@@ -64,7 +65,7 @@ const MyContribution = () => {
         setMyContribution, setContributionDoneAndRefresh,
         ContributionDoneAndRefresh, myContribution, contributionEditeHolderData
       }}>
-        <div className="TitalMyContribution"><h3 className='notchTitalMyContribution'>MyContribution</h3></div>
+        <div className="TitleMyContribution"><h3 className='notchTitleMyContribution'>MyContribution</h3></div>
 
         {allMyContribution ? <>{allMyContribution.map((element, index) => {
 
@@ -75,7 +76,7 @@ const MyContribution = () => {
           let trueOrFalseVisibilit = "false"
           element.visibility ? trueOrFalseVisibilit = "true" : trueOrFalseVisibilit = "false";
           return (<div key={element._id} className="ContributionListMainDiv">
-            <div className='MyContributionfirst'>
+            <div className='MyContributionFirst'>
             <img className="myCampaignPageImg" src={element.campaign.campaignCardImage} alt="no photo found" />
               <div>
 
@@ -83,7 +84,7 @@ const MyContribution = () => {
                   <ListGroup variant="flush">
                     <ListGroup.Item>campaignTitle: {element.campaign.campaignTitle}</ListGroup.Item>
                     <ListGroup.Item>bankAccount: {element.campaign.bankAccount}</ListGroup.Item>
-                    <ListGroup.Item>catgory: {element.campaign.catgory}</ListGroup.Item>
+                    <ListGroup.Item>category: {element.campaign.category}</ListGroup.Item>
                   </ListGroup>
                 </Card>
 
@@ -91,9 +92,9 @@ const MyContribution = () => {
               </div>
             </div>
             <hr />
-            <div className='MyContributionSacand'>
+            <div className='MyContributionSecond'>
               <p>name: {element.name}</p>
-              <p>ammount of my Contribution: {element.ammount}</p>
+              <p>amount of my Contribution: {element.amount}</p>
               <p>visibility:  {trueOrFalseVisibilit}</p>
               <p>lastDateOfContributionCanRefund: {element.lastDateOfContributionCanRefund.split("T")[0]}</p>
               <hr />
@@ -111,7 +112,7 @@ const MyContribution = () => {
               />
 
 
-              {(diff <= 0) ? <><Button className="shadowButton" id={element._id} onClick={deletethisContribution}>delete</Button><br /></> : <></>}
+              {(diff <= 0) ? <><Button className="shadowButton" id={element._id} onClick={deleteThisContribution}>delete</Button><br /></> : <></>}
             </div>
 
           </div>

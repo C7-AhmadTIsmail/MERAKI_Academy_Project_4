@@ -12,7 +12,7 @@ const Percentage = ({ campaignPercentage }) => {
 
     if (IDHolder === elementArray.campaign) {
 
-      holder += elementArray.ammount
+      holder += elementArray.amount
     };
 
   });
@@ -20,7 +20,7 @@ const Percentage = ({ campaignPercentage }) => {
 
   return (
 
-    <div style={{ width: 40, height: 40 }} className="Circuler">
+    <div style={{ width: 40, height: 40 }} className="Circular">
       <CircularProgressbar text={`${Math.floor((holder / campaignPercentage.Amounts) * 100)}%`}  value={(holder / campaignPercentage.Amounts) * 100} />
     </div>
 

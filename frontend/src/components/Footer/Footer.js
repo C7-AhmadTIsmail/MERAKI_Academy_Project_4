@@ -18,10 +18,10 @@ const Footer = () => {
             <MDBContainer className='p-4 pb-0'>
                 <section className=''>
                     <p className='d-flex justify-content-center align-items-center'>
-                       {login?<><h5>Welcome to our website </h5></> : 
-                       <>
-                       <span className='me-3'>Register for free</span>
-                       <Link to="/Register">
+                        {login?<><h5>Welcome to our website </h5></> : 
+                        <>
+                        <span className='me-3'>Register for free</span>
+                        <Link to="/Register">
                             <Button className='ButtonFooter' type='button' >
                                 Register !
                             </Button>

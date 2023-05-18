@@ -9,6 +9,7 @@ import "./MyProfile.css"
 export const UserContext = createContext();
 
 const MyProfile = () => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const [firstMyProfile, setFirstMyProfile] = useState(null)
   const [editePasswordVlue, seteditePasswordVlue] = useState(false)
   const [modalShow, setModalShow] = React.useState(false);
@@ -16,22 +17,22 @@ const MyProfile = () => {
 
   const [PopupEditeMyDataAnotherLocation, setPopupEditeMyDataAnotherLocation] = useState(false)
 
-  const usertest = {
+  const userTest = {
     name: undefined,
     age: undefined,
     phoneNumber: undefined,
-    zipcode: undefined,
+    zipCode: undefined,
     country: undefined,
     urlMyPhoto: undefined,
   }
-  const [userData, setUserData] = useState(usertest)
-  const { name, age, country, phoneNumber, zipcode, urlMyPhoto } = userData
+  const [userData, setUserData] = useState(userTest)
+  const { name, age, country, phoneNumber, zipCode, urlMyPhoto } = userData
 
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user?._id
-    axios.get(`http://localhost:5000/user/getUserData/${idUser}`,
+    axios.get(`${BACKEND}/user/getUserData/${idUser}`,
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setFirstMyProfile(res.data.result);
 
@@ -58,8 +59,8 @@ const MyProfile = () => {
       seteditePasswordVlue, setModalShow, setModalShowPhoto,
       PopupEditeMyDataAnotherLocation, setPopupEditeMyDataAnotherLocation
     }}>
-      <div className="Mypage">
-        <div className="TitalMyProfile"><h3 className="notchTitalMyCampaign">MyProfile</h3></div>
+      <div className="MyPage">
+        <div className="TitleMyProfile"><h3 className="notchTitleMyCampaign">MyProfile</h3></div>
         <div>
 
           {firstMyProfile ? <>
@@ -87,7 +88,7 @@ const MyProfile = () => {
                 <p>email: {firstMyProfile[0].email}</p>
                 <p>age: {firstMyProfile[0].age.split("T")[0]}</p>
                 <p>country: {firstMyProfile[0].country}</p>
-                <p>zipcode : {firstMyProfile[0].zipcode}</p>
+                <p>zipCode : {firstMyProfile[0].zipCode}</p>
                 <p>phoneNumber : {firstMyProfile[0].phoneNumber}</p>
               </div>
             </div>

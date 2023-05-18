@@ -11,17 +11,16 @@
     width: 400px;
     height: auto;
     background-color: #3d3d3d;
-    color:wheat
+    color: wheat;
 }
-
 
 ::-webkit-input-placeholder {
     text-align: center;
-  }
-  
-  :-moz-placeholder {
+}
+
+:-moz-placeholder {
     text-align: center;
-  }
+}
 
 .RegisterWord {
     display: flex;
@@ -46,15 +45,16 @@
     margin-top: 2px;
 }
 
-.RegisterInputForm{
+.RegisterInputForm {
     border-radius: 10px;
     width: 320px;
 }
-.RegisterInputLabel{
+
+.RegisterInputLabel {
     margin-top: 10px;
 }
 
-.SubmetButtonRegister {
+.SubmitButtonRegister {
     margin-top: 20px;
     margin-bottom: 10px;
     width: 220px;

@@ -2,7 +2,7 @@
 const favoriteSchema = require("../models/favoriteSchema");
 
 
-const addfavorite = (req, res) => {
+const addFavorite = (req, res) => {
 
     const favoriteCampaign = req.params.idCampaign;
     const user = req.params.idUser;
@@ -29,7 +29,7 @@ const addfavorite = (req, res) => {
 
 
 
-const removefavorite = (req, res) => {
+const removeFavorite = (req, res) => {
     const user = req.params.idUser
     const favoriteCampaign = req.params.idCampaign
     favoriteSchema.deleteMany({ user, favoriteCampaign })
@@ -50,7 +50,7 @@ const removefavorite = (req, res) => {
 }
 
 
-const getfavoriteByUser = (req, res) => {
+const getFavoriteByUser = (req, res) => {
     const user = req.params.idUser
     favoriteSchema.find({ user }).populate("favoriteCampaign")
         .then((result) => {
@@ -72,4 +72,4 @@ const getfavoriteByUser = (req, res) => {
 
 
 
-module.exports = { addfavorite, removefavorite, getfavoriteByUser };
+module.exports = { addFavorite, removeFavorite, getFavoriteByUser };

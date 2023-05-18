@@ -8,30 +8,31 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 
 const PopupMyCampaignShowAndDeleteTeamMamber = (props) => {
-    const { elementHolderTeams, setElementHolderTeams, setModalShowTeamMamberAndDelete } = useContext(UserContext);
-    const [teamMamberHolder, setTeamMamberHolder] = useState(null)
-    const [teamMamberRefresh, setTeamMamberRefresh] = useState(false)
+    const BACKEND = process.env.REACT_APP_BACKEND;
+    const { elementHolderTeams, setElementHolderTeams, setModalShowTeamMemberAndDelete } = useContext(UserContext);
+    const [teamMemberHolder, setTeamMemberHolder] = useState(null)
+    const [teamMemberRefresh, setTeamMemberRefresh] = useState(false)
 
 
     useEffect(() => {
         if (elementHolderTeams) {
             const token = JSON.parse(localStorage.getItem('user')).token
             const idUser = JSON.parse(localStorage.getItem('user')).user._id
-            axios.get(`http://localhost:5000/campaignTeams/${elementHolderTeams}`,
+            axios.get(`${BACKEND}/campaignTeams/${elementHolderTeams}`,
                 { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
-                    setTeamMamberHolder(res?.data?.teamsMamber)
+                    setTeamMemberHolder(res?.data?.teamsMember)
                 });
         }
-    }, [teamMamberRefresh, elementHolderTeams])
+    }, [teamMemberRefresh, elementHolderTeams])
 
 
-    const deleteMamberOfteam = (e) => {
+    const deleteMemberOfTeam = (e) => {
         const token = JSON.parse(localStorage.getItem('user')).token
         const idUser = JSON.parse(localStorage.getItem('user')).user._id
-        axios.put(`http://localhost:5000/campaignTeams/delete/${elementHolderTeams}`, { teamMamberHolder: teamMamberHolder[e.target.id] },
+        axios.put(`${BACKEND}/campaignTeams/delete/${elementHolderTeams}`, { teamMemberHolder: teamMemberHolder[e.target.id] },
             { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
                 setElementHolderTeams(null)
-                setModalShowTeamMamberAndDelete(false)
+                setModalShowTeamMemberAndDelete(false)
             });
     }
 
@@ -51,19 +52,19 @@ const PopupMyCampaignShowAndDeleteTeamMamber = (props) => {
                 <Modal.Body>
                     <h4>Centered Modal</h4>
 
-                    {teamMamberHolder?.map((element, index) => {
+                    {teamMemberHolder?.map((element, index) => {
 
                         return (
-                            <div key={index} className="FlexTeamMambr">
+                            <div key={index} className="FlexTeamMember">
                                 <>
                                     <div>
-                                        <h5>name: {element.firtsName} {element.lastName}</h5>
+                                        <h5>name: {element.firstName} {element.lastName}</h5>
                                         <p>phone number: {element.phoneNumber}</p>
                                         <p>country: {element.country}</p>
                                     </div>
                                     <div>
 
-                                        <Button className="shadowButton" id={index} variant="danger" onClick={deleteMamberOfteam}>X</Button>
+                                        <Button className="shadowButton" id={index} variant="danger" onClick={deleteMemberOfTeam}>X</Button>
                                     </div>
                                 </>
                             </div>

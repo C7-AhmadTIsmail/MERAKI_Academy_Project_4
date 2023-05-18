@@ -1,10 +1,10 @@
-.TitalMyCampaign {
+.TitleMyCampaign {
     display: flex;
     justify-content: center;
     z-index: -1;
 }
 
-.notchTitalMyCampaign {
+.notchTitleMyCampaign {
     top: 0;
     left: 50%;
     width: 280px;
@@ -18,8 +18,8 @@
     z-index: -1;
 }
 
-.notchTitalMyCampaign::before,
-.notchTitalMyCampaign::after {
+.notchTitleMyCampaign::before,
+.notchTitleMyCampaign::after {
     content: '';
     position: absolute;
     top: 0;
@@ -31,14 +31,14 @@
     background-image: radial-gradient(circle at 0 100%, transparent 6px, #222 7px);
 }
 
-.notchTitalMyCampaign::after {
+.notchTitleMyCampaign::after {
     left: 100%;
     margin-right: 7 px;
     background-image: radial-gradient(circle at 100% 100%, transparent 6px, #222 7px);
 }
 
 @media screen and (max-width: 990px) {
-    .notchTitalMyCampaign {
+    .notchTitleMyCampaign {
         display: none;
     }
 }
@@ -62,22 +62,22 @@
 }
 
 
-.FirstColume{
+.FirstColumn{
     display: flex;
     justify-content: space-around;
     margin-bottom: 12px;
     margin-top: 6px;
 
 }
-.SecondColume{
+.SecondColumn{
     
 }
 
-#pargraphesAboutCampaign{
+#paragraphAboutCampaign{
     margin-left: 9px;
 }
 
-.SecandRowMyCampaign{
+.SecondRowMyCampaign{
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 6px;

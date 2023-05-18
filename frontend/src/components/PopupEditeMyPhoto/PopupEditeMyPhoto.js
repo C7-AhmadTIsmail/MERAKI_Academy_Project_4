@@ -9,13 +9,14 @@ import Form from 'react-bootstrap/Form';
 
 
 const PopupEditeMyPhoto = (props) => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const { setPhotoedit, seteditePasswordVlue, setModalShowPhoto,
     PopupEditeMyDataAnotherLocation, setPopupEditeMyDataAnotherLocation } = useContext(UserContext);
 
-  const usertest = {
+  const userTest = {
     urlMyPhoto: undefined,
   }
-  const [userData, setUserData] = useState(usertest)
+  const [userData, setUserData] = useState(userTest)
   const { urlMyPhoto } = userData
 
   const handleChange = (e) => {
@@ -24,10 +25,10 @@ const PopupEditeMyPhoto = (props) => {
   }
 
 
-  const submetNewPhtoto = () => {
+  const submItNewPhoto = () => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.put(`http://localhost:5000/user/update/${idUser}`, { urlMyPhoto: urlMyPhoto },
+    axios.put(`${BACKEND}/user/update/${idUser}`, { urlMyPhoto: urlMyPhoto },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setPopupEditeMyDataAnotherLocation(!PopupEditeMyDataAnotherLocation)
         setModalShowPhoto(false)
@@ -55,11 +56,11 @@ const PopupEditeMyPhoto = (props) => {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button className='submetNewButton shadowButton' onClick={()=>{
+          <Button className='submitNewButton shadowButton' onClick={()=>{
             
-            submetNewPhtoto()
+            submItNewPhoto()
             props.onHide()
-            }}>submet</Button>
+            }}>submit</Button>
         </Modal.Footer>
       </Modal>
 

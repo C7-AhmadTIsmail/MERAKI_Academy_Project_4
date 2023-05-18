@@ -2,7 +2,7 @@
 const teamsCampaignSchema = require("../models/teamsCampaignSchema");
 
 
-const addteamsMamber = (req, res) => {
+const addTeamsMember = (req, res) => {
 
     const campaign = req.params.idCampaign;
     const { firstName, lastName, phoneNumber, country } = req.body;
@@ -28,9 +28,9 @@ const addteamsMamber = (req, res) => {
 }
 
 
-const removeteamsMamber = (req, res) => {
+const removeTeamsMember = (req, res) => {
     const campaign = req.params.idCampaign;
-    const { firstName, lastName, phoneNumber, country } = req.body.teamMamberHolder
+    const { firstName, lastName, phoneNumber, country } = req.body.teamMemberHolder
 
     teamsCampaignSchema.findOneAndDelete({ campaign, firstName, lastName, phoneNumber, country })
         .then((result) => {
@@ -38,7 +38,7 @@ const removeteamsMamber = (req, res) => {
                 {
                     success: true,
                     message: "Success remove member from this campaign",
-                    teamsMamber: result
+                    teamsMember: result
                 })
         }).catch((err) => {
             res.status(500).json(
@@ -50,15 +50,15 @@ const removeteamsMamber = (req, res) => {
 }
 
 
-const getAllteamsMamberForThisCampaign = (req, res) => {
+const getAllTeamsMemberForThisCampaign = (req, res) => {
     const campaign = req.params.idCampaign;
     teamsCampaignSchema.find({ campaign })
         .then((result) => {
             res.status(200).json(
                 {
                     success: true,
-                    message: "Success get all mamber for this campaign",
-                    teamsMamber: result
+                    message: "Success get all member for this campaign",
+                    teamsMember: result
                 })
         }).catch((err) => {
             res.status(500).json(
@@ -72,4 +72,4 @@ const getAllteamsMamberForThisCampaign = (req, res) => {
 
 
 
-module.exports = { addteamsMamber, removeteamsMamber, getAllteamsMamberForThisCampaign };
+module.exports = { addTeamsMember, removeTeamsMember, getAllTeamsMemberForThisCampaign };

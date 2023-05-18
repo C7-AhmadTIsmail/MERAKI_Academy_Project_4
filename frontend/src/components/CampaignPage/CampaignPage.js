@@ -15,6 +15,7 @@ import axios from 'axios';
 export const UserContextMain = createContext();
 
 const CampaignPage = (props) => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const holderAllData = props
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
@@ -25,7 +26,7 @@ const CampaignPage = (props) => {
     name: "",
     dateOfContribution: "",
     lastDateOfContributionCanRefund: "",
-    ammount: "",
+    amount: "",
     visibility: ""
   }
   const [userComment, setUserComment] = useState(commentTest)
@@ -49,12 +50,12 @@ const CampaignPage = (props) => {
   const [changeOnAmmount, setChangeOnAmmount] = useState(false)
 
   const { comment } = userComment
-  const { name, dateOfContribution, lastDateOfContributionCanRefund, ammount, visibility } = contribution
+  const { name, dateOfContribution, lastDateOfContributionCanRefund, Amount, visibility } = contribution
 
 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/comment/getCommentCampaign/${props.data._id}`)
+    axios.get(`${BACKEND}/comment/getCommentCampaign/${props.data._id}`)
       .then(function (response) {
         setCommentholder(response.data.Comment)
       })
@@ -62,7 +63,7 @@ const CampaignPage = (props) => {
         console.log(error);
       });
 
-    axios.get(`http://localhost:5000/contribution/getcontributionCampaign/${props.data._id}`)
+    axios.get(`${BACKEND}/contribution/getcontributionCampaign/${props.data._id}`)
       .then(function (response) {
         setValeAchievment(response.data.contribution)
       })
@@ -74,7 +75,7 @@ const CampaignPage = (props) => {
 
     const token = JSON.parse(localStorage.getItem('user'))?.token
     const idUser = JSON.parse(localStorage.getItem('user'))?.user._id
-    axios.get(`http://localhost:5000/campaignTeams/${props.data._id}`).then((res) => {
+    axios.get(`${BACKEND}/campaignTeams/${props.data._id}`).then((res) => {
       setTeamMamberHolder(res?.data?.teamsMamber)
 
     });
@@ -90,10 +91,10 @@ const CampaignPage = (props) => {
     }
   }
 
-  const addtofaverts = () => {
+  const addToFavorte = () => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.post(`http://localhost:5000/favorite/add/${props.data._id}/${idUser}`, "", { headers: { "Authorization": `Bearer ${token}` } })
+    axios.post(`${BACKEND}/favorite/add/${props.data._id}/${idUser}`, "", { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
         setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
 
@@ -103,11 +104,11 @@ const CampaignPage = (props) => {
         console.log(error);
       });
   }
-  const removieFromFavorite = () => {
+  const removeFromFavorite = () => {
 
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.delete(`http://localhost:5000/favorite/delete/${props.data._id}/${idUser}`, { headers: { "Authorization": `Bearer ${token}` } })
+    axios.delete(`${BACKEND}/favorite/delete/${props.data._id}/${idUser}`, { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
         setElementOnFavriteAlreudy(!elementOnFavriteAlreudy)
 
@@ -118,10 +119,10 @@ const CampaignPage = (props) => {
       });
   }
 
-  const removecomment = (e) => {
+  const removeComment = (e) => {
     const idOfComment = e.target.id
     const token = JSON.parse(localStorage.getItem('user')).token
-    axios.delete(`http://localhost:5000/comment/delete/${idOfComment}`, { headers: { "Authorization": `Bearer ${token}` } })
+    axios.delete(`${BACKEND}/comment/delete/${idOfComment}`, { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
         console.log(response.data)
         setEditOnComment(!editOnComment)
@@ -137,7 +138,7 @@ const CampaignPage = (props) => {
     const initialValue = 0;
     let g = 0
     g = valeAchievment?.reduce((accumulator, currentValue) => {
-      return currentValue.ammount + accumulator
+      return currentValue.Amount + accumulator
     }, initialValue);
     return (g)
   }
@@ -148,7 +149,7 @@ const CampaignPage = (props) => {
     const token = JSON.parse(localStorage.getItem('user'))?.token
     if (token) {
       const idUser = JSON.parse(localStorage.getItem('user')).user._id
-      axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
+      axios.get(`${BACKEND}/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
         let holder = false
         res?.data?.result?.forEach(element => {
           if (element.favoriteCampaign?._id === props.data?._id) {
@@ -163,8 +164,8 @@ const CampaignPage = (props) => {
   const [holdBigContribtution, setHoldBigContribtution] = useState(null)
 
 
-  let longitude = props.data?.loaction[0]
-  let latitude = props.data?.loaction[1]
+  let longitude = props.data?.location[0]
+  let latitude = props.data?.location[1]
   // console.log(props.data)
   return (
     <>
@@ -176,7 +177,7 @@ const CampaignPage = (props) => {
       }}>
 
         <div className='CampaignPageInSideMain'>
-          <div className='TitalCampaignPage'><h3 className='notchTitalCampaignPage'>CampaignPage</h3></div>
+          <div className='TitleCampaignPage'><h3 className='notchTitleCampaignPage'>CampaignPage</h3></div>
           <div className="newOne">
             <div className='ContentCampaignPage'>
               <div className="row1">
@@ -200,7 +201,7 @@ const CampaignPage = (props) => {
           <div>
             <Card style={{ width: '88%', marginLeft: "20px", marginBottom: "20px" }}>
               <ListGroup>
-                <ListGroup.Item> {props.data?.pargraphesAboutCampaign}</ListGroup.Item>
+                <ListGroup.Item> {props.data?.paragraphsAboutCampaign}</ListGroup.Item>
               </ListGroup>
             </Card>
 
@@ -243,7 +244,7 @@ const CampaignPage = (props) => {
 
             {showcontribution ? <>
             </> : <>
-              <Button className='shadowButton' variant="primary" onClick={() => { setmodalShowTeamMamber(true); setElementHolderTeams(props.data._id) }}>show team mamber</Button>
+              <Button className='shadowButton' variant="primary" onClick={() => { setmodalShowTeamMamber(true); setElementHolderTeams(props.data._id) }}>show team member</Button>
               <PopupCampaignPageMamberTeamShow show={modalShowTeamMamber} onHide={() => setmodalShowTeamMamber(false)} />
 
             </>}
@@ -272,7 +273,7 @@ const CampaignPage = (props) => {
               {idUser ? <>
                 <Button variant="primary" className='shadowButton' onClick={() => { setModalShowComment(true) }}>add Comment</Button>
                 <PopupCampaignPageAddComment show={modalShowComment} onHide={() => setModalShowComment(false)} />
-                {elementOnFavriteAlreudyShow ? <div  > <Button className='shadowButton' variant="danger" onClick={removieFromFavorite}>removie from favorite</Button></div> : <><div  ><Button className='shadowButton' variant="primary" onClick={addtofaverts}>add to favorite</Button></div></>}
+                {elementOnFavriteAlreudyShow ? <div  > <Button className='shadowButton' variant="danger" onClick={removeFromFavorite}>remove from favorite</Button></div> : <><div  ><Button className='shadowButton' variant="primary" onClick={addToFavorte}>add to favorite</Button></div></>}
               </> : <></>}
             </>}
           </div>
@@ -292,14 +293,14 @@ const CampaignPage = (props) => {
                     </ListGroup>
                   </Card>
                   <div className="RemoveCommentButton">
-                    {(element.commenter == idUser) ? <><Button variant="danger" className='RemoveCommentButton shadowButton' id={element._id} onClick={removecomment}>Remove</Button></> : <></>}
+                    {(element.commenter == idUser) ? <><Button variant="danger" className='RemoveCommentButton shadowButton' id={element._id} onClick={removeComment}>Remove</Button></> : <></>}
                   </div>
                 </div>
                 )
               })}</> : <></>}
             </>}
           </div>
-          <a href={props.data?.darftCampaignLink} className="linkcapimge">Reference website</a>
+          <a href={props.data?.draftCampaignLink} className="linkcapimge">Reference website</a>
         </div>
       </UserContextMain.Provider>
     </>

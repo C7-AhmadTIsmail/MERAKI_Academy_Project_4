@@ -8,14 +8,14 @@ import "./Login.css";
 
 
 const Login = () => {
-
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const { setLogin } = useContext(UserContext);
   const navigate = useNavigate();
-  const usertest = {
+  const userTest = {
     email: null,
     password: null,
   }
-  const [userData, setUserData] = useState(usertest)
+  const [userData, setUserData] = useState(userTest)
   const { email, password } = userData
 
   const [errors, setErrors] = useState({})
@@ -25,16 +25,16 @@ const Login = () => {
   const validateData = () => {
     let errors = {};
     if (!validator.isEmail(email)) {
-      errors.email = "A vailed email is required";
+      errors.email = "A vialed email is required";
     }
     if (!validator.isStrongPassword(password)) {
-      errors.password = "A vailed strong password is required";
+      errors.password = "A vialed strong password is required";
     }
     return errors
 
   }
 
-  const handleChamge = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setUserData((preData) => ({ ...preData, [name]: value }))
   }
@@ -46,7 +46,7 @@ const Login = () => {
       return;
     }
     setErrors({});
-    axios.post('http://localhost:5000/user/logIn', userData)
+    axios.post(`${BACKEND}/user/logIn`, userData)
       .then(function (response) {
         setLoginErrors(null)
         localStorage.setItem("user", JSON.stringify({ token: response.data.token, user: response.data.user }))
@@ -66,13 +66,13 @@ const Login = () => {
         <div className='LoginStyleInside'>
           <h3 className='LoginWord'>Login</h3>
           <hr className='LoginHr' />
-          <h6 className="PlaseWord">please enter your name email & password</h6>
+          <h6 className="pleaseWord">please enter your name email & password</h6>
           <div className="InsideLoginDiv">
-            <label className="LoginContainte" htmlFor="email">Email:</label>
-            <input className="LoginContainte InputCorner" name="email"  onChange={handleChamge} placeholder="Username"></input>
+            <label className="LoginContainer" htmlFor="email">Email:</label>
+            <input className="LoginContainer InputCorner" name="email"  onChange={handleChange} placeholder="Username"></input>
             <div style={{ color: "red" }}>{errors.email}</div>
-            <label className="LoginContainte" htmlFor="password" >Password:</label>
-            <input className="LoginContainte InputCorner" name="password"  type="password"  onChange={handleChamge}  placeholder="Password"></input>
+            <label className="LoginContainer" htmlFor="password" >Password:</label>
+            <input className="LoginContainer InputCorner" name="password"  type="password"  onChange={handleChange}  placeholder="Password"></input>
             <div style={{ color: "red" }}>{errors.password}</div>
             <Button variant="primary" className='LoginButton shadowButton' onClick={login}>LogIn</Button>
             <div style={{ color: "red" }}>{loginErrors?.message}</div>

@@ -9,6 +9,8 @@ import axios from 'axios';
 
 
 const PopupMyCampaignAddTeamMamber = (props) => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
+  
   const { elementHolder, setCampaignDoneAndRefresh, campaignDoneAndRefresh } = useContext(UserContext)
 
   const userMyTeams = {
@@ -21,12 +23,10 @@ const PopupMyCampaignAddTeamMamber = (props) => {
 
   const validateData = () => {
     let errors = {};
-    //console.log(5)
-
 
     if (!firstName) {
 
-      errors.firstName = "firts Name is required";
+      errors.firstName = "first Name is required";
     }
     if (!lastName) {
 
@@ -46,7 +46,7 @@ const PopupMyCampaignAddTeamMamber = (props) => {
   const [userDataMyCampaign, setUserDataMyCampaign] = useState(userMyTeams)
   const { firstName, lastName, phoneNumber, country } = userDataMyCampaign
 
-  const submeteTeam = (e) => {
+  const submitTeam = (e) => {
     const errors = validateData();
     if (Object.keys(errors).length) {
       setErrors(errors);
@@ -54,7 +54,7 @@ const PopupMyCampaignAddTeamMamber = (props) => {
     }
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.post(`http://localhost:5000/campaignTeams/add/${e.target.id}`, { firstName, lastName, phoneNumber, country },
+    axios.post(`${BACKEND}/campaignTeams/add/${e.target.id}`, { firstName, lastName, phoneNumber, country },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setCampaignDoneAndRefresh(!campaignDoneAndRefresh)
 
@@ -78,7 +78,7 @@ const PopupMyCampaignAddTeamMamber = (props) => {
         centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Add Team Mamber
+            Add Team Member
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -102,7 +102,7 @@ const PopupMyCampaignAddTeamMamber = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <div className="buttonChange">
-            <Button className="shadowButton" id={elementHolder} onClick={submeteTeam}>submet</Button><br />
+            <Button className="shadowButton" id={elementHolder} onClick={submitTeam}>submit</Button><br />
           </div>
           <Button className="shadowButton" onClick={props.onHide}>Close</Button>
         </Modal.Footer>

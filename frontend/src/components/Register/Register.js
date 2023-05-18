@@ -7,20 +7,21 @@ import axios from 'axios';
 import "./Register.css";
 
 const Register = () => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const navigate = useNavigate();
-  const usertest = {
+  const userTest = {
     email: undefined,
     password: undefined,
     name: undefined ,
     age: undefined,
     phoneNumber: undefined,
-    zipcode: undefined,
+    zipCode: undefined,
     country: undefined,
     role: "64047450f9276133c0753cfc",
     urlMyPhoto: "",
   }
-  const [userData, setUserData] = useState(usertest)
-  const { email, password, name, age, country, phoneNumber, zipcode, urlMyPhoto } = userData
+  const [userData, setUserData] = useState(userTest)
+  const { email, password, name, age, country, phoneNumber, zipCode, urlMyPhoto } = userData
 
   const [errors, setErrors] = useState({})
 
@@ -29,11 +30,11 @@ const Register = () => {
     if (!validator.isEmail(email)) {
     
 
-      errors.email = "A vailed email is required";
+      errors.email = "A vialed email is required";
     }
     if (!validator.isStrongPassword(password)) {
     
-      errors.password = "A vailed strong password is required";
+      errors.password = "A vialed strong password is required";
     }
     if(!name){
       
@@ -53,19 +54,19 @@ const Register = () => {
   }
 
 
-  const handleChamge = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setUserData((preData) => ({ ...preData, [name]: value }))
   }
 
-  const submet = () => {
+  const submit = () => {
 
 const errors = validateData();  
 if (Object.keys(errors).length) {
   setErrors(errors);
   return;
 }
-    axios.post('http://localhost:5000/user/signUp', userData)
+    axios.post(`${BACKEND}/user/signUp`, userData)
       .then(function (response) {
         navigate("/Login")
       })
@@ -84,28 +85,28 @@ if (Object.keys(errors).length) {
           <hr className='RegisterLine' />
           <div className='InnerSideOfRegister'>
             <label htmlFor="email"className='RegisterInputLabel' >Email: </label>
-            <input name="email"  className='RegisterInputForm' placeholder="xxxxx@xxxx.com" onChange={handleChamge}></input>
+            <input name="email"  className='RegisterInputForm' placeholder="xxxxx@xxxx.com" onChange={handleChange}></input>
             <div style={{ color: "red" }}>{errors.email}</div>
             <label htmlFor="password"className='RegisterInputLabel' >Password: </label>
-            <input name="password" type="password"  className='RegisterInputForm' placeholder="XXXXXXXX" onChange={handleChamge}></input>
+            <input name="password" type="password"  className='RegisterInputForm' placeholder="XXXXXXXX" onChange={handleChange}></input>
             <div style={{ color: "red" }}>{errors.password}</div>
             <label htmlFor="name" className='RegisterInputLabel'>name: </label>
-            <input name="name"  className='RegisterInputForm' placeholder="your full name" onChange={handleChamge}></input>
+            <input name="name"  className='RegisterInputForm' placeholder="your full name" onChange={handleChange}></input>
             <div style={{ color: "red" }}>{errors.name}</div>
             <label htmlFor="country" className='RegisterInputLabel'>country:</label>
-            <input name="country" className='RegisterInputForm'  placeholder="your country" onChange={handleChamge}></input>
-            <label htmlFor="phoneNumber" className='RegisterInputLabel'>phone namber:</label>
-            <input name="phoneNumber" pattern="[1-9]{1}[0-9]{8,12}" className='RegisterInputForm'  placeholder="no leading zero" onChange={handleChamge}></input>
+            <input name="country" className='RegisterInputForm'  placeholder="your country" onChange={handleChange}></input>
+            <label htmlFor="phoneNumber" className='RegisterInputLabel'>phone number:</label>
+            <input name="phoneNumber" pattern="[1-9]{1}[0-9]{8,12}" className='RegisterInputForm'  placeholder="no leading zero" onChange={handleChange}></input>
             <div style={{ color: "red" }}>{errors.phoneNumber}</div>
-            <label htmlFor="zipcode" className='RegisterInputLabel'>zibcode:</label>
-            <input name="zipcode" className='RegisterInputForm'  placeholder="your zipcode" onChange={handleChamge}></input>
+            <label htmlFor="zipCode" className='RegisterInputLabel'>zibCode:</label>
+            <input name="zipCode" className='RegisterInputForm'  placeholder="your zipCode" onChange={handleChange}></input>
             <label htmlFor="urlMyPhoto" className='RegisterInputLabel'>url my photo:</label>
-            <input name="urlMyPhoto" type="url"  className='RegisterInputForm' placeholder="your url as link" onChange={handleChamge}></input>
+            <input name="urlMyPhoto" type="url"  className='RegisterInputForm' placeholder="your url as link" onChange={handleChange}></input>
             <div style={{ color: "red" }}>{errors.urlMyPhoto}</div>
             <label htmlFor="age" className='RegisterInputLabel' >age:</label>
-            <input name="age"  type="date" className='RegisterInputForm'  placeholder="mm/dd/yyyy" onChange={handleChamge}></input>
+            <input name="age"  type="date" className='RegisterInputForm'  placeholder="mm/dd/yyyy" onChange={handleChange}></input>
             <div style={{ color: "red" }}>{errors.age}</div>
-            <Button variant="primary" className='SubmetButtonRegister shadowButton' onClick={submet}>submet</Button>
+            <Button variant="primary" className='submitButtonRegister shadowButton' onClick={submit}>submit</Button>
           </div>
         </div>
       </div>

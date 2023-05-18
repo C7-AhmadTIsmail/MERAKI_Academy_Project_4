@@ -1,10 +1,10 @@
-.TitalMyProfile {
+.TitleMyProfile {
     display: flex;
     justify-content: center;
     z-index: -1;
 }
 
-.notchTitalMyProfile {
+.notchTitleMyProfile {
     top: 0;
     left: 50%;
     width: 280px;
@@ -19,8 +19,8 @@
     
 }
 
-.notchTitalMyProfile::before,
-.notchTitalMyProfile::after {
+.notchTitleMyProfile::before,
+.notchTitleMyProfile::after {
     content: '';
     position: absolute;
     top: 0;
@@ -32,14 +32,14 @@
     background-image: radial-gradient(circle at 0 100%, transparent 6px, #222 7px);
 }
 
-.notchTitalMyProfile::after {
+.notchTitleMyProfile::after {
     left: 100%;
     margin-right: 7 px;
     background-image: radial-gradient(circle at 100% 100%, transparent 6px, #222 7px);
 }
 
 @media screen and (max-width: 990px) {
-    .notchTitalMyProfile {
+    .notchTitleMyProfile {
         display: none;
     }
 }
@@ -137,6 +137,6 @@
     opacity: 0.8;
 }
 
-.Mypage{
+.MyPage{
     height: 100%;
 }

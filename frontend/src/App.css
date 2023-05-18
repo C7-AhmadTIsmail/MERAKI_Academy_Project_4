@@ -1,4 +1,4 @@
-body{
+body {
     text-align: center;
     margin-top: 0;
     margin-left: 0;
@@ -8,31 +8,30 @@ body{
     opacity: 0.9;
 }
 
-#dark{
+#dark {
     background-color: rgb(110, 106, 101);
     width: 100%;
 
 
 }
-#light{
-    
-}
-#darkCard{
+
+#light {}
+
+#darkCard {
     background-color: rgb(128, 124, 118);
 }
 
 
-/* remve array from input type number  */
+/* remove array from input type number  */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
--webkit-appearance: none;
-margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
-/* remve array from input type number  */
+
+/* remove array from input type number  */
 /* Firefox */
 input[type=number] {
--moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
-
-

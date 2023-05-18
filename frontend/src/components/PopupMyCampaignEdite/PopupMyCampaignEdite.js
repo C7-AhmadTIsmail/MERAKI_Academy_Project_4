@@ -7,33 +7,34 @@ import axios from 'axios';
 
 
 const PopupMyCampaignEdite = (props) => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const { setmodalShowEditeMyCampaign,
     campaignDoneAndRefresh, setCampaignDoneAndRefresh, elementHolder } = useContext(UserContext);
   const userMyCampaign = {
     bankAccount: [0],
     campaignTitle: null,
     campaignCardImage: null,
-    pargraphesAboutCampaign: null,
-    loaction: [0, 0],
-    catgory: [null],
+    paragraphsAboutCampaign: null,
+    location: [0, 0],
+    category: [null],
     campaignDurationDays: 0,
     urlVideoOrImage: null,
     campaignPerks: [null, null],
     campaignAmounts: 0,
-    darftCampaignLink: null
+    draftCampaignLink: null
   }
 
   const [userDataMyCampaign, setUserDataMyCampaign] = useState(userMyCampaign)
 
   const { bankAccount, campaignTitle, campaignCardImage,
-    pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
-    urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink } = userDataMyCampaign
+    paragraphsAboutCampaign, location, category, campaignDurationDays,
+    urlVideoOrImage, campaignPerks, campaignAmounts, draftCampaignLink } = userDataMyCampaign
 
 
-  const submetedite = (e) => {
+  const submitEdit = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.put(`http://localhost:5000/campaign/update/${e.target.id}`, { campaignTitle, campaignAmounts, bankAccount, catgory, pargraphesAboutCampaign, campaignDurationDays, },
+    axios.put(`${BACKEND}/campaign/update/${e.target.id}`, { campaignTitle, campaignAmounts, bankAccount, category, paragraphsAboutCampaign, campaignDurationDays, },
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setCampaignDoneAndRefresh(!campaignDoneAndRefresh)
       });
@@ -61,7 +62,7 @@ const PopupMyCampaignEdite = (props) => {
         centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            edite campaign 
+            edit campaign 
           </Modal.Title>
         </Modal.Header>
         <Modal.Body  style={{ display: "flex", flexDirection: "column" }}>
@@ -73,10 +74,10 @@ const PopupMyCampaignEdite = (props) => {
           <input name="campaignAmounts" onChange={handle_Change_myCampaign}></input>
           <label htmlFor="bankAccount">bank Account:</label>
           <input name="bankAccount" onChange={handle_Change_myCampaign}></input>
-          <label htmlFor="catgory">catgory:</label>
-          <input name="catgory" onChange={handle_Change_myCampaign}></input>
-          <label htmlFor="pargraphesAboutCampaign">pargraphes About Campaign:</label>
-          <input name="pargraphesAboutCampaign" onChange={handle_Change_myCampaign}></input>
+          <label htmlFor="category">category:</label>
+          <input name="category" onChange={handle_Change_myCampaign}></input>
+          <label htmlFor="paragraphsAboutCampaign">paragraph About Campaign:</label>
+          <input name="paragraphsAboutCampaign" onChange={handle_Change_myCampaign}></input>
           <label htmlFor="campaignDurationDays">campaign Duration Days:</label>
           <input name="campaignDurationDays" onChange={handle_Change_myCampaign}></input>
 
@@ -84,7 +85,7 @@ const PopupMyCampaignEdite = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <div >
-            <Button className="shadowButton"  id={elementHolder} onClick={submetedite}>submet</Button>
+            <Button className="shadowButton"  id={elementHolder} onClick={submitEdit}>submit</Button>
           </div>
           <Button className="shadowButton" onClick={props.onHide}>Close</Button>
         </Modal.Footer>

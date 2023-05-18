@@ -3,29 +3,29 @@ const express = require("express");
 const contributionRouter = express.Router();
 
 
-const { addcontribution , getAllcontribution , updatecontribution ,
-     removecontribution , getcontributionByUser , getcontributionByCampaign 
-     ,getcontributionByCampaignMaximum} = require('../controllers/contribution')
+const { addContribution , getAllContribution , updateContribution ,
+     removeContribution , getContributionByUser , getContributionByCampaign 
+     ,getContributionByCampaignMaximum} = require('../controllers/contribution')
 
 const { authentication } = require('../middleware/authentication');
 const { authorization } = require('../middleware/authorization');
 
 //end point
 
-contributionRouter.post("/add/:idCampaign/:idcontributor",authentication, addcontribution );
+contributionRouter.post("/add/:idCampaign/:idContributor",authentication, addContribution );
 
-contributionRouter.get("/get", getAllcontribution );
+contributionRouter.get("/get", getAllContribution );
 
-contributionRouter.put("/update/:id",authentication, updatecontribution);
+contributionRouter.put("/update/:id",authentication, updateContribution);
 
-contributionRouter.delete("/delete/:id",authentication, removecontribution );
+contributionRouter.delete("/delete/:id",authentication, removeContribution );
 
-contributionRouter.get("/getcontributionUser/:idUser",authentication, getcontributionByUser );
+contributionRouter.get("/getContributionUser/:idUser",authentication, getContributionByUser );
 
-contributionRouter.get("/getcontributionCampaign/:idCampaign",getcontributionByCampaign );
+contributionRouter.get("/getContributionCampaign/:idCampaign",getContributionByCampaign );
 
 
-contributionRouter.get("/getcontributionCampaignMaximum/:idCampaign",getcontributionByCampaignMaximum );
+contributionRouter.get("/getContributionCampaignMaximum/:idCampaign",getContributionByCampaignMaximum );
 
 module.exports = contributionRouter;
 

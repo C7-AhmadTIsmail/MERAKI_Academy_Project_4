@@ -6,14 +6,14 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
 const PopupCampaignPageBestContribution = (props) => {
-
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const { holderAllData, userComment, setUserComment, editOnComment,
     setEditOnComment, setModalShowContribution, contribution, setContribution
     , setAddContributionShow, holdBigContribtution,
     setHoldBigContribtution, } = useContext(UserContextMain);
 
-  const showTheBigestContribution = () => {
-    axios.get(`http://localhost:5000/contribution/getcontributionCampaignMaximum/${holderAllData.data?._id}`)
+  const showTheBiggestContribution = () => {
+    axios.get(`${BACKEND}/contribution/getContributionCampaignMaximum/${holderAllData.data?._id}`)
       .then(function (response) {
         setHoldBigContribtution(response.data.contribution)
 
@@ -34,17 +34,17 @@ const PopupCampaignPageBestContribution = (props) => {
         centered>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Big Contribtution
+            Big Contribution
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {holdBigContribtution ? "" : showTheBigestContribution()}
+          {holdBigContribtution ? "" : showTheBiggestContribution()}
           {holdBigContribtution ? <>
             {holdBigContribtution?.map((element, index) => {
-              return (<div key={index}  className="bestAmmount">
+              return (<div key={index}  className="bestAmount">
                 <br />
                 <h5> name: {element.name}</h5>
-                <h5>ammount: ${element.ammount}</h5>
+                <h5>amount: ${element.amount}</h5>
               </div>
               )
             })}

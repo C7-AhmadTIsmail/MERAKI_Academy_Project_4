@@ -10,8 +10,7 @@ import "./Main.css";
 
 
 const Main = () => {
-
-  
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const [first, setFirst] = useState(null)
   const [campaignPageData, setcampaignPageData] = useState(null)
   const { campaignPageShow, setCampaignPageShow ,cardTheme} = useContext(UserContext);
@@ -22,18 +21,18 @@ const Main = () => {
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/campaign/get`).then((res) => {
+    axios.get(`${BACKEND}/campaign/get`).then((res) => {
       setFirst(res.data.campaign);
     });
 
-    axios.get(`http://localhost:5000/contribution/get/`).then((res) => {
+    axios.get(`${BACKEND}/contribution/get/`).then((res) => {
       setValueAchievmentPercentage(res?.data.contribution);
 
     });
     const token = JSON.parse(localStorage.getItem('user'))?.token
     if (token) {
       const idUser = JSON.parse(localStorage.getItem('user')).user._id
-      axios.get(`http://localhost:5000/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
+      axios.get(`${BACKEND}/favorite/${idUser}`, { "headers": { "Authorization": `Bearer ${token}` } }).then((res) => {
         setFavoriteHolder(res.data.result);
       });
     }
@@ -49,10 +48,10 @@ const Main = () => {
   }
 
 
-  const addTOfaverteFromMain = (e) => {
+  const addTOFavoriteFromMain = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.post(`http://localhost:5000/favorite/add/${e.target.id}/${idUser}`, "",
+    axios.post(`${BACKEND}/favorite/add/${e.target.id}/${idUser}`, "",
       { headers: { "Authorization": `Bearer ${token}` } })
       .then(function (response) {
         setShowPlusButton(!showPlusButton)
@@ -62,7 +61,7 @@ const Main = () => {
       });
   }
 
-  const mainGenration = first ? first.map((element, index) => {
+  const mainGeneration = first ? first.map((element, index) => {
     let checker = false
     favoriteHolder?.map((e) => {
       if (e.favoriteCampaign?._id === element?._id) {
@@ -77,9 +76,9 @@ const Main = () => {
         <Card.Body>
           <Card.Title id={element._id} onClick={clickOnCampaignPage} style={{cursor: "pointer"}}  >{element.campaignTitle}</Card.Title>
           <Card.Text>
-            <div className="CirculerMain">
+            <div className="CircularMain">
               <Percentage campaignPercentage={{ ID: element._id, ValueAchievmentPercentage, Amounts: element.campaignAmounts }} />
-              {checker ? <></> : <>{idUser ? <Button onClick={addTOfaverteFromMain} id={element._id} >+</Button> : <></>}</>}
+              {checker ? <></> : <>{idUser ? <Button onClick={addTOFavoriteFromMain} id={element._id} >+</Button> : <></>}</>}
             </div>
           </Card.Text>
 
@@ -97,8 +96,8 @@ const Main = () => {
       <div >
         {campaignPageShow ? <CampaignPage data={campaignPageData} /> :
           <>
-            <div className="TitalMain"><h3 className="notchTitalMain">Main</h3></div>
-            <div className='grid-container-main'>{mainGenration}
+            <div className="TitleMain"><h3 className="notchTitleMain">Main</h3></div>
+            <div className='grid-container-main'>{mainGeneration}
             </div>
           </>}
       </div>

@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import "./PopupCampaignPageMamberTeamShow.css";
 
 const PopupCampaignPageMamberTeamShow = (props) => {
+    
     const { elementHolderTeams, teamMamberHolder } = useContext(UserContextMain);
 
 
@@ -17,7 +18,7 @@ const PopupCampaignPageMamberTeamShow = (props) => {
                 centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Team Mamber
+                        Team Member
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

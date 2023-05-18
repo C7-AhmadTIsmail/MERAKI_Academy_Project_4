@@ -11,6 +11,7 @@ import "./MyCampaign.css";
 export const UserContext = createContext();
 
 const MyCampaign = () => {
+  const BACKEND = process.env.REACT_APP_BACKEND;
   const [allMyCampaign, setAllMyCampaign] = useState(null)
   const [showThisSectionEditeArea, setshowThisSectionEditeArea] = useState(null)
   const [modalShowEditeMyCampaign, setmodalShowEditeMyCampaign] = useState(false)
@@ -24,22 +25,22 @@ const MyCampaign = () => {
     bankAccount: undefined,
     campaignTitle: undefined,
     campaignCardImage: undefined,
-    pargraphesAboutCampaign: undefined,
-    loaction: [undefined, undefined],
-    catgory: [undefined],
+    paragraphsAboutCampaign: undefined,
+    location: [undefined, undefined],
+    category: [undefined],
     campaignDurationDays: undefined,
     urlVideoOrImage: undefined,
     campaignPerks: undefined,
     campaignAmounts: undefined,
-    darftCampaignLink: undefined,
+    draftCampaignLink: undefined,
   }
 
 
   const [userDataMyCampaign, setUserDataMyCampaign] = useState(userMyCampaign)
 
   const { bankAccount, campaignTitle, campaignCardImage,
-    pargraphesAboutCampaign, loaction, catgory, campaignDurationDays,
-    urlVideoOrImage, campaignPerks, campaignAmounts, darftCampaignLink } = userDataMyCampaign
+    paragraphsAboutCampaign, location, category, campaignDurationDays,
+    urlVideoOrImage, campaignPerks, campaignAmounts, draftCampaignLink } = userDataMyCampaign
 
 
   //   const [error, setError] = useState({})
@@ -54,7 +55,7 @@ const MyCampaign = () => {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.get(`http://localhost:5000/campaign/getCampaign/${idUser}`,
+    axios.get(`${BACKEND}/campaign/getCampaign/${idUser}`,
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         setAllMyCampaign(res.data.campaign);
         console.log(res.data.campaign, "res0")
@@ -64,10 +65,10 @@ const MyCampaign = () => {
 
 
 
-  const deletethisCampaign = (e) => {
+  const deleteThisCampaign = (e) => {
     const token = JSON.parse(localStorage.getItem('user')).token
     const idUser = JSON.parse(localStorage.getItem('user')).user._id
-    axios.delete(`http://localhost:5000/campaign/delete/${e.target.id}`,
+    axios.delete(`${BACKEND}/campaign/delete/${e.target.id}`,
       { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
         console.log(res, "0")
         setCampaignDoneAndRefresh(!campaignDoneAndRefresh)
@@ -84,7 +85,7 @@ const MyCampaign = () => {
         campaignDoneAndRefresh, setCampaignDoneAndRefresh, elementHolder,
         elementHolderTeams, setElementHolderTeams, setModalShowAddTeamMamber, setModalShowTeamMamberAndDelete,
       }}>
-        <div className="TitalMyCampaign"> <h3 className="notchTitalMyCampaign">MyCampaign</h3> </div>
+        <div className="TitleMyCampaign"> <h3 className="notchTitleMyCampaign">MyCampaign</h3> </div>
         {allMyCampaign ? <>{allMyCampaign.map((element, index) => {
           let d1 = new Date(element?.campaignDurationDays?.split("T")[0]);
           let d2 = new Date();
@@ -92,11 +93,11 @@ const MyCampaign = () => {
           // console.log(d1,d2,"D",diff)
 
           return (<div key={element._id} className="CampaignListMainDiv">
-            <div className='FirstColume'>
+            <div className='FirstColumn'>
               <div className='FirstRowMyCampaign'>
                 <img className="myCampaignPageImg" src={element.campaignCardImage} alt="no photo found" />
               </div>
-              <div className='SecondColume'>
+              <div className='SecondColumn'>
 
 
                 <Card style={{ width: '25rem', marginTop: "10vh" }}>
@@ -112,9 +113,9 @@ const MyCampaign = () => {
 
               </div>
             </div>
-            <p id="pargraphesAboutCampaign">pargraphes About Campaign: {element?.pargraphesAboutCampaign}</p>
+            <p id="paragraphsAboutCampaign">paragraph About Campaign: {element?.paragraphsAboutCampaign}</p>
             <>
-              <div className='SecandRowMyCampaign'>
+              <div className='SecondRowMyCampaign'>
                 {(diff <= 0) ? <>   <Button variant="primary" className="shadowButton" id={element._id} onClick={(e) => {
                   setmodalShowEditeMyCampaign(true)
                   setElementHolder(e.target.id)
@@ -133,7 +134,7 @@ const MyCampaign = () => {
                   setModalShowTeamMamberAndDelete(true)
 
                 }
-                }>show team mamber</Button>
+                }>show team member</Button>
 
                 <PopupMyCampaignShowAndDeleteTeamMamber
                   show={modalShowTeamMamberAndDelete}
@@ -147,7 +148,7 @@ const MyCampaign = () => {
                   setModalShowAddTeamMamber(true)
                   setElementHolder(e.target.id)
                 }
-                }>add team mamber</Button>
+                }>add team member</Button>
 
                 <PopupMyCampaignAddTeamMamber
                   show={modalShowAddTeamMamber}
@@ -155,7 +156,7 @@ const MyCampaign = () => {
                 />
 
 
-                {(diff <= 0) ? <> <Button className="shadowButton" id={element._id} onClick={deletethisCampaign}>delete</Button><br /></> : <></>}
+                {(diff <= 0) ? <> <Button className="shadowButton" id={element._id} onClick={deleteThisCampaign}>delete</Button><br /></> : <></>}
 
               </div>
             </>

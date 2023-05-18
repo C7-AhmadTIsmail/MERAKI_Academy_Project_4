@@ -4,13 +4,13 @@
     border:black solid 2px;
 }
 
-.TitalCampaignPage {
+.TitleCampaignPage {
     display: flex;
     justify-content: center;
     z-index: -1;
 }
 
-.notchTitalCampaignPage {
+.notchTitleCampaignPage {
     top: 0;
     left: 50%;
     width: 280px;
@@ -24,8 +24,8 @@
     z-index: -1;
 }
 
-.notchTitalCampaignPage::before,
-.notchTitalCampaignPage::after {
+.notchTitleCampaignPage::before,
+.notchTitleCampaignPage::after {
     content: '';
     position: absolute;
     top: 0;
@@ -37,14 +37,14 @@
     background-image: radial-gradient(circle at 0 100%, transparent 6px, #222 7px);
 }
 
-.notchTitalCampaignPage::after {
+.notchTitleCampaignPage::after {
     left: 100%;
     margin-right: 7 px;
     background-image: radial-gradient(circle at 100% 100%, transparent 6px, #222 7px);
 }
 
 @media screen and (max-width: 990px) {
-    .notchTitalCampaignPage {
+    .notchTitleCampaignPage {
         display: none;
     }
 }
