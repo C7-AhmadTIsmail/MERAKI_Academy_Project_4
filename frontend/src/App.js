@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 
-import NavBar from "./components/NavBar/NavBar"
+import NavBar from "./components/Navbar/Navbar"
 import Main from "./components/Main/Main"
 import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
