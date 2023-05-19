@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import "./NavBar.css";
+import "./Navbar.css";
 import DropDownList from "../DropDownList/DropDownList";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
