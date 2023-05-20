@@ -20,6 +20,13 @@ function App() {
   const [tokenFound, setTokenFound] = useState(JSON.parse(localStorage.getItem('user'))?.token)
   const [theme, setTheme] = useState("light")
   const [cardTheme, setCardTheme] = useState("light")
+
+if(localStorage.getItem("Theme")!=theme){
+  setTheme(localStorage.getItem("Theme"))
+  setCardTheme(localStorage.getItem("Theme"))
+}
+
+
   useEffect(() => {
     if (tokenFound) {
       setLogin(!login)

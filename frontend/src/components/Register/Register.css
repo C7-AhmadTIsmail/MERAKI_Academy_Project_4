@@ -8,6 +8,7 @@
     border: 2px black solid;
     border-radius: 10px;
     margin-top: 30px;
+    margin-bottom: 5px;
     width: 400px;
     height: auto;
     background-color: #3d3d3d;
@@ -57,5 +58,5 @@
 .SubmitButtonRegister {
     margin-top: 20px;
     margin-bottom: 10px;
-    width: 220px;
+    width: auto;
 }

@@ -28,8 +28,17 @@ const NavBar = () => {
         setCampaignPageShow(false);
     };
     const ChangeTheme=()=>{
-        setTheme((curr)=>(curr==="light"?"dark":"light"))
-        setCardTheme((curr)=>(curr==="light"?"darkCard":"light"))
+
+        if("light"===localStorage.getItem("Theme")){
+            localStorage.setItem("Theme","dark")
+            setTheme((curr)=>"dark") 
+            setCardTheme((curr)=>"darkCard") 
+
+        }else{
+            localStorage.setItem("Theme","light")
+            setTheme((curr)=>"light")
+            setCardTheme((curr)=>"lightCard")  
+    }
     }
 
 

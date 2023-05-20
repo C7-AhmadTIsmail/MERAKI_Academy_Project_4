@@ -106,7 +106,7 @@ if (Object.keys(errors).length) {
             <label htmlFor="age" className='RegisterInputLabel' >age:</label>
             <input name="age"  type="date" className='RegisterInputForm'  placeholder="mm/dd/yyyy" onChange={handleChange}></input>
             <div style={{ color: "red" }}>{errors.age}</div>
-            <Button variant="primary" className='submitButtonRegister shadowButton' onClick={submit}>submit</Button>
+            <Button variant="primary" className='SubmitButtonRegister shadowButton' onClick={submit}>submit</Button>
           </div>
         </div>
       </div>

@@ -75,12 +75,12 @@ const Main = () => {
         <Card.Img variant="top" style={{ width: '20rem',height:'239px',cursor: "pointer" }} id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
         <Card.Body>
           <Card.Title id={element._id} onClick={clickOnCampaignPage} style={{cursor: "pointer"}}  >{element.campaignTitle}</Card.Title>
-          <Card.Text>
+          <div>
             <div className="CircularMain">
               <Percentage campaignPercentage={{ ID: element._id, ValueAchievmentPercentage, Amounts: element.campaignAmounts }} />
               {checker ? <></> : <>{idUser ? <Button onClick={addTOFavoriteFromMain} id={element._id} >+</Button> : <></>}</>}
             </div>
-          </Card.Text>
+          </div>
 
         </Card.Body>
       </Card>

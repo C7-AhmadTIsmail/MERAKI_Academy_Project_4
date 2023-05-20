@@ -144,3 +144,34 @@ margin-left: 35px;
     margin-left: 20px;
     margin-bottom: 30px;
 }
+
+@media screen and (max-width: 1070px) {
+    .ContentCampaignPage{
+        display: flex;
+        margin: 0px 10px;
+    }
+    .row1{
+        margin-bottom: 10px;
+        padding-left: 0px;
+    }
+    .row2{
+        margin-left: 10px;
+    }
+  }
+
+@media screen and (max-width: 800px) {
+    .ContentCampaignPage{
+        flex-direction:column;
+        justify-content:center;
+    }
+    .row1{
+        margin-bottom: 0px;
+        padding-left: 180px;
+    }
+    
+    .row2{
+        margin-left: 0px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+  }

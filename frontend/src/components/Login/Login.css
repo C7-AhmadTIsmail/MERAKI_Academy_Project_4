@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 
 }
 
@@ -12,8 +14,10 @@
     width: 380px;
     height: 430px;
     margin-top: 69px;
+    margin-bottom: 112px;
     background-color: #3d3d3d;
     color:wheat
+    
 }
 
 .LoginWord {
