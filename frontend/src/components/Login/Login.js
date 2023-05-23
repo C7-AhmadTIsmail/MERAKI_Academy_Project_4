@@ -69,10 +69,10 @@ const Login = () => {
           <h6 className="pleaseWord">please enter your name email & password</h6>
           <div className="InsideLoginDiv">
             <label className="LoginContainer" htmlFor="email">Email:</label>
-            <input className="LoginContainer InputCorner" name="email"  onChange={handleChange} placeholder="ahmad@gmail.com"></input>
+            <input className="LoginContainer InputCorner" name="email"  onChange={handleChange} value="ahmad@gmail.com"></input>
             <div style={{ color: "red" }}>{errors.email}</div>
             <label className="LoginContainer" htmlFor="password" >Password:</label>
-            <input className="LoginContainer InputCorner" name="password"  type="password"  onChange={handleChange}  placeholder="qweasd123A@"></input>
+            <input className="LoginContainer InputCorner" name="password"  type="password"  onChange={handleChange}  value="qweasd123A@"></input>
             <div style={{ color: "red" }}>{errors.password}</div>
             <Button variant="primary" className='LoginButton shadowButton' onClick={login}>LogIn</Button>
             <div style={{ color: "red" }}>{loginErrors?.message}</div>
