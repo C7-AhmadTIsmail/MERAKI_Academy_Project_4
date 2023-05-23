@@ -1,12 +1,15 @@
 require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
+const db=require("./models/db")
 const app = express();
+
+// port # run on it
+const PORT = process.env.PORT || 5000;
+
 app.use(cors());
 app.use(express.json());
-
 // db build
-const db=require("./models/db")
 
 // router build
 const userRouter = require("./routes/user")
@@ -17,8 +20,6 @@ const contributionRouter= require("./routes/contribution")
 const favoriteRouter=require("./routes/favorite")
 const campaignTeamsRouter=require("./routes/campaignTeams")
 
-// port # run on it
-const PORT = process.env.PORT || 5000;
 
 // Handles any other endpoints [endpoints]
 app.use("/role",roleRouter);
