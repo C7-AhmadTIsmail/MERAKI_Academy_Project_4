@@ -55,7 +55,7 @@ const Favorite = () => {
         return (<div key={element.favoriteCampaign?._id} >
 
             <Card style={{ width: '20rem',height:'359px' }} id={cardTheme}>
-                <Card.Img  variant="top" style={{ width: '20rem',height:'239px',cursor: "pointer" }} onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id} src={element?.favoriteCampaign?.campaignCardImage} alt="no photo found" />
+                <Card.Img  variant="top" style={{ width: '100%',height:'239px',cursor: "pointer" }} onClick={clickOnCampaignPageInnerSide} id={element?.favoriteCampaign?._id} src={element?.favoriteCampaign?.campaignCardImage} alt="no photo found" />
                 <Card.Body>
                     <Card.Title onClick={clickOnCampaignPageInnerSide} style={{cursor: "pointer"}} id={element?.favoriteCampaign?._id}>{element?.favoriteCampaign?.campaignTitle}</Card.Title>
 
