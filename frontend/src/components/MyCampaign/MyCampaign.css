@@ -55,10 +55,7 @@
 
 
 .FirstRowMyCampaign{
-    /* display: flex;
-    padding: 12;
-    justify-content: space-around;
-    margin-top: 20px; */
+
 }
 
 
@@ -67,14 +64,15 @@
     justify-content: space-around;
     margin-bottom: 12px;
     margin-top: 6px;
-
 }
+
 .SecondColumn{
-    
 }
 
-#paragraphAboutCampaign{
+#paragraphsAboutCampaign{
     margin-left: 9px;
+    margin-right: 5px;
+    text-transform:capitalize;
 }
 
 .SecondRowMyCampaign{
@@ -83,9 +81,41 @@
     margin-bottom: 6px;
 }
 
-
+.thirdColumn{
+    display: none;
+}
 
 .myCampaignPageImg{
     width: 200px;
     height: 230px;
 }
+
+@media (max-width: 665px) {
+    .FirstColumn{
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 5px;
+        margin-top: 6px;
+
+        gap: 20px;
+    }
+    .SecondColumn{
+        display: none;
+    }
+    .thirdColumn{
+        display:block;
+    }
+
+}
+
+@media (max-width: 550px) {
+    .SecondRowMyCampaign{
+        display: grid;
+row-gap: 3px;
+    }
+
+}
+
+
+
+

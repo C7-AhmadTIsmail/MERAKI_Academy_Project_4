@@ -35,19 +35,19 @@ if(localStorage.getItem("Theme")!=theme){
 
   return (
     <UserContext.Provider value={{ setLogin, login, setCampaignPageShow ,campaignPageShow ,setTheme ,theme ,cardTheme, setCardTheme}}>
-      <div className="APP" id={theme}>
+      <div className="APP" id={theme} style={{height: '100vh'}}>
         <header className="App-header">
         </header>
         <NavBar />
         <div>
           <Routes >
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Main pass={theme} />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/Login" element={<Login />} />
-            <Route path="/Campaign" element={<Campaign />} />
+            <Route path="/Campaign" element={<Campaign pass={theme}/>} />
             <Route path="/Favorite" element={<Favorite />} />
-            <Route path="/MyCampaign" element={<MyCampaign />} />
-            <Route path="/MyContribution" element={<MyContribution />} />
+            <Route path="/MyCampaign" element={<MyCampaign pass={theme}/>} />
+            <Route path="/MyContribution" element={<MyContribution pass={theme}/>} />
             <Route path="/MyProfile" element={<MyProfile />} />
 
           </Routes>

@@ -12,8 +12,8 @@ const Login = () => {
   const { setLogin } = useContext(UserContext);
   const navigate = useNavigate();
   const userTest = {
-    email: null,
-    password: null,
+    email: "ahmad@gmail.com",
+    password: "qweasd123A@",
   }
   const [userData, setUserData] = useState(userTest)
   const { email, password } = userData
@@ -69,10 +69,10 @@ const Login = () => {
           <h6 className="pleaseWord">please enter your name email & password</h6>
           <div className="InsideLoginDiv">
             <label className="LoginContainer" htmlFor="email">Email:</label>
-            <input className="LoginContainer InputCorner" name="email"  onChange={handleChange} placeholder="Username"></input>
+            <input className="LoginContainer InputCorner" name="email"  onChange={handleChange} placeholder="ahmad@gmail.com"></input>
             <div style={{ color: "red" }}>{errors.email}</div>
             <label className="LoginContainer" htmlFor="password" >Password:</label>
-            <input className="LoginContainer InputCorner" name="password"  type="password"  onChange={handleChange}  placeholder="Password"></input>
+            <input className="LoginContainer InputCorner" name="password"  type="password"  onChange={handleChange}  placeholder="qweasd123A@"></input>
             <div style={{ color: "red" }}>{errors.password}</div>
             <Button variant="primary" className='LoginButton shadowButton' onClick={login}>LogIn</Button>
             <div style={{ color: "red" }}>{loginErrors?.message}</div>

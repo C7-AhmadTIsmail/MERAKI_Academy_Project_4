@@ -17,7 +17,11 @@ const Main = () => {
   const [favoriteHolder, setFavoriteHolder] = useState(null)
   const [showPlusButton, setShowPlusButton] = useState(false)
   const [ValueAchievmentPercentage, setValueAchievmentPercentage] = useState(null)
+  const [theme, setTheme] = useState("light")
 
+  if(localStorage.getItem("Theme")!=theme){
+    setTheme(localStorage.getItem("Theme"))
+  }
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
 
   useEffect(() => {
@@ -69,10 +73,10 @@ const Main = () => {
       }
 
     })
-    return <div key={element._id} >
+    return <div key={element._id} className="cardStyle" >
 
       <Card style={{ width: '20rem',height:'379px' }} id={cardTheme}>
-        <Card.Img variant="top" style={{ width: '20rem',height:'239px',cursor: "pointer" }} id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
+        <Card.Img variant="top" style={{ width: '100%',height:'239px',cursor: "pointer" }} id={element._id} onClick={clickOnCampaignPage} src={element.campaignCardImage} alt="no photo found" />
         <Card.Body>
           <Card.Title id={element._id} onClick={clickOnCampaignPage} style={{cursor: "pointer"}}  >{element.campaignTitle}</Card.Title>
           <div>
@@ -93,7 +97,7 @@ const Main = () => {
     <>
 
 
-      <div >
+      <div id={theme} >
         {campaignPageShow ? <CampaignPage data={campaignPageData} /> :
           <>
             <div className="TitleMain"><h3 className="notchTitleMain">Main</h3></div>

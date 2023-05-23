@@ -9,7 +9,7 @@ import axios from 'axios';
 
 export const UserContext = createContext();
 
-const MyContribution = () => {
+const MyContribution = ({pass}) => {
   const BACKEND = process.env.REACT_APP_BACKEND;
   const [allMyContribution, setAllMyContribution] = useState(null)
   const [showThisSectionEditeArea, setshowThisSectionEditeArea] = useState(null)
@@ -60,7 +60,7 @@ const MyContribution = () => {
 
 
   return (
-    <div>
+    <div id={pass}>
       <UserContext.Provider value={{
         setMyContribution, setContributionDoneAndRefresh,
         ContributionDoneAndRefresh, myContribution, contributionEditeHolderData
@@ -79,14 +79,24 @@ const MyContribution = () => {
             <div className='MyContributionFirst'>
             <img className="myCampaignPageImg" src={element.campaign.campaignCardImage} alt="no photo found" />
               <div>
-
-              <Card style={{ width: '25rem', marginTop: "10vh" }}>
+              <div className='table1'>
+              <Card style={{ width: '25rem', marginTop: "10vh" }} >
                   <ListGroup variant="flush">
                     <ListGroup.Item>campaignTitle: {element.campaign.campaignTitle}</ListGroup.Item>
                     <ListGroup.Item>bankAccount: {element.campaign.bankAccount}</ListGroup.Item>
                     <ListGroup.Item>category: {element.campaign.category}</ListGroup.Item>
                   </ListGroup>
                 </Card>
+                </div>
+                <div className='table2'>
+                <Card style={{ width: '25rem', marginTop: "2vh" }} >
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>campaignTitle: {element.campaign.campaignTitle}</ListGroup.Item>
+                    <ListGroup.Item>bankAccount: {element.campaign.bankAccount}</ListGroup.Item>
+                    <ListGroup.Item>category: {element.campaign.category}</ListGroup.Item>
+                  </ListGroup>
+                </Card>
+                </div>
 
 
               </div>
@@ -110,6 +120,7 @@ const MyContribution = () => {
                 show={modalShowEditeMyContribution}
                 onHide={() => setModalShowEditeMyContribution(false)}
               />
+
 
 
               {(diff <= 0) ? <><Button className="shadowButton" id={element._id} onClick={deleteThisContribution}>delete</Button><br /></> : <></>}

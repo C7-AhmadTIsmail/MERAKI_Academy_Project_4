@@ -10,7 +10,7 @@ import "./MyCampaign.css";
 
 export const UserContext = createContext();
 
-const MyCampaign = () => {
+const MyCampaign = ({pass}) => {
   const BACKEND = process.env.REACT_APP_BACKEND;
   const [allMyCampaign, setAllMyCampaign] = useState(null)
   const [showThisSectionEditeArea, setshowThisSectionEditeArea] = useState(null)
@@ -79,7 +79,7 @@ const MyCampaign = () => {
 
 
   return (
-    <div>
+    <div id={pass}>
       <UserContext.Provider value={{
         setmodalShowEditeMyCampaign,
         campaignDoneAndRefresh, setCampaignDoneAndRefresh, elementHolder,
@@ -109,6 +109,20 @@ const MyCampaign = () => {
 
                   </ListGroup>
                 </Card>
+              </div>
+              <div className='thirdColumn'>
+
+
+                <Card style={{ width: '25rem', marginTop: "1vh" }}>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>campaign Title : {element.campaignTitle}</ListGroup.Item>
+                    <ListGroup.Item>campaign Amounts: ${element.campaignAmounts} </ListGroup.Item>
+                    <ListGroup.Item>bankAccount: {element.bankAccount}</ListGroup.Item>
+                    <ListGroup.Item>campaign Duration Days: {element?.campaignDurationDays?.split("T")[0]}</ListGroup.Item>
+
+                  </ListGroup>
+                </Card>
+
 
 
               </div>

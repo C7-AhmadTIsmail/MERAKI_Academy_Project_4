@@ -15,6 +15,7 @@ import axios from 'axios';
 export const UserContextMain = createContext();
 
 const CampaignPage = (props) => {
+
   const BACKEND = process.env.REACT_APP_BACKEND;
   const holderAllData = props
   const idUser = JSON.parse(localStorage.getItem('user'))?.user?._id
@@ -51,7 +52,11 @@ const CampaignPage = (props) => {
 
   const { comment } = userComment
   const { name, dateOfContribution, lastDateOfContributionCanRefund, Amount, visibility } = contribution
+  const [theme, setTheme] = useState("light")
 
+  if (localStorage.getItem("Theme") != theme) {
+    setTheme(localStorage.getItem("Theme"))
+  }
 
 
   useEffect(() => {
@@ -177,7 +182,7 @@ const CampaignPage = (props) => {
         elementHolderTeams, teamMamberHolder
       }}>
 
-        <div className='CampaignPageInSideMain'>
+        <div className='CampaignPageInSideMain' id={theme}>
           <div className='TitleCampaignPage'><h3 className='notchTitleCampaignPage'>CampaignPage</h3></div>
           <div className="newOne">
             <div className='ContentCampaignPage'>
@@ -186,7 +191,17 @@ const CampaignPage = (props) => {
               </div>
               <div className="row2">
 
-                <Card style={{ width: '27rem', marginLeft: "127px" }}>
+                <Card style={{ width: '27rem', marginLeft: "122px" }}>
+                  <ListGroup>
+                    <ListGroup.Item>campaign Title: {props.data?.campaignTitle}</ListGroup.Item>
+                    <ListGroup.Item>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</ListGroup.Item>
+                    <ListGroup.Item>campaign Duration Days: {props.data?.campaignDurationDays?.split("T")[0]}</ListGroup.Item>
+                    <ListGroup.Item>bank Account: {props.data?.bankAccount}</ListGroup.Item>
+                  </ListGroup>
+                </Card>
+              </div>
+              <div className="row3">
+                <Card >
                   <ListGroup>
                     <ListGroup.Item>campaign Title: {props.data?.campaignTitle}</ListGroup.Item>
                     <ListGroup.Item>campaign Amounts: ${props.data?.campaignAmounts} /{totalDone()}</ListGroup.Item>
@@ -207,7 +222,7 @@ const CampaignPage = (props) => {
             </Card>
 
 
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div id="mediaVM" >
               <iframe
                 className='Video'
                 src={`https://www.youtube.com/embed/${props.data?.urlVideoOrImage?.split("v=")[1].substring(0, 11)}`}
@@ -240,7 +255,7 @@ const CampaignPage = (props) => {
             </div>
 
           </div>
-          
+
           <div className='OneRow'>
 
             {showcontribution ? <>

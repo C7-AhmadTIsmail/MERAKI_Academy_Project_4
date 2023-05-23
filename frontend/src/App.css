@@ -6,13 +6,17 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     opacity: 0.9;
+    min-height: 100%;
+}
+
+.APP{
+    height: 100%;
 }
 
 #dark {
     background-color: rgb(110, 106, 101);
     width: 100%;
-
-
+    min-height: 100%;
 }
 
 #light {}

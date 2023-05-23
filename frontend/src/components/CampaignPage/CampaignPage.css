@@ -145,12 +145,26 @@ margin-left: 35px;
     margin-bottom: 30px;
 }
 
+.row3{
+    display: none;
+  }
+
 @media screen and (max-width: 1070px) {
+    .OneRow{
+        flex-wrap: wrap;
+    }
+    .newOne{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
     .ContentCampaignPage{
         display: flex;
         margin: 0px 10px;
     }
     .row1{
+        display: flex;
+        justify-content: center;
         margin-bottom: 10px;
         padding-left: 0px;
     }
@@ -160,18 +174,70 @@ margin-left: 35px;
   }
 
 @media screen and (max-width: 800px) {
+
     .ContentCampaignPage{
         flex-direction:column;
         justify-content:center;
+        margin: 0px 0px;
     }
     .row1{
         margin-bottom: 0px;
-        padding-left: 180px;
+        padding-left: auto;
     }
     
     .row2{
         margin-left: 0px;
         margin-top: 10px;
         margin-bottom: 10px;
+        padding-left: auto;
     }
+    .row2{
+        display: none;
+      }
+      .row3{
+          margin-top: 15px;
+          margin-bottom: 15px;
+          display: block;
+        }
   }
+
+  @media (max-width: 775px) {
+    .OneRow{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:space-evenly;
+        gap: 6px;
+    }
+   
+
+}
+
+
+@media (max-width: 280px) {
+    .OneRow{
+        justify-content:center;
+    }
+
+}
+
+#mediaVM{
+    display: flex; 
+    justify-content: space-evenly;
+}
+
+@media (max-width: 775px) {
+    #mediaVM{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .CampaignPageImg{
+        width:240px;
+        height:260px;
+        margin-top: 20px;
+        border-radius: 12px;
+        border:black solid 1px;
+    }
+
+}
+    

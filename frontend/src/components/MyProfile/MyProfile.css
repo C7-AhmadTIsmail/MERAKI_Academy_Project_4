@@ -129,7 +129,7 @@
     display: flex;
     justify-content: center;
     margin-top: 35px;
-   
+    padding-bottom: 25px;
 }
 
 .ButtonEditProfile:hover {
@@ -139,4 +139,55 @@
 
 .MyPage{
     height: 100%;
+}
+
+
+@media (max-width: 1000px) {
+    
+    .f2{
+        margin-top: 30px;
+        margin-right: 20px;
+        margin-left: 231px;
+    }
+    
+}
+
+
+@media (max-width: 890px) {
+    .f2{
+        margin-top: 40px;
+        margin-right: 25px;
+        margin-left: 151px;
+    }
+    
+}
+
+
+@media (max-width: 800px) {
+
+    .f2{
+        margin-top: 40px;
+        margin-right: 25px;
+        margin-left: 100px;
+    }
+    
+}
+
+
+@media (max-width: 775px) {
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0px 110px;
+    }
+    
+    
+    
+    .f2{
+        margin-top: 40px;
+        margin-right: 25px;
+        margin-left: 15px;
+    }
+    
 }
